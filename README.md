@@ -10,7 +10,7 @@ If that is your question, our AirBNB reporting and analysis Tool can help you.
 In our App we try to provide you all relevant Information you need to have to find the best and suitavle accommadation on AirBNB for your next holidays.
 How we try to achieve this goal
 - Our App let's you explore informations about prices, availabilities and ratings.
-- We alloe you to select a Neighbourhood and to check Information about costst, special offers or room availabilities on AirBNB for this specific Neighboorhood.  
+- Select a Neighbourhood and check Information about costs, special room offers or room availabilities on AirBNB for the specified Neighboorhood.  
 - You select, which Information you want to have visuallized.
 - Compare ratings and be sure the accomodation holds what it promises
 # Our Goal and vision
