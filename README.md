@@ -7,7 +7,7 @@ TODO: Make sure to mention that per April 23 we are the 3rd team to choose the A
 # Our Project (what are we doing)
 It's Holiday Time! But wait, we still need to find a suitable and cheap acommodation. Where should we start?
 If that is your question, our AirBNB reporting and analysis Tool can help you. 
-In our App we try to provide all relevant Information you need know to find the best accommadation on AirBNB for your holidays.
+In our App we try to provide you all relevant Information you need to have to find the best and suitavle accommadation on AirBNB for your next holidays.
 How we try to achieve this goal
 - Our App let's you explore informations about prices, availabilities and ratings.
 - We alloe you to select a Neighbourhood and to check Information about costst, special offers or room availabilities on AirBNB for this specific Neighboorhood.  
