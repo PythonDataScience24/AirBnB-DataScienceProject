@@ -1,4 +1,4 @@
-# AirBnB Dataset - a reporting tool for AirBnB accommodations
+# Analyse AirBnB - a reporting tool for AirBnB accommodations
 # Welcome
 Welcome to our AriBnB reporting and analysis plattform! Great to have you here!
 With this short documentation we would like to give you some basic information about the goal of the app and why you should use it. So, let's get started.
