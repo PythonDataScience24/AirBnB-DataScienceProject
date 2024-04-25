@@ -5,7 +5,7 @@ With this short documentation we would like to give you some basic information a
 
 # Our project (what are we doing)
 It's holiday season! But wait, we still need to find a suitable and cheap accommodation. Where should we start?
-If this is your question, our AirBnB reporting and analysis tool can help you. 
+If this is your question, our AirBnB reporting and analysis tool can help you right away. 
 In our App we try to provide you all relevant information you need to have to find the best and suitable accommadation on AirBnB for your next Holidays.
 How we try to achieve this goal
 - Our App allows you to explore informations about accommodations on AirBnB like prices, availabilities or ratings.
