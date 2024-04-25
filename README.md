@@ -1,12 +1,11 @@
 # AirBnB Dataset - a reporting tool for the Airbnb accommodations ---
 # Welcome
 Welcome to our AriBnB reporting and anylysis plattform! Great to have you here!
-With this short Documentation we would like to give you some relevant Information about the goal of the app and why you should use it. So, let's get startet.
-TODO: Make sure to mention that per April 23 we are the 3rd team to choose the Airbnb dataset.
+With this short Documentation we would like to give you some relevant information about the goal of the App and why you should use it. So, let's get started.
 
 # Our Project (what are we doing)
-It's Holiday Time! But wait, we still need to find a suitable and cheap acommodation. Where should we start?
-If that is your question, our AirBNB reporting and analysis Tool can help you. 
+It's Holiday season! But wait, we still need to find a suitable and cheap acommodation. Where should we start?
+If that is your question, our AirBnB reporting and analysis tool can help you. 
 In our App we try to provide you all relevant Information you need to have to find the best and suitavle accommadation on AirBNB for your next holidays.
 How we try to achieve this goal
 - Our App let's you explore informations about prices, availabilities and ratings.
