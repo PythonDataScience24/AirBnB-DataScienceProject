@@ -27,7 +27,7 @@ The project uses a rich dataset from Kaggel that contains extensive details abou
 The project emphasises interactive features. Users can analyse the data using parameters of their choice. For example, the AirBnB data can be analysed by city, neighbourhood or room type.
 An additional advantage of the reporting tool is the clear visualisation of the data, which makes the analysis understandable and intuitive.
 
-# How to get startet
+# How to get started
 As we will start soon with the development of our project, all information you need to get startet will follow. If you need to know something immediately, see below under **Contact us**
 
 # How can you get involved
