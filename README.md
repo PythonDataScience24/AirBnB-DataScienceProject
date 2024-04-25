@@ -17,6 +17,9 @@ How we try to achieve this goal
 Notiz vom Roadmap Team: Goals entsprechen den Milestones, falls sich etwas ändert, bitte auch bei der roadmap anpassen.
 
 # Who we are
+We would like to introduce ourself shortly. We are Viola Meier, Romano Brentani, Lukas Künzi, Barbara Dravec, four students graduating their Bachelors degree in Computer Science at the university of Bern Switzerland. You find more Informations of us in the members File. 
+The application is being developed as a part of the Bachelor's programm "Programing for Datascience", lectured by the University of Bern, which all four Students visit. 
+
 
 # What makes our Project special 
 The project uses a rich data set from Kaggel that contains extensive details about the AirBnBs. 
