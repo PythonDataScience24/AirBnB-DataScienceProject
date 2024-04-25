@@ -40,6 +40,8 @@ If you want to contact us regarding a project-related problem or an enhancment, 
 
 # Thank you
 
+Thank you for your interest, for visiting this page, or for collaborating with us. 
+
 
 # Licences
 Our project is open source. For further informations and details consider the  LICENSE.md file.
