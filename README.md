@@ -36,7 +36,7 @@ CONTRIBUTING.md file.
 Notice: Our CONTRIBUTING.md will be completed soon. 
 
 # Contact us
-If 
+If you want to contact us regarding a project-related problem or an enhancment, you can create an issue in our GitHub repository. The option to create an issue will be available once we have set up the GitHub environment. For other questions, please feel free to contact Romano Brentani: email
 
 # Thank you
 
