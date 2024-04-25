@@ -13,8 +13,6 @@ How we try to achieve this goal
 - You select, which information you want to have visualized.
 - Compare ratings and be sure the accomodation holds what it promises.
 
-[The dataset for this service is provided by Kaggel.](https://www.kaggle.com/datasets/arianazmoudeh/airbnbopendata?resource=download)
-
 # Our goal and vision
 We know how hard and time intense it can be to find the right place to spend your holidays. Our goal is to make your life easier when it comes to your holidays. With a user friendly tool we want to achieve that everybody can find their favorite and the most suitable accommodation according to their needs. It should not matter if you are looking for the cheapest or most expensive one, with our tool you should be able to find whatever your are looking for. 
 
@@ -22,7 +20,7 @@ We know how hard and time intense it can be to find the right place to spend you
 We would like to introduce ourself shortly. We are Viola Meier, Romano Brentani, Lukas Künzi, Barbara Dravec, four students currently doing their Bachelors degree in Computer Science at the University of Berne, Switzerland. You find more information about us in the members file. 
 This application is being developed by our team within the Bachelor's program "Programming for Datascience" at University of Berne. 
 
-# What makes our projet special 
+# What makes our project special 
 The project uses a rich dataset from Kaggel that contains extensive details about AirBnB's listings. 
 The project emphasises interactive features. Users can analyse the data using parameters of their choice. For example, the AirBnB data can be analysed by city, neighbourhood or room type.
 An additional advantage of the reporting tool is the clear visualisation of the data, which makes the analysis understandable and intuitive.
@@ -33,7 +31,11 @@ As we will start soon with the development of our project, all information you n
 # How can you get involved
 If you are interested in working on the project and would like to contribute improvements or further ideas, please checkout our 
 CONTRIBUTING.md file. 
-Notice: Our CONTRIBUTING.md will be uploaded soon. 
+Notice: Our CONTRIBUTING.md will be uploaded soon.
+
+# Source of Data
+- [The dataset for this service is provided by Kaggel.](https://www.kaggle.com/datasets/arianazmoudeh/airbnbopendata?resource=download)
+- [A data dictionary provides a concise guide to understanding and using the data.](https://docs.google.com/spreadsheets/d/1b_dvmyhb_kAJhUmv81rAxl4KcXn0Pymz)
 
 # Contact us
 If you want to contact us regarding a project-related problem or an enhancment, you can create an issue in our GitHub repository. The option to create an issue will be available once we have set up the GitHub environment. For other questions or problems, please feel free to contact Romano Brentani: romano.brentani@students.unibe.ch
