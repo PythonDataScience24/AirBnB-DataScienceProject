@@ -1,5 +1,5 @@
 
-# AirBnB reporting and analysis tool Roadmap
+# Analyse AirBnB - a reporting and analysis tool for AirBnb - Roadmap
 ## Welcome dear traveler! 
 We are a team of students from the University of Bern.
 Our vision for this project is to help all travelers to find the best accommodation for their needs.
