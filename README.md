@@ -14,7 +14,8 @@ How we try to achieve this goal
 - You select, which Information you want to have visuallized.
 - Compare ratings and be sure the accomodation holds what it promises
 # Our Goal and vision
-Notiz vom Roadmap Team: Goals entsprechen den Milestones, falls sich etwas ändert, bitte auch bei der roadmap anpassen.
+Our goal is to make your travel planning easier.
+Our overall goal is to create a user-friendly reporting tool that allows user-specific analysis of AirBnB accommodation. 
 
 # Who we are
 We would like to introduce ourself shortly. We are Viola Meier, Romano Brentani, Lukas Künzi, Barbara Dravec, four students graduating their Bachelors degree in Computer Science at the university of Bern Switzerland. You find more Informations of us in the members File. 
