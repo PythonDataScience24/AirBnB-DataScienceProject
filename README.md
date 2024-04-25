@@ -4,22 +4,22 @@ Welcome to our AriBnB reporting and anylysis plattform! Great to have you here!
 With this short Documentation we would like to give you some relevant information about the goal of the App and why you should use it. So, let's get started.
 
 # Our Project (what are we doing)
-It's Holiday season! But wait, we still need to find a suitable and cheap acommodation. Where should we start?
-If that is your question, our AirBnB reporting and analysis tool can help you. 
-In our App we try to provide you all relevant Information you need to have to find the best and suitavle accommadation on AirBNB for your next holidays.
+It's Holiday Time! But wait, we still need to find a suitable and cheap accommodation. Where should we start?
+If that is your question, our AirBNB reporting and analysis Tool can help you. 
+In our App we try to provide you all relevant Information you need to have to find the best and suitable accommadation on AirBNB for your next holidays.
 How we try to achieve this goal
-- Our App let's you explore informations about prices, availabilities and ratings.
-- Select a Neighbourhood and check Information about costs, special room offers or room availabilities on AirBNB for the specified Neighboorhood.  
-- You select, which Information you want to have visuallized.
+- Our App allows you to explore informations about accommodations on AirBNB like prices, availabilities or ratings.
+- The App gives you the possibility to select a Neighbourhood and to check Informations about costs, room offers or room availabilities on AirBNB for the specified Neighboorhood.  
+- You select, which Information you want to have visualized.
 - Compare ratings and be sure the accomodation holds what it promises
+The Data the application uses to generate the information is provided by Kaggel.
+
 # Our Goal and vision
-Our goal is to make your travel planning easier.
-Our overall goal is to create a user-friendly reporting tool that allows user-specific analysis of AirBnB accommodation. 
+We know how hard and time intense it can be to find the right place to spend your holidays. Our Goal is to make your life easier when it comes to your holidays. With a user friendly tool we want to achieve that everybody can find his favorites and the most suitable accommodations according to their requirements. It should not matter if you are looking for the cheapest or most expensive one, with our tool you should be able to find whatever your are looking for. 
 
 # Who we are
 We would like to introduce ourself shortly. We are Viola Meier, Romano Brentani, Lukas Künzi, Barbara Dravec, four students graduating their Bachelors degree in Computer Science at the university of Bern Switzerland. You find more Informations of us in the members File. 
 The application is being developed as a part of the Bachelor's programm "Programing for Datascience", lectured by the University of Bern, which all four Students visit. 
-
 
 # What makes our Project special 
 The project uses a rich data set from Kaggel that contains extensive details about the AirBnBs. 
@@ -35,10 +35,9 @@ CONTRIBUTING.md file.
 Notice: Our CONTRIBUTING.md will be completed soon. 
 
 # Contact us
-If you want to contact us regarding a project-related problem or an enhancment, you can create an issue in our GitHub repository. The option to create an issue will be available once we have set up the GitHub environment. For other questions, please feel free to contact Romano Brentani: email
+If you want to contact us regarding a project-related problem or an enhancment, you can create an issue in our GitHub repository. The option to create an issue will be available once we have set up the GitHub environment. For other questions, please feel free to contact Romano Brentani: romano.brentani@students.unibe.ch
 
 # Thank you
-
 Thank you for your interest, for visiting this page, or for collaborating with us. 
 
 
