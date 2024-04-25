@@ -1,6 +1,6 @@
 # AirBnB Dataset - a reporting tool for the Airbnb accommodations ---
 # Welcome
-Welcome to our AriBNB reporting and anylysis plattform! Great to have you here!
+Welcome to our AriBnB reporting and anylysis plattform! Great to have you here!
 With this short Documentation we would like to give you some relevant Information about the goal of the app and why you should use it. So, let's get startet.
 TODO: Make sure to mention that per April 23 we are the 3rd team to choose the Airbnb dataset.
 
@@ -18,10 +18,21 @@ Notiz vom Roadmap Team: Goals entsprechen den Milestones, falls sich etwas ände
 
 # Who we are
 
-# What makes our Project special
+# What makes our Project special 
+The project uses a rich data set from Kaggel that contains extensive details about the AirBnBs. 
+The project emphasises interactive features. Users can analyse the data using parameters of their choice. For example, the AirBnB data can be analysed by city, neighbourhood or room type.
+An additional advantage of the reporting tool is the clear visualisation of the data, which makes the analysis understandable and intuitive.
 
 # How to get startet
 
+Instructions will follow
 
+# How can you get involved
+
+If you are interested in working on the project and would like to contribute improvements or further ideas, please checkout our 
+CONTRIBUTING.md file. 
+
+# Licences
+Our project is open source. For further informations and details consider the  LICENSE.md file.
 
 
