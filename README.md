@@ -28,13 +28,19 @@ An additional advantage of the reporting tool is the clear visualisation of the 
 
 # How to get startet
 
-Instructions will follow
+As we will start soon with the development of our Project, all informations you need to get startet will follow. If you need to know something immediately, see below under #Contact us
 
 # How can you get involved
 
 If you are interested in working on the project and would like to contribute improvements or further ideas, please checkout our 
 CONTRIBUTING.md file. 
 Notice: Our CONTRIBUTING.md will be completed soon. 
+
+# Contact us
+If 
+
+# Thank you
+
 
 # Licences
 Our project is open source. For further informations and details consider the  LICENSE.md file.
