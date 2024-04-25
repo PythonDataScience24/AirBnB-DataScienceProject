@@ -12,6 +12,7 @@ How we try to achieve this goal
 - The App gives you the possibility to select a neighbourhood and to check informations about costs, room offers or room availabilities on AirBnB for the specified neighboorhood.  
 - You select, which information you want to have visualized.
 - Compare ratings and be sure the accomodation holds what it promises.
+
 The dataset the application uses to generate the information is provided by Kaggel.
 
 # Our Goal and vision
