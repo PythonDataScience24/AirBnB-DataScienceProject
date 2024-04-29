@@ -13,6 +13,7 @@ import pandas as pd
 # what about min-nights?
 
 
+
 # 3. Availability
 # cluster the locations according to their availability. e.g. 20% of all listings are available 365 days/year, 30% of all listing are available 180 days/year
 # How many NaN values? what do we do w/NaN values?
