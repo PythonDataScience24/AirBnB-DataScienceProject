@@ -1,13 +1,4 @@
-import numpy as np
 import pandas as pd
-
-df = pd.read_csv('../data/Airbnb_Open_Data.csv')
-df.head()
-print(df.shape)
-print(df.head)
-print(df.tail)
-
-print(df.columns)
 
 # 1. Calculate # of unique listing
 # calculate the # of unique listings. You could also display how many listings for each neighbourhood group are listed.
