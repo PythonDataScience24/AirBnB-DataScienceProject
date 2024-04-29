@@ -63,3 +63,17 @@ def no_room_availability_with_price_less_than(price: float):
     listings_no_availability = listings[listings["availability 365"] == 0]
     quotient = listings.shape[0] / listings_no_availability.shape[0]
     return 100 / quotient
+
+
+def no_room_availability_with_price_between(lower_bound: float, upper_bound: float):
+    listings = data[["price", "availability 365"]]
+    prices = listings["price"].str.replace(",", ".").str[1:].astype(float)
+    listings["price"] = prices
+    listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
+    listings_no_availability = listings[listings["availability 365"] == 0]
+    quotient = listings.shape[0] / listings_no_availability.shape[0]
+    return 100 / quotient
+
+#Availabillity review
+
+
