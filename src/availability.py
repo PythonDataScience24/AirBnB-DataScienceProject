@@ -27,7 +27,7 @@ def room_type_min_availability_per_type() -> pd.DataFrame:
     return listings
 
 
-def room_type_avg_availability_per_type():
+def mean_room_type_avg_availability_per_type():
     listings = data.groupby("room type")["availability 365"].mean()
     return listings
 
