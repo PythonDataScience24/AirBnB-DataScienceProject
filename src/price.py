@@ -9,16 +9,6 @@ import pandas as pd
 # same for max
 # what about min-nights?
 
-def clean_data(df: pd.DataFrame) -> pd.DataFrame:
-    """Cleans the price and service fees columns.
-    NaN values in price are dropped, in service fee are assumed to be 0.
-    The price and service fee columns are converted from Strings to integers."""
-    df.dropna(subset=['price'], inplace=True)
-    df['price'] = df['price'].str.replace('$', '').str.replace(',', '').astype(int)
-    df['service fee'] = df['service fee'].fillna('0')
-    df['service fee'] = df['service fee'].str.replace('$', '').str.replace(',', '').astype(int)
-    return df
-
 
 class PriceSummary:
     def __init__(self, csv_path: str = None, df: pd.DataFrame = None):
@@ -27,7 +17,30 @@ class PriceSummary:
             self.df = df
         else:
             self.df = pd.read_csv(csv_path)
-            self.df = clean_data(self.df)
+
+    def clean_data(self) -> pd.DataFrame:
+        """Cleans the price and service fees columns.
+        NaN values in price are dropped, in service fee are assumed to be 0.
+        The price and service fee columns are converted from Strings to integers.
+        Has to be called before the first method which calculates min or max prices is called."""
+        self.df.dropna(subset=['price'], inplace=True)
+        self.df['price'] = self.df['price'].str.replace('$', '').str.replace(',', '').astype(int)
+        self.df['service fee'] = self.df['service fee'].fillna('0')
+        self.df['service fee'] = self.df['service fee'].str.replace('$', '').str.replace(',', '').astype(int)
+        return self.df
+
+    def get_number_of_nan_prices(self):
+        """Returns the number of NaN values in the price column.
+        Has to be called before clean_data() to get the correct number of NaN values."""
+        return self.df['price'].isna().sum()
+
+    def get_number_of_nan_service_fees(self):
+        """Returns the number of NaN values in the service fee column.
+        Has to be called before clean_data() to get the correct number of NaN values."""
+        return self.df['service fee'].isna().sum()
+
+    def get_total_number_of_listings(self):
+        return self.df.shape[0]
 
     def get_min_price_per_night(self):
         min_price = self.df['price'].min()
@@ -57,6 +70,9 @@ class PriceSummary:
             self.df['costs'] = self.df['price'] + self.df['service fee']
         max_costs_index = self.df['costs'].idxmax()
         return self.get_price_and_service_fees_of_row(max_costs_index)
+
+    def get_average_price_per_night(self):
+        return self.df['price'].mean()
 
 
 if __name__ == '__main__':
