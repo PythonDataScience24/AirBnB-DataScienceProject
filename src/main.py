@@ -37,21 +37,11 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    min_price_per_night = price_summary.get_min_price_per_night()
-    max_price_per_night = price_summary.get_max_price_per_night()
-    min_costs_for_one_night = price_summary.get_min_costs_for_one_night()
-    max_costs_for_one_night = price_summary.get_max_costs_for_one_night()
     st.write(f"{total_number_of_listings} listings are available in New York City. " 
              f" {non_nan_prices} provide pricing information. "
              "In the following pricing summary, only listings with pricing information are considered.")
     st.write("Accommodations are available in the following price range:")
-    st.text(f"Min price per night: ${min_price_per_night[0]}, with additional ${min_price_per_night[1]} of service "
-            f"fee\nMax price per night: ${max_price_per_night[0]}, with additional ${max_price_per_night[1]} of "
-            f"service fee")
-    st.text(f"Min costs for one night: ${min_costs_for_one_night[0]+min_costs_for_one_night[1]} "
-            f"(${min_costs_for_one_night[0]} price per night + ${min_costs_for_one_night[1]} service fee)\n"
-            f"Min costs for one night: ${max_costs_for_one_night[0]+max_costs_for_one_night[1]} "
-            f"(${max_costs_for_one_night[0]} price per night + ${max_costs_for_one_night[1]} service fee)")
+    st.table(price_summary.get_summary_table())
 
 
 def display_availability_percentage_per_neighbour_group():
