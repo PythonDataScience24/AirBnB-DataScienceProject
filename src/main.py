@@ -70,10 +70,19 @@ def display_room_types_with_zero_availability():
 
 def display_listing_with_max_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    (type, max_value) = availability_summary.listing_with_max_availability()
+    (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
     st.text("Book now a room with type " + str(type) + ", this type still has "
             + str(max_value) + " days of availability")
+    return
+
+
+def display_listing_with_min_availability():
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    (type, min_value) = availability_summary.room_type_with_min_availability()
+    st.subheader("Room Type with min availability")
+    st.text("Don't miss it and book now a room with type " + str(type) + ", this type only has "
+            + str(min_value) + " days left of availability")
     return
 
 
@@ -91,3 +100,4 @@ if __name__ == '__main__':
     display_room_availability_with_less_than(30)
     display_listings_with_one_year_availabilities()
     display_listing_with_max_availability()
+    display_listing_with_min_availability()

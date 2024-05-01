@@ -41,14 +41,15 @@ class AvailabilitySummary:
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
-    def listing_with_max_availability(self):
+    def room_type_with_max_availability(self):
         listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
         idx = listings_grouped_by_type.idxmax()
         return idx, int(listings_grouped_by_type[idx])
 
-    def room_type_min_availability_per_type(self) -> pd.DataFrame:
-        listings = self.df.groupby("room type")["availability 365"].min()
-        return listings
+    def room_type_with_min_availability(self):
+        listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
+        idx = listings_grouped_by_type.idxmin()
+        return idx, int(listings_grouped_by_type[idx])
 
     def mean_availability_per_room_type(self):
         listings = self.df.groupby("room type")["availability 365"].mean()
@@ -58,8 +59,10 @@ class AvailabilitySummary:
         listings = self.df[self.df["availability 365"] == 0]
         listings_grouped_by_type = listings.groupby("room type")["availability 365"].count()
         total_count = self.df.groupby("room type")["availability 365"].count()
-        quotient = total_count / listings_grouped_by_type
-        result = 100 / quotient
+        quotients = total_count / listings_grouped_by_type
+        df = pd.DataFrame(quotients)
+        df = df.rename(columns={"availability 365": "Percentage (%)"})
+        result = 100 / df
         return result
 
     def percentage_availability_per_type(self, days: int):
