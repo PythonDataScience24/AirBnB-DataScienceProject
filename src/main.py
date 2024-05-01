@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import price
 import availability
+import airbnb_summary
 
 
 def display_map():
@@ -12,11 +13,11 @@ def display_map():
     
 def display_airbnb_summary():
     st.subheader('Available AirBnBs in NYC')
-    airbnb_summary = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
-    number = airbnb_summary.get_total_airbnbs()
+    airbnb_summ = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
+    number = airbnb_summ.get_total_airbnbs()
     st.text(f"In NYC you can choose between {number} different AirBnbs")
     st.text("The following table shows you the number of available AirBnbs per neighbourhood")
-    data = airbnb_summary.get_airbnbs_per_nhood()
+    data = airbnb_summ.get_airbnbs_per_nhood()
     st.table(data=data)    
 
 
