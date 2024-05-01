@@ -4,6 +4,13 @@ import price
 import availability
 
 
+def display_map():
+    st.header('Map')
+    df = pd.read_csv('data/Airbnb_Open_Data.csv')
+    df_map = df.dropna(subset=['lat', 'long'])
+    st.map(data=df_map, latitude='lat', longitude='long', size=1)
+
+
 def display_price_summary():
     st.subheader('Prices')
     price_summary = price.PriceSummary('data/Airbnb_Open_Data.csv')
@@ -18,13 +25,6 @@ def display_price_summary():
             f"Max price per night: {price_summary.get_max_price_per_night()}")
     st.text(f"Min costs for one night: {price_summary.get_min_costs_for_one_night()}\n" +
             f"Max costs for one night: {price_summary.get_max_costs_for_one_night()}")
-
-
-def display_map():
-    st.header('Map')
-    df = pd.read_csv('data/Airbnb_Open_Data.csv')
-    df_map = df.dropna(subset=['lat', 'long'])
-    st.map(data=df_map, latitude='lat', longitude='long', size=1)
 
 
 def display_availability_percentage_per_neighbour_group():
@@ -72,10 +72,19 @@ def display_room_types_with_zero_availability():
 
 def display_listing_with_max_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    (type, max_value) = availability_summary.listing_with_max_availability()
+    (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
     st.text("Book now a room with type " + str(type) + ", this type still has "
             + str(max_value) + " days of availability")
+    return
+
+
+def display_listing_with_min_availability():
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    (type, min_value) = availability_summary.room_type_with_min_availability()
+    st.subheader("Room Type with min availability")
+    st.text("Don't miss it and book now a room with type " + str(type) + ", this type only has "
+            + str(min_value) + " days left of availability")
     return
 
 
@@ -88,8 +97,9 @@ if __name__ == '__main__':
     display_availability_percentage_per_neighbour_group()
     display_mean_availability_per_room_type()
     display_room_types_with_zero_availability()
-    st.header("Some more Informations about availability in the next 365 days")
+    st.header("Some more information about room availability in the next 365 days")
     display_room_availabilities_with_more_than([180, 90])
     display_room_availability_with_less_than(30)
     display_listings_with_one_year_availabilities()
     display_listing_with_max_availability()
+    display_listing_with_min_availability()
