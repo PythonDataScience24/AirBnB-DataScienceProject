@@ -135,6 +135,7 @@ def display_room_availability_with_price_between_and_more_than():
 
 
 if __name__ == '__main__':
+    st.set_page_config(page_title="AirBNB in New York City")
     st.title("AirBNB in New York City")
     display_map()
     st.header("AirBnB Summary")
