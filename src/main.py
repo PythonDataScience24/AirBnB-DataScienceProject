@@ -9,6 +9,15 @@ def display_map():
     df = pd.read_csv('data/Airbnb_Open_Data.csv')
     df_map = df.dropna(subset=['lat', 'long'])
     st.map(data=df_map, latitude='lat', longitude='long', size=1)
+    
+def display_airbnb_summary():
+    st.subheader('Available AirBnBs in NYC')
+    airbnb_summary = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
+    number = airbnb_summary.get_total_airbnbs()
+    st.text(f"In NYC you can choose between {number} different AirBnbs")
+    st.text("The following table shows you the number of available AirBnbs per neighbourhood")
+    data = airbnb_summary.get_airbnbs_per_nhood()
+    st.table(data=data)    
 
 
 def display_price_summary():
@@ -91,6 +100,8 @@ def display_listing_with_min_availability():
 if __name__ == '__main__':
     st.title("AirBNB in New York City")
     display_map()
+    st.header("AirBnB Summary")
+    display_airbnb_summary()
     st.header("Price Summary")
     display_price_summary()
     st.header("Availability Summary")
