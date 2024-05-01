@@ -26,6 +26,12 @@ The project emphasises interactive features. Users can analyse the data using pa
 An additional advantage of the reporting tool is the clear visualisation of the data, which makes the analysis understandable and intuitive.
 
 # How to get started
+To get started, clone the repository and run 
+```pip install -r requirements.txt```
+
+To start the dashboard 
+```streamlit run src/main.py```
+
 As we will start soon with the development of our project, all information you need to get startet will follow. If you need to know something immediately, see below under **Contact us**
 
 # How can you get involved

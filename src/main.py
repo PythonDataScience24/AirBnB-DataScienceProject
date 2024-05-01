@@ -11,7 +11,9 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.text(f"Prices for {non_nan_prices} out of {total_number_of_listings} listings are available.")
+    st.write(f"{total_number_of_listings} listings are available in New York City." +
+             f" {non_nan_prices} provide pricing information." +
+             "In the following princing summary, only listings with pricing information are considered.")
     st.text(f"Min price per night: {price_summary.get_min_price_per_night()}\n" +
             f"Max price per night: {price_summary.get_max_price_per_night()}")
     st.text(f"Min costs for one night: {price_summary.get_min_costs_for_one_night()}\n" +
