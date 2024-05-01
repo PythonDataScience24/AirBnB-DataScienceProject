@@ -42,8 +42,9 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def room_type_max_availability_per_type(self) -> pd.DataFrame:
-        listings = self.df.groupby("room type")["availability 365"].max()
-        return listings
+        listings = self.df.groupby("room type")["availability 365"].sum()
+        max_availability = listings.max()
+        return max_availability
 
     def room_type_min_availability_per_type(self) -> pd.DataFrame:
         listings = self.df.groupby("room type")["availability 365"].min()
