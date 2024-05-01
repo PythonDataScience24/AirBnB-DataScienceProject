@@ -23,11 +23,11 @@ class RatingSummary:
         return average_ratings         
 
     def get_min_rating_per_nhood(self) -> pd.DataFrame:
-        grouped = self.df.groupby('neighbourhood group')['review rate number'].idxmin()
-        min_rating = grouped.loc[['review rate number','neighbourhood group','host name', 'NAME']]
+        grouped = self.df.groupby('neighbourhood group')
+        min_rating = grouped['review rate number'].min()
         return min_rating
 
     def get_max_rating_per_nhood(self) -> pd.DataFrame:
-        grouped = self.df.groupby('neighbourhood group')['review rate number'].idxmax()
-        max_rating = grouped.loc[['review rate number','neighbourhood group','host name', 'NAME']]
+        grouped = self.df.groupby('neighbourhood group')
+        max_rating = grouped['review rate number'].max()
         return max_rating

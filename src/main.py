@@ -106,7 +106,7 @@ def display_rating_summary():
     st.table(data = data)
     st.text("Best rating per neighbourhood")
     data = rating_summary.get_max_rating_per_nhood()
-    st.tabel(data=data)
+    st.table(data=data)
     st.text("Worst rating per neighbourhood")
     data = rating_summary.get_min_rating_per_nhood()
     st.table(data=data)
