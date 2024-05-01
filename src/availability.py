@@ -41,10 +41,10 @@ class AvailabilitySummary:
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
-    def room_type_max_availability_per_type(self) -> pd.DataFrame:
-        listings = self.df.groupby("room type")["availability 365"].sum()
-        max_availability = listings.max()
-        return max_availability
+    def listing_with_max_availability(self):
+        listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
+        idx = listings_grouped_by_type.idxmax()
+        return idx, int(listings_grouped_by_type[idx])
 
     def room_type_min_availability_per_type(self) -> pd.DataFrame:
         listings = self.df.groupby("room type")["availability 365"].min()
@@ -94,7 +94,7 @@ class AvailabilitySummary:
 
     def room_availability_price_day(self, lower_bound: float, upper_bound: float, days: int):
         listings = self.df[["price", "availability 365"]]
-        prices = listings["price"].str.replace(",", ".").str[1:].astype(float)
+        prices = listings["price"].str.replace("", "").str[1:].astype(float)
         listings["price"] = prices
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
         listings_no_availability = listings[listings["availability 365"] >= days]

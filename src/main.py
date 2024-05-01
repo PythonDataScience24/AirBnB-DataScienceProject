@@ -5,7 +5,7 @@ import availability
 
 
 def display_price_summary():
-    st.header('Prices')
+    st.subheader('Prices')
     price_summary = price.PriceSummary('data/Airbnb_Open_Data.csv')
     number_of_nan_prices = price_summary.get_number_of_nan_prices()
     total_number_of_listings = price_summary.get_total_number_of_listings()
@@ -25,10 +25,9 @@ def display_map():
     st.map(data=df_map, latitude='lat', longitude='long', size=1)
 
 
-
 def display_availability_percentage_per_neighbour_group():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    st.header("Percentage of Listings with Availability more than 180 days in future per neighbour group")
+    st.subheader("Percentage of Listings with Availability more than 180 days in future per neighbour group")
     data = availability_summary.availability_per_neighbour_group_more_than(180)
     st.table(data=data)
     return
@@ -36,7 +35,7 @@ def display_availability_percentage_per_neighbour_group():
 
 def display_mean_availability_per_room_type():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    st.header("Mean availability per room type")
+    st.subheader("Mean availability per room type")
     data = availability_summary.mean_availability_per_room_type()
     st.table(data=data)
     return
@@ -64,15 +63,26 @@ def display_room_availability_with_less_than(days):
 def display_room_types_with_zero_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     data = availability_summary.percentage_no_availability_per_type()
-    st.header("Percentage of Listings with no availability per room type")
+    st.subheader("Percentage of Listings with no availability per room type")
     st.table(data=data)
     return
 
 
+def display_listing_with_max_availability():
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    (type, max_value) = availability_summary.listing_with_max_availability()
+    st.subheader("Room Type with max availability")
+    st.text("Book now a room with type " + str(type) + ", this type still has "
+            + str(max_value) + " days of availability")
+    return
+
+
 if __name__ == '__main__':
-    st.title("Figure out if we want to use streamlit")
-    display_price_summary()
+    st.title("AirBNB in New York City")
     display_map()
+    st.header("Price Summary")
+    display_price_summary()
+    st.header("Availability Summary")
     display_availability_percentage_per_neighbour_group()
     display_mean_availability_per_room_type()
     display_room_types_with_zero_availability()
@@ -80,3 +90,4 @@ if __name__ == '__main__':
     display_room_availabilities_with_more_than([180, 90])
     display_room_availability_with_less_than(30)
     display_listings_with_one_year_availabilities()
+    display_listing_with_max_availability()
