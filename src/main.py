@@ -5,6 +5,10 @@ import availability
 import airbnb_summary
 import rating
 
+# To start the Programm please make sure you have streamlit installed
+# Then in your command line enter the following command:
+# streamlit run src/main.py
+# See also README.md
 
 def display_map():
     st.header('Map')
