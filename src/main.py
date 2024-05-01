@@ -57,11 +57,11 @@ def display_mean_availability_per_room_type():
 def display_room_availabilities_with_more_than(values):
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     for value in values:
-        data = availability_summary.room_availability_in_more_than_days(value)
+        data = availability_summary.room_availability_more_than(value)
         st.text(str(data) + "% of all listings still have " + str(value) + " or more days availability in future")
 
 
-def display_listings_with_one_year_availabilities():
+def display_room_with_one_year_availabilities():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     data = availability_summary.room_availability_in_exact_days(365)
     st.text(str(data) + "% of all listings still have 365 days availability")
@@ -81,7 +81,7 @@ def display_room_types_with_zero_availability():
     return
 
 
-def display_listing_with_max_availability():
+def display_room_with_max_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
@@ -90,7 +90,7 @@ def display_listing_with_max_availability():
     return
 
 
-def display_listing_with_min_availability():
+def display_room_with_min_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     (type, min_value) = availability_summary.room_type_with_min_availability()
     st.subheader("Room Type with min availability")
@@ -112,6 +112,21 @@ def display_rating_summary():
     st.table(data=data)
 
 
+def display_room_availability_with_price_between_and_more_than():
+    st.subheader('Check prices and availability in one shot')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    data = availability_summary.room_availability_with_price_between_and_more_than(50,100, 180)
+    if data < 50:
+        st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
+                                                                              "availability"
+                                                                              "which cost between 50 Dollar and 100 "
+                                                                              "Dollar")
+    else:
+        st.write(str(data) + "%" + "of all rooms which cost between 50 Dollar and 100 Dollar still have more than 180 "
+                                   "days"
+                                   "availability left")
+
+
 if __name__ == '__main__':
     st.title("AirBNB in New York City")
     display_map()
@@ -126,8 +141,9 @@ if __name__ == '__main__':
     st.header("Some more information about room availability in the next 365 days")
     display_room_availabilities_with_more_than([180, 90])
     display_room_availability_with_less_than(30)
-    display_listings_with_one_year_availabilities()
-    display_listing_with_max_availability()
-    display_listing_with_min_availability()
+    display_room_with_one_year_availabilities()
+    display_room_with_max_availability()
+    display_room_with_min_availability()
+    display_room_availability_with_price_between_and_more_than()
     st.header("Rating Summary")
     display_rating_summary()

@@ -26,18 +26,13 @@ class AvailabilitySummary:
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
-    def room_availability_in_more_than_days(self, days: int) -> pd.DataFrame:
+    def room_availability_more_than(self, days: int) -> pd.DataFrame:
         listings = self.df[self.df['availability 365'] >= days]
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
     def room_availability_less_than(self, days: int):
         listings = self.df[self.df['availability 365'] <= days]
-        quotient = self.df.shape[0] / listings.shape[0]
-        return round(100 / quotient)
-
-    def room_availability_more_than(self, days: int):
-        listings = self.df[self.df['availability 365'] >= days]
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
@@ -73,36 +68,18 @@ class AvailabilitySummary:
         result = 100 / quotient
         return result
 
-    def room_availability_with_price_less_than(self, price: float):
+    def mean_room_availability_with_price_less_than(self, price: float):
         mean = self.df.loc[self.df["price"] <= price, "price"].mean()
         return mean
 
-    def no_room_availability_with_price_less_than(self, price: float):
+    def room_availability_with_price_between_and_more_than(self, lower_bound: float, upper_bound: float, days: int):
         listings = self.df[["price", "availability 365"]]
-        prices = listings["price"].str.replace(",", ".").str[1:].astype(float)
-        listings["price"] = prices
-        listings = listings[listings["price"] <= price]
-        listings_no_availability = listings[listings["availability 365"] == 0]
-        quotient = listings.shape[0] / listings_no_availability.shape[0]
-        return 100 / quotient
-
-    def no_room_availability_with_price_between(self, lower_bound: float, upper_bound: float):
-        listings = self.df[["price", "availability 365"]]
-        prices = listings["price"].str.replace(",", ".").str[1:].astype(float)
+        prices = listings["price"].str.replace(",", "").str[1:].astype(float)
         listings["price"] = prices
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
-        listings_no_availability = listings[listings["availability 365"] == 0]
-        quotient = listings.shape[0] / listings_no_availability.shape[0]
-        return 100 / quotient
-
-    def room_availability_price_day(self, lower_bound: float, upper_bound: float, days: int):
-        listings = self.df[["price", "availability 365"]]
-        prices = listings["price"].str.replace("", "").str[1:].astype(float)
-        listings["price"] = prices
-        listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
-        listings_no_availability = listings[listings["availability 365"] >= days]
-        quotient = listings.shape[0] / listings_no_availability.shape[0]
-        return 100 / quotient
+        listings_with_availability = listings[listings["availability 365"] >= days]
+        quotient = listings.shape[0] / listings_with_availability.shape[0]
+        return round(100 / quotient)
 
     def availability_per_neighbour_group_more_than(self, days: int):
         self.df.loc[self.df["neighbourhood group"] == "manhatan", "neighbourhood group"] = "Manhattan"
