@@ -1,9 +1,11 @@
 import pandas as pd
 import streamlit as st
-import price
-import availability
+
 import airbnb_summary
+import availability
+import price
 import rating
+
 
 # To start the Programm please make sure you have streamlit installed
 # Then in your command line enter the following command:
@@ -12,10 +14,12 @@ import rating
 
 def display_map():
     st.header('Map')
+    st.write('The following map shows the location of the AirBnBs in New York City.')
     df = pd.read_csv('data/Airbnb_Open_Data.csv')
     df_map = df.dropna(subset=['lat', 'long'])
     st.map(data=df_map, latitude='lat', longitude='long', size=1)
-    
+
+
 def display_airbnb_summary():
     st.subheader('Available AirBnBs in NYC')
     airbnb_summ = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
@@ -23,7 +27,7 @@ def display_airbnb_summary():
     st.text(f"In NYC you can choose between {number} different AirBnbs")
     st.text("The following table shows you the number of available AirBnbs per neighbourhood")
     data = airbnb_summ.get_airbnbs_per_nhood()
-    st.table(data=data)    
+    st.table(data=data)
 
 
 def display_price_summary():
@@ -33,13 +37,21 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.write(f"{total_number_of_listings} listings are available in New York City." +
-             f" {non_nan_prices} provide pricing information." +
-             "In the following princing summary, only listings with pricing information are considered.")
-    st.text(f"Min price per night: {price_summary.get_min_price_per_night()}\n" +
-            f"Max price per night: {price_summary.get_max_price_per_night()}")
-    st.text(f"Min costs for one night: {price_summary.get_min_costs_for_one_night()}\n" +
-            f"Max costs for one night: {price_summary.get_max_costs_for_one_night()}")
+    min_price_per_night = price_summary.get_min_price_per_night()
+    max_price_per_night = price_summary.get_max_price_per_night()
+    min_costs_for_one_night = price_summary.get_min_costs_for_one_night()
+    max_costs_for_one_night = price_summary.get_max_costs_for_one_night()
+    st.write(f"{total_number_of_listings} listings are available in New York City. " 
+             f" {non_nan_prices} provide pricing information. "
+             "In the following pricing summary, only listings with pricing information are considered.")
+    st.write("Accommodations are available in the following price range:")
+    st.text(f"Min price per night: ${min_price_per_night[0]}, with additional ${min_price_per_night[1]} of service "
+            f"fee\nMax price per night: ${max_price_per_night[0]}, with additional ${max_price_per_night[1]} of "
+            f"service fee")
+    st.text(f"Min costs for one night: ${min_costs_for_one_night[0]+min_costs_for_one_night[1]} "
+            f"(${min_costs_for_one_night[0]} price per night + ${min_costs_for_one_night[1]} service fee)\n"
+            f"Min costs for one night: ${max_costs_for_one_night[0]+max_costs_for_one_night[1]} "
+            f"(${max_costs_for_one_night[0]} price per night + ${max_costs_for_one_night[1]} service fee)")
 
 
 def display_availability_percentage_per_neighbour_group():
@@ -102,12 +114,13 @@ def display_room_with_min_availability():
             + str(min_value) + " days left of availability")
     return
 
+
 def display_rating_summary():
     st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_Data.csv')
     st.text("Average Rating per neighbourhood")
     data = rating_summary.get_average_rating_per_nhood()
-    st.table(data = data)
+    st.table(data=data)
     st.text("Best rating per neighbourhood")
     data = rating_summary.get_max_rating_per_nhood()
     st.table(data=data)
@@ -119,7 +132,7 @@ def display_rating_summary():
 def display_room_availability_with_price_between_and_more_than():
     st.subheader('Check prices and availability in one shot')
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    data = availability_summary.room_availability_with_price_between_and_more_than(50,100, 180)
+    data = availability_summary.room_availability_with_price_between_and_more_than(50, 100, 180)
     if data < 50:
         st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
                                                                               "availability"
