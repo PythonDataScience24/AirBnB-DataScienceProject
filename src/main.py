@@ -3,6 +3,7 @@ import streamlit as st
 import price
 import availability
 import airbnb_summary
+import rating
 
 
 def display_map():
@@ -97,6 +98,19 @@ def display_listing_with_min_availability():
             + str(min_value) + " days left of availability")
     return
 
+def display_rating_summary():
+    st.subheader('Rating Summary')
+    rating_summary = rating.RatingSummary('data/Airbnb_Open_Data.csv')
+    st.text("Average Rating per neighbourhood")
+    data = rating_summary.get_average_rating_per_nhood()
+    st.table(data = data)
+    st.text("Best rating per neighbourhood")
+    data = rating_summary.get_max_rating_per_nhood()
+    st.tabel(data=data)
+    st.text("Worst rating per neighbourhood")
+    data = rating_summary.get_min_rating_per_nhood()
+    st.table(data=data)
+
 
 if __name__ == '__main__':
     st.title("AirBNB in New York City")
@@ -115,3 +129,5 @@ if __name__ == '__main__':
     display_listings_with_one_year_availabilities()
     display_listing_with_max_availability()
     display_listing_with_min_availability()
+    st.header("Rating Summary")
+    display_rating_summary()

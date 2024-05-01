@@ -17,7 +17,7 @@ class RatingSummary:
         self.df.loc[self.df["neighbourhood group"] == "brookln", "neighbourhood group"] = "Brooklyn"
         return self.df 
 
-    def get_average_ratings_per_nhood(self)->pd.DataFrame:
+    def get_average_rating_per_nhood(self)->pd.DataFrame:
         grouped = self.df.groupby('neighbourhood group')
         average_ratings = grouped['review rate number'].mean()
         return average_ratings         
