@@ -1,8 +1,9 @@
 import pandas as pd
 import streamlit as st
-import price
-import availability
+
 import airbnb_summary
+import availability
+import price
 import rating
 
 
@@ -13,6 +14,7 @@ import rating
 
 def display_map():
     st.header('Map')
+    st.write('The following map shows the location of the AirBnBs in New York City.')
     df = pd.read_csv('data/Airbnb_Open_Data.csv')
     df_map = df.dropna(subset=['lat', 'long'])
     st.map(data=df_map, latitude='lat', longitude='long', size=1)
@@ -35,13 +37,11 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.write(f"{total_number_of_listings} listings are available in New York City." +
-             f" {non_nan_prices} provide pricing information." +
-             "In the following princing summary, only listings with pricing information are considered.")
-    st.text(f"Min price per night: {price_summary.get_min_price_per_night()}\n" +
-            f"Max price per night: {price_summary.get_max_price_per_night()}")
-    st.text(f"Min costs for one night: {price_summary.get_min_costs_for_one_night()}\n" +
-            f"Max costs for one night: {price_summary.get_max_costs_for_one_night()}")
+    st.write(f"{total_number_of_listings} listings are available in New York City. " 
+             f" {non_nan_prices} provide pricing information. "
+             "In the following pricing summary, only listings with pricing information are considered.")
+    st.write("Accommodations are available in the following price range:")
+    st.table(price_summary.get_summary_table())
 
 
 def display_availability_percentage_per_neighbour_group():
@@ -135,6 +135,7 @@ def display_room_availability_with_price_between_and_more_than():
 
 
 if __name__ == '__main__':
+    st.set_page_config(page_title="AirBNB in New York City")
     st.title("AirBNB in New York City")
     display_map()
     st.header("AirBnB Summary")

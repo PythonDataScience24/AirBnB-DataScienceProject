@@ -74,6 +74,25 @@ class PriceSummary:
     def get_average_price_per_night(self):
         return self.df['price'].mean()
 
+    def get_summary_table(self):
+        min_price_per_night = self.get_min_price_per_night()
+        max_price_per_night = self.get_max_price_per_night()
+        min_costs_for_one_night = self.get_min_costs_for_one_night()
+        max_costs_for_one_night = self.get_max_costs_for_one_night()
+        table = pd.DataFrame({
+            "name": ["Min price per night", "Max price per night", "Min costs for one night",
+                     "Max costs for one night"],
+            "Amount": [f"${min_price_per_night[0]}", f"${max_price_per_night[0]}",
+                       f"${min_costs_for_one_night[0] + min_costs_for_one_night[1]}",
+                       f"${max_costs_for_one_night[0] + max_costs_for_one_night[1]}"],
+            "Additional Information": [f"additional ${min_price_per_night[1]} of service fee",
+                                       f"additional ${max_price_per_night[1]} of service fee",
+                                       f"${min_costs_for_one_night[0]} price per night + ${min_costs_for_one_night[1]} service fee",
+                                       f"${max_costs_for_one_night[0]} price per night + ${max_costs_for_one_night[1]} service fee"]})
+        table.style.hide(axis="index")
+        table.set_index("name", inplace=True)
+        return table
+
 
 if __name__ == '__main__':
     price_summary = PriceSummary('../data/Airbnb_Open_Data.csv')
