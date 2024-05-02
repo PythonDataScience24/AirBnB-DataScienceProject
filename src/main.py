@@ -5,6 +5,7 @@ import availability
 import airbnb_summary
 import rating
 
+
 # To start the Programm please make sure you have streamlit installed
 # Then in your command line enter the following command:
 # streamlit run src/main.py
@@ -15,7 +16,8 @@ def display_map():
     df = pd.read_csv('data/Airbnb_Open_Data.csv')
     df_map = df.dropna(subset=['lat', 'long'])
     st.map(data=df_map, latitude='lat', longitude='long', size=1)
-    
+
+
 def display_airbnb_summary():
     st.subheader('Available AirBnBs in NYC')
     airbnb_summ = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
@@ -23,7 +25,7 @@ def display_airbnb_summary():
     st.text(f"In NYC you can choose between {number} different AirBnbs")
     st.text("The following table shows you the number of available AirBnbs per neighbourhood")
     data = airbnb_summ.get_airbnbs_per_nhood()
-    st.table(data=data)    
+    st.table(data=data)
 
 
 def display_price_summary():
@@ -102,12 +104,13 @@ def display_room_with_min_availability():
             + str(min_value) + " days left of availability")
     return
 
+
 def display_rating_summary():
     st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_Data.csv')
     st.text("Average Rating per neighbourhood")
     data = rating_summary.get_average_rating_per_nhood()
-    st.table(data = data)
+    st.table(data=data)
     st.text("Best rating per neighbourhood")
     data = rating_summary.get_max_rating_per_nhood()
     st.table(data=data)
@@ -119,7 +122,7 @@ def display_rating_summary():
 def display_room_availability_with_price_between_and_more_than():
     st.subheader('Check prices and availability in one shot')
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
-    data = availability_summary.room_availability_with_price_between_and_more_than(50,100, 180)
+    data = availability_summary.room_availability_with_price_between_and_more_than(50, 100, 180)
     if data < 50:
         st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
                                                                               "availability"
