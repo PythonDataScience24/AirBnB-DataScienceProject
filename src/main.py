@@ -7,7 +7,7 @@ import price
 import rating
 
 
-# To start the Programm please make sure you have streamlit installed
+# To start the Program please make sure you have streamlit installed: --> pip install streamlit
 # Then in your command line enter the following command:
 # streamlit run src/main.py
 # See also README.md
@@ -91,7 +91,7 @@ def display_room_with_max_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
-    st.text("Book now a room with type " + str(type) + ", this type still has "
+    st.write("Book now a room with type " + str(type) + ", this type still has "
             + str(max_value) + " days of availability")
     return
 
@@ -100,7 +100,7 @@ def display_room_with_min_availability():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     (type, min_value) = availability_summary.room_type_with_min_availability()
     st.subheader("Room Type with min availability")
-    st.text("Don't miss it and book now a room with type " + str(type) + ", this type only has "
+    st.write("Don't miss it and book now a room with type " + str(type) + ", this type only has "
             + str(min_value) + " days left of availability")
     return
 
@@ -125,8 +125,8 @@ def display_room_availability_with_price_between_and_more_than():
     data = availability_summary.room_availability_with_price_between_and_more_than(50, 100, 180)
     if data < 50:
         st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
-                                                                              "availability"
-                                                                              "which cost between 50 Dollar and 100 "
+                                                                              "availability "
+                                                                              "which cost between 50 and 100 "
                                                                               "Dollar")
     else:
         st.write(str(data) + "%" + "of all rooms which cost between 50 Dollar and 100 Dollar still have more than 180 "
