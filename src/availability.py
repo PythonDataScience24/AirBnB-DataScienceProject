@@ -21,12 +21,12 @@ class AvailabilitySummary:
         self.df.loc[self.df["availability 365"] < 0, "availability 365"] = 0
         return self.df
 
-    def room_availability_in_exact_days(self, days: int) -> pd.DataFrame:
+    def room_availability_in_exact_days(self, days: int):
         listings = self.df[self.df['availability 365'] == days]
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
-    def room_availability_more_than(self, days: int) -> pd.DataFrame:
+    def room_availability_more_than(self, days: int):
         listings = self.df[self.df['availability 365'] >= days]
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
