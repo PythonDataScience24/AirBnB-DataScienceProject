@@ -7,7 +7,7 @@ import price
 import rating
 
 
-# To start the Program please make sure you have streamlit installed: --> pip install streamlit
+# To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
 # streamlit run src/main.py
 # See also README.md
