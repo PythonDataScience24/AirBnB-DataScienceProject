@@ -7,6 +7,7 @@
     st.subheader("Mean availability per room type")
     data = availability_summary.mean_availability_per_room_type()
     st.table(data=data)
+    return
 ```
 ### Adapted code
 
@@ -17,7 +18,10 @@ def display_availability_percentage_per_neighbour_group():
     data = availability_summary.availability_per_neighbour_group_more_than(180)
     st.table(data=data)
 ````
-#### 
+#### fixed issue 
+removed return statement
+
+# Message
 
 
 
