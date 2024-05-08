@@ -1,10 +1,11 @@
 import pandas as pd
 import streamlit as st
 
-import src.airbnb_summary as airbnb_summary
-import src.availability as availability
-import src.price as price
-import src.rating as rating
+# imports need to be this way because of streamlit
+import airbnb_summary
+import availability
+import price
+import rating
 
 
 # To start the program please make sure you have streamlit installed
