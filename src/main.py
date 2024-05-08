@@ -49,7 +49,6 @@ def display_availability_percentage_per_neighbour_group():
     st.subheader("Percentage of Listings with Availability more than 180 days in future per neighbour group")
     data = availability_summary.availability_per_neighbour_group_more_than(180)
     st.table(data=data)
-    return
 
 
 def display_mean_availability_per_room_type():
