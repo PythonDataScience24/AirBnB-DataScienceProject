@@ -6,7 +6,8 @@ import rating
 import airbnb_summary
 
 
-def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFrame) -> pd.DataFrame | None:
+def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFrame) \
+        -> pd.DataFrame | None:
     """
     Returns the group from a DataFrameGroupBy object, if the group exists, else None.
 

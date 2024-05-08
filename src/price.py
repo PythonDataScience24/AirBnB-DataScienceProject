@@ -42,37 +42,42 @@ class PriceSummary:
     def get_total_number_of_listings(self) -> int:
         return self.df.shape[0]
 
-    def get_min_price_per_night(self) -> tuple[int, int]:
+    def get_min_price_per_night(self) -> tuple[int, int, int]:
         min_price = self.df['price'].min()
         min_prices = self.df[self.df['price'] == min_price]
         min_price_index = min_prices['service fee'].idxmin()
         return self._get_price_and_service_fees_of_row(min_price_index)
 
-    def get_max_price_per_night(self) -> tuple[int, int]:
+    def get_max_price_per_night(self) -> tuple[int, int, int]:
         max_price = self.df['price'].max()
-        max_prices = self.df[self.df['price'] == max_price]
+        max_prices = self.df.loc[self.df['price'] == max_price, ['NAME', 'price', 'service fee']]
         max_price_index = max_prices['service fee'].idxmax()
         return self._get_price_and_service_fees_of_row(max_price_index)
 
-    def _get_price_and_service_fees_of_row(self, row_index) -> tuple[int, int]:
+    def _get_price_and_service_fees_of_row(self, row_index) -> tuple[int, int, int]:
         price = self.df.at[row_index, 'price']
         service_fee = self.df.at[row_index, 'service fee']
-        return price, service_fee
+        name = self.df.at[row_index, 'NAME']
+        return name, price, service_fee
 
-    def get_min_costs_for_one_night(self) -> tuple[int, int]:
+    def get_min_costs_for_one_night(self) -> tuple[int, int, int]:
         if 'costs' not in self.df.columns:
             self.df['costs'] = self.df['price'] + self.df['service fee']
         min_costs_index = self.df['costs'].idxmin()
         return self._get_price_and_service_fees_of_row(min_costs_index)
 
-    def get_max_costs_for_one_night(self) -> tuple[int, int]:
+    def get_max_costs_for_one_night(self) -> tuple[int, int, int]:
         if 'costs' not in self.df.columns:
             self.df['costs'] = self.df['price'] + self.df['service fee']
         max_costs_index = self.df['costs'].idxmax()
         return self._get_price_and_service_fees_of_row(max_costs_index)
 
-    def get_average_price_per_night(self) -> float:
+    def get_mean_price_per_night(self) -> float:
         return self.df['price'].mean()
+
+    def _get_name(self, idx):
+        return self.df.at[idx, 'NAME']
+        pass
 
     def get_summary_table(self):
         min_price_per_night = self.get_min_price_per_night()

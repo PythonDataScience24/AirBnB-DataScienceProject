@@ -21,7 +21,20 @@ def display_availability_percentage_per_neighbour_group():
 #### fixed issue 
 removed return statement
 
-# Message
+# Message 2
+### src/neighbourhood_selector.py:9:0: C0301: Line too long (108/100) (line-too-long)
+### previous code
+```bash
+def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFrame) -> pd.DataFrame | None:
+```
+### adapted code
+```bash
+def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFrame) \
+        -> pd.DataFrame | None:
+```
+#### fixed issue
+shortened line with method definition
+
 
 
 
