@@ -45,5 +45,12 @@ shortened line with method definition
 #### fixed issue 
 removed unused import statement
 
+# Message 4
+### src/home.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 
- 
+#### Previous code: 
+```bash
+from airbnb_summary import AirBnBSummary #unused
+```
+#### fixed issue 
+removed unused import statement
