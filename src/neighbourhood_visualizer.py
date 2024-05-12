@@ -43,7 +43,6 @@ class NeighbourhoodVisualizer:
     def visualize_filtered_dataframe(self):
         """ Returns a visualization of the filtered dataframe """
         st.dataframe(self.df)
-        pass
 
     def visualize_neighbourhood_availability(self, days: int):
         """
@@ -63,7 +62,6 @@ class NeighbourhoodVisualizer:
         (name, max_price, service_fee) = self.priceSummary.get_max_price_per_night()
         st.subheader("Max Price per Night")
         st.write("The accommodation " + str(name) + " has the max price " + str(max_price) + " dollar per night")
-        pass
 
     def visualize_min_price(self):
         """
@@ -73,7 +71,6 @@ class NeighbourhoodVisualizer:
         (name, min_price, service_fee) = self.priceSummary.get_min_price_per_night()
         st.subheader("Min Price per Night")
         st.write("The accommodation " + str(name) + " has the min price " + str(min_price) + " dollar per night")
-        pass
 
     def visualize_mean_price(self):
         """
@@ -82,7 +79,6 @@ class NeighbourhoodVisualizer:
         """
         mean_price = self.priceSummary.get_mean_price_per_night()
         st.write("mean price per night: " + str(round(mean_price)))
-        pass
 
     def visualize_max_costs(self):
         """
@@ -121,10 +117,16 @@ class NeighbourhoodVisualizer:
         """
         pass
 
+    def visualize_median_cost(self):
+        """
+        visualizes the median costs of all
+        rooms in the selected neighbourhood
+        """
+        pass
+
     def visualize_numbers_of_listings(self):
         """
         visualizes the number many listings in the selected neighbourhood exist
         """
         total_number_of_listings = self.airbnbSummary.get_total_airbnbs()
         st.write(f"Total number of listings in the selected neighbourhood:", total_number_of_listings)
-        pass

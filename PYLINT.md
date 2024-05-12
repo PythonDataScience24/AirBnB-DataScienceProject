@@ -35,8 +35,15 @@ def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFr
 #### fixed issue
 shortened line with method definition
 
+# Message 3
 
-
+### src/neighbourhood_selector.py:3:0: W0611: Unused import price (unused-import)
+#### Previous code: 
+```bash
+ import price #unused
+```
+#### fixed issue 
+removed unused import statement
 
 
  

@@ -72,6 +72,9 @@ class PriceSummary:
         max_costs_index = self.df['costs'].idxmax()
         return self._get_price_and_service_fees_of_row(max_costs_index)
 
+    def get_median_costs_for_one_night(self) -> int:
+        pass
+
     def get_mean_price_per_night(self) -> float:
         return self.df['price'].mean()
 
