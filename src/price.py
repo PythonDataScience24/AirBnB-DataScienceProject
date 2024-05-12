@@ -73,14 +73,13 @@ class PriceSummary:
         return self._get_price_and_service_fees_of_row(max_costs_index)
 
     def get_median_costs_for_one_night(self) -> int:
-        pass
+        return self.df['price'].median()
 
     def get_mean_price_per_night(self) -> float:
         return self.df['price'].mean()
 
     def _get_name(self, idx):
         return self.df.at[idx, 'NAME']
-        pass
 
     def get_summary_table(self):
         min_price_per_night = self.get_min_price_per_night()
