@@ -10,7 +10,7 @@ class DataPreprocessor:
             self.df = pd.read_csv(csv_path)
 
 
-    def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
+    def rename_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Overwrites the existing column names with snake_case names
         df:

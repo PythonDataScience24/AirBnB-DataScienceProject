@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import neighbourhood_selector
 import neighbourhood_visualizer
+from airbnb_summary import AirBnBSummary
 
 # To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
@@ -18,9 +19,10 @@ selector.set_selection(neighbourhood, room_type)
 if selector.selection_df is not None:
     df: pd.DataFrame = selector.selection_df
     visualizer: neighbourhood_visualizer.NeighbourhoodVisualizer = neighbourhood_visualizer.NeighbourhoodVisualizer(df)
-    st.subheader("Checkout the resulting dataframe and explore the data for your selection")
+    visualizer.visualize_numbers_of_listings()
     visualizer.visualize_filtered_dataframe()
-    st.subheader('See below multiple information about the neighbourhood and room type you have selected')
+    st.subheader("See below multiple information about the neighbourhood " + neighbourhood + " and room type "
+                 + room_type)
     visualizer.visualize_max_price()
     visualizer.visualize_min_price()
     st.subheader("Mean Price of the neighbourhood " + str(neighbourhood) + " and room type " + str(room_type))

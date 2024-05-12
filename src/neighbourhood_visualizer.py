@@ -2,6 +2,8 @@ import pandas as pd
 from availability import AvailabilitySummary
 from price import PriceSummary
 import streamlit as st
+from airbnb_summary import AirBnBSummary
+from rating import RatingSummary
 
 
 class NeighbourhoodVisualizer:
@@ -10,6 +12,8 @@ class NeighbourhoodVisualizer:
         self.df = df
         self.availabilitySummary = self.get_availability_summary_of_selection()
         self.priceSummary = self.get_price_summary_of_selection()
+        self.airbnbSummary = self.get_overall_summary_of_selection()
+        self.ratingSummary = self.get_rating_summary_of_selection()
 
     def get_availability_summary_of_selection(self) -> AvailabilitySummary:
         """ Returns a AvailabilitySummary of the selected neighbourhood and room type."""
@@ -23,6 +27,18 @@ class NeighbourhoodVisualizer:
         price_summary: PriceSummary = PriceSummary(df=self.df.copy())
         price_summary.clean_data()
         return price_summary
+
+    def get_overall_summary_of_selection(self) -> AirBnBSummary:
+        """ Returns a AirBnBSummary of the selected neighbourhood and room type."""
+        overall_summary: airbnb_summary.AirBnBSummary = AirBnBSummary(df=self.df.copy())
+        overall_summary.clean_data()
+        return overall_summary
+
+    def get_rating_summary_of_selection(self) -> RatingSummary:
+        """ Returns a RatingSummary of the selected neighbourhood and room type."""
+        rating_summary: RatingSummary = RatingSummary(df=self.df.copy())
+        rating_summary.clean_data()
+        return rating_summary
 
     def visualize_filtered_dataframe(self):
         """ Returns a visualization of the filtered dataframe """
@@ -109,4 +125,6 @@ class NeighbourhoodVisualizer:
         """
         visualizes the number many listings in the selected neighbourhood exist
         """
+        total_number_of_listings = self.airbnbSummary.get_total_airbnbs()
+        st.write(f"Total number of listings in the selected neighbourhood:", total_number_of_listings)
         pass

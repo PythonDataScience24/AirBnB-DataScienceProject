@@ -1,12 +1,11 @@
 import pandas as pd
 import streamlit as st
-
-# imports need to be this way because of streamlit
 import airbnb_summary
-import availability
 import price
+import availability
 import rating
 
+# imports need to be this way because of streamlit
 
 # To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
