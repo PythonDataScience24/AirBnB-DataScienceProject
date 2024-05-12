@@ -42,31 +42,31 @@ class PriceSummary:
     def get_total_number_of_listings(self) -> int:
         return self.df.shape[0]
 
-    def get_min_price_per_night(self) -> tuple[int, int, int]:
+    def get_min_price_per_night(self) -> tuple[str, int, int]:
         min_price = self.df['price'].min()
         min_prices = self.df[self.df['price'] == min_price]
         min_price_index = min_prices['service fee'].idxmin()
         return self._get_price_and_service_fees_of_row(min_price_index)
 
-    def get_max_price_per_night(self) -> tuple[int, int, int]:
+    def get_max_price_per_night(self) -> tuple[str, int, int]:
         max_price = self.df['price'].max()
         max_prices = self.df.loc[self.df['price'] == max_price, ['NAME', 'price', 'service fee']]
         max_price_index = max_prices['service fee'].idxmax()
         return self._get_price_and_service_fees_of_row(max_price_index)
 
-    def _get_price_and_service_fees_of_row(self, row_index) -> tuple[int, int, int]:
+    def _get_price_and_service_fees_of_row(self, row_index) -> tuple[str, int, int]:
         price = self.df.at[row_index, 'price']
         service_fee = self.df.at[row_index, 'service fee']
         name = self.df.at[row_index, 'NAME']
         return name, price, service_fee
 
-    def get_min_costs_for_one_night(self) -> tuple[int, int, int]:
+    def get_min_costs_for_one_night(self) -> tuple[str, int, int]:
         if 'costs' not in self.df.columns:
             self.df['costs'] = self.df['price'] + self.df['service fee']
         min_costs_index = self.df['costs'].idxmin()
         return self._get_price_and_service_fees_of_row(min_costs_index)
 
-    def get_max_costs_for_one_night(self) -> tuple[int, int, int]:
+    def get_max_costs_for_one_night(self) -> tuple[str, int, int]:
         if 'costs' not in self.df.columns:
             self.df['costs'] = self.df['price'] + self.df['service fee']
         max_costs_index = self.df['costs'].idxmax()
@@ -89,13 +89,13 @@ class PriceSummary:
         table = pd.DataFrame({
             "name": ["Min price per night", "Max price per night", "Min costs for one night",
                      "Max costs for one night"],
-            "Amount": [f"${min_price_per_night[0]}", f"${max_price_per_night[0]}",
-                       f"${min_costs_for_one_night[0] + min_costs_for_one_night[1]}",
-                       f"${max_costs_for_one_night[0] + max_costs_for_one_night[1]}"],
+            "Amount": [f"${min_price_per_night[1]}", f"${max_price_per_night[2]}",
+                       f"${min_costs_for_one_night[1] + min_costs_for_one_night[2]}",
+                       f"${max_costs_for_one_night[1] + max_costs_for_one_night[2]}"],
             "Additional Information": [f"additional ${min_price_per_night[1]} of service fee",
                                        f"additional ${max_price_per_night[1]} of service fee",
-                                       f"${min_costs_for_one_night[0]} price per night + ${min_costs_for_one_night[1]} service fee",
-                                       f"${max_costs_for_one_night[0]} price per night + ${max_costs_for_one_night[1]} service fee"]})
+                                       f"${min_costs_for_one_night[1]} price per night + ${min_costs_for_one_night[2]} service fee",
+                                       f"${max_costs_for_one_night[1]} price per night + ${max_costs_for_one_night[2]} service fee"]})
         table.style.hide(axis="index")
         table.set_index("name", inplace=True)
         return table
