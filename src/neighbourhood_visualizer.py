@@ -30,7 +30,7 @@ class NeighbourhoodVisualizer:
 
     def get_overall_summary_of_selection(self) -> AirBnBSummary:
         """ Returns a AirBnBSummary of the selected neighbourhood and room type."""
-        overall_summary: airbnb_summary.AirBnBSummary = AirBnBSummary(df=self.df.copy())
+        overall_summary: AirBnBSummary = AirBnBSummary(df=self.df.copy())
         overall_summary.clean_data()
         return overall_summary
 
