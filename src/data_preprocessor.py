@@ -3,7 +3,7 @@ import numpy as np
 
 
 class DataPreprocessor:
-    """in the class attributes we specify column names and their respective data types"""
+    """Convert column names and their respective data types"""
     column_names = ['id',
                     'name',
                     'host_id',
@@ -59,13 +59,11 @@ class DataPreprocessor:
                   'license': str}
 
     def __init__(self, csv_path: str = None):
-        # Load CSV file with specified column names and data types
+        """Load CSV file with specified column names and data types"""
         self.df = pd.read_csv(csv_path, names=self.column_names, dtype=self.data_types, header=0)
 
     def drop_columns(self):
-        """
-        Delete columns that are not being used or have mostly null values
-        """
+        """Delete columns that are not being used or have mostly null values"""
         # Drop the 'country' column since it's all United States
         self.df.drop(columns=['country'], inplace=True)
         # Drop the 'country_code' column since it's all US
@@ -74,7 +72,7 @@ class DataPreprocessor:
         self.df.drop(columns=['license'], inplace=True)
 
     def standardize_datatypes_columns(self):
-        """change string data types to float, int or dates after cleaning the columns"""
+        """Change string data types to float, int or to_datetime"""
         self.df["price"] = self.df["price"].str.replace(",", "").str[1:].astype(float)
         self.df['price'] = self.df['price'].astype(str).str.replace(r'\$/', '', regex=True).astype(np.float64)
         self.df["service_fee"] = self.df["service_fee"].astype(str).str.replace('$', "").astype(np.float64)
@@ -82,9 +80,7 @@ class DataPreprocessor:
         self.df['last_review'] = pd.to_datetime(self.df['last_review'])  # instead of NaN there's NaT value
 
     def clean_invalid_values(self):
-        """
-        Cleans invalid values from a DataFrame
-        """
+        """Clean invalid values from a DataFrame"""
         # clean invalid data from 'availability' column
         self.df.loc[self.df["availability_365"] > 365, "availability 365"] = 365
         self.df.loc[self.df["availability_365"] < 0, "availability 365"] = 0
@@ -92,7 +88,7 @@ class DataPreprocessor:
         self.df.loc[self.df["neighbourhood_group"] == "brookln", "neighbourhood_group"] = "Brooklyn"
 
     def clean_missing_values(self):
-        """Cleans null values from the data set"""
+        """Clean null values from the data set"""
         # clean NaN data from 'id' column
         self.df.dropna(subset=['id'], inplace=True)
         # clean NaN data from 'name' column since we consider a listing with no description as not valuable for our
@@ -100,11 +96,13 @@ class DataPreprocessor:
         self.df.dropna(subset=['name'], inplace=True)
 
     def preprocess(self):
+        """Apply all preprocessing steps"""
         self.standardize_datatypes_columns()
         self.clean_invalid_values()
         self.drop_columns()
         self.clean_missing_values()
 
     def write_csv(self):
+        """Write out the data set as a CSV file"""
         self.df.to_csv("data/Airbnb_Open_processed_Data.csv", index=False)
 
