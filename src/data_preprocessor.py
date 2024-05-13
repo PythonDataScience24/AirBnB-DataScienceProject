@@ -1,60 +1,112 @@
 import pandas as pd
 import numpy as np
 
+
 class DataPreprocessor:
-    def __init__(self, csv_path: str = None, df: pd.DataFrame = None):
-        assert csv_path is not None or df is not None, "Either csv_path or df must be provided"
-        if df is not None:
-            self.df = df
-        else:
-            self.df = pd.read_csv(csv_path)
+    """in the class attributes we specify column names and their respective data types"""
+    column_names = ['id',
+                    'name',
+                    'host_id',
+                    'host_identity_verified',
+                    'host_name',
+                    'neighbourhood_group',
+                    'neighbourhood',
+                    'lat',
+                    'long',
+                    'country',
+                    'country_code',
+                    'instant_bookable',
+                    'cancellation_policy',
+                    'room_type',
+                    'construction_year',
+                    'price',
+                    'service_fee',
+                    'minimum_nights',
+                    'number_of_reviews',
+                    'last_review',
+                    'reviews_per_month',
+                    'review_rate_number',
+                    'calculated_host_listings_count',
+                    'availability_365',
+                    'house_rules',
+                    'license']
 
+    data_types = {'id': np.int64,
+                  'name': str,
+                  'host_id': np.int64,
+                  'host_identity_verified': str,
+                  'host_name': str,
+                  'neighbourhood_group': str,
+                  'neighbourhood': str,
+                  'lat': np.float64,
+                  'long': np.float64,
+                  'country': str,
+                  'country_code': str,
+                  'instant_bookable': str,
+                  'cancellation_policy': str,
+                  'room_type': str,
+                  'construction_year': np.float64,
+                  'price': object,
+                  'service_fee': object,
+                  'minimum_nights': np.float64,
+                  'number_of_reviews': np.float64,
+                  'last_review': object,
+                  'reviews_per_month': np.float64,
+                  'review_rate_number': np.float64,
+                  'calculated_host_listings_count': np.float64,
+                  'availability_365': np.float64,
+                  'house rules': str,
+                  'license': str}
 
-    def rename_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+    def __init__(self, csv_path: str = None):
+        # Load CSV file with specified column names and data types
+        self.df = pd.read_csv(csv_path, names=self.column_names, dtype=self.data_types, )
+
+    def drop_columns(self):
         """
-        Overwrites the existing column names with snake_case names
-        df:
+        Delete columns that are not being used or have mostly null values
         """
-        #rename NAME to name
-        self.df.rename(columns={'NAME' : 'name',
-                                'host id' : 'host_id',
-                                'host name' : 'host_name',
-                                'neighbourhood group' : 'neighbourhood_group',
-                                'country code' : 'country_code',
-                                'room type' : 'room_type',
-                                'Construction year' : 'construction_year',
-                                'service fee' : 'service_fee',
-                                'minimum nights' : 'minimum_nights',
-                                'number of reviews' : 'number_of_reviews',
-                                'last review' : 'last_review',
-                                'reviews per month' : 'reviews_per_month',
-                                'review rate number' : 'review_rate_number',
-                                'calculated host listings count' : 'calculated_host_listings_count',
-                                'availablity 365' : 'availability_365',
-                                }, inplace=True)
-        return df
+        # Drop the 'country' column since it's all United States
+        self.df.drop(columns=['country'], inplace=True)
+        # Drop the 'country_code' column since it's all US
+        self.df.drop(columns=['country_code'], inplace=True)
+        # Drop the 'license' column since there's only one license all other values are null
+        self.df.drop(columns=['license'], inplace=True)
 
-    def clean_invalid_values(self, pd.DataFrame) -> pd.DataFrame:
+    def standardize_datatypes_columns(self):
+        """change string data types to float, int or dates after cleaning the columns"""
+        self.df['price'] = self.df['price'].astype(str).str.replace(r'\$/', '', regex=True).astype(np.float64)
+        self.df['service_fee'] = self.df['service_fee'].astype(str).str.replace(r['$/'], '', regex=True).astype(
+            np.float64)
+        self.df['last_review'] = pd.to_datetime(self.df['last_review'])  # instead of NaN there's NaT value
+
+    def clean_invalid_values(self):
         """
         Cleans invalid values from a DataFrame
-        df:
         """
-        # clean invalid data from availability column
+        # clean invalid data from 'availability' column
         self.df.loc[self.df["availability 365"] > 365, "availability 365"] = 365
         self.df.loc[self.df["availability 365"] < 0, "availability 365"] = 0
+        self.df.loc[self.df["neighbourhood group"] == "manhatan", "neighbourhood group"] = "Manhattan"
+        self.df.loc[self.df["neighbourhood group"] == "brookln", "neighbourhood group"] = "Brooklyn"
 
-        # clean invalid data from abc column
+    def clean_missing_values(self):
+        """Cleans null values from the data set"""
+        # clean NaN data from 'id' column
+        self.df.dropna(subset=['id'], inplace=True)
+        # clean NaN data from 'name' column since we consider a listing with no description as not valuable for our
+        # target user group
+        self.df.dropna(subset=['name'], inplace=True)
 
 
-        # clean invalid data from xzy column
+# Instantiate DataPreprocessor object with the path to your CSV file
+preprocessor = DataPreprocessor('../data/Airbnb_Open_Data.csv')
 
+# Execute preprocessing steps sequentially
+preprocessor.standardize_datatypes_columns()
+preprocessor.clean_invalid_values()
+preprocessor.clean_missing_values()
+preprocessor.drop_columns()
 
-    return df
-
-
-    def clean_missing_values(self, df:pd.DataFrame) -> pd.DataFrame:
-        """
-        Cleans missing values from a DataFrame
-        df:
-        """
-        self.df.dropna(subset=['availability 365'], inplace=True)
+# Save the preprocessed DataFrame to a new CSV file
+preprocessor.df.to_csv('../data/preprocessed_data.csv', index=False)
