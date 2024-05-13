@@ -119,9 +119,11 @@ class NeighbourhoodVisualizer:
 
     def visualize_median_cost(self):
         """
-        visualizes the median costs of all
+        visualizes the median costs (price per night) of all
         rooms in the selected neighbourhood
         """
+        median = self.priceSummary.get_median_price_for_one_night()
+        st.write("The median price per night is: " + str(median))
         pass
 
     def visualize_numbers_of_listings(self):

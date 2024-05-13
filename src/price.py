@@ -72,7 +72,7 @@ class PriceSummary:
         max_costs_index = self.df['costs'].idxmax()
         return self._get_price_and_service_fees_of_row(max_costs_index)
 
-    def get_median_costs_for_one_night(self) -> int:
+    def get_median_price_for_one_night(self) -> int:
         return self.df['price'].median()
 
     def get_mean_price_per_night(self) -> float:
@@ -99,11 +99,3 @@ class PriceSummary:
         table.style.hide(axis="index")
         table.set_index("name", inplace=True)
         return table
-
-
-if __name__ == '__main__':
-    price_summary = PriceSummary('../data/Airbnb_Open_Data.csv')
-    print(price_summary.get_min_price_per_night())
-    print(price_summary.get_max_price_per_night())
-    print(price_summary.get_min_costs_for_one_night())
-    print(price_summary.get_max_costs_for_one_night())
