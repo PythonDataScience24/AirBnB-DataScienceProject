@@ -15,7 +15,7 @@ data_preprocessor = data_preprocessor.DataPreprocessor('data/Airbnb_Open_Data.cs
 data_preprocessor.preprocess()
 data_preprocessor.write_csv()
 selector = neighbourhood_selector.NeighbourhoodSelector(
-    'data/Airbnb_Open_Data.csv')
+    'data/Airbnb_Open_processed_Data.csv')
 neighbourhood: str = st.selectbox('Neighbourhood', selector.get_neighbourhoods())
 room_type: str = st.selectbox('Room Type', selector.get_room_types())
 selector.set_selection(neighbourhood, room_type)
@@ -27,6 +27,7 @@ if selector.selection_df is not None:
     visualizer.visualize_filtered_dataframe()
     st.subheader("See below multiple information about the neighbourhood " + neighbourhood + " and room type "
                  + room_type)
+    visualizer.visualize_mean_rating()
     visualizer.visualize_max_price()
     visualizer.visualize_min_price()
     visualizer.visualize_median_cost()

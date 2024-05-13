@@ -78,6 +78,7 @@ class DataPreprocessor:
         self.df["price"] = self.df["price"].str.replace(",", "").str[1:].astype(float)
         self.df['price'] = self.df['price'].astype(str).str.replace(r'\$/', '', regex=True).astype(np.float64)
         self.df["service_fee"] = self.df["service_fee"].astype(str).str.replace('$', "").astype(np.float64)
+        self.df['service_fee'] = self.df['service_fee'].fillna(0.0)
         self.df['last_review'] = pd.to_datetime(self.df['last_review'])  # instead of NaN there's NaT value
 
     def clean_invalid_values(self):

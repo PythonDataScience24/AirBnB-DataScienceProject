@@ -38,7 +38,7 @@ class NeighbourhoodSelector:
         """ Set the selection_df to the selection of the neighbourhood and room type, if it exists, else None.
         Returns the selection_df."""
         # TODO: change column names after data cleaning
-        group_by: pd.api.typing.DataFrameGroupBy = self.full_df.groupby(['neighbourhood', 'room type'])
+        group_by: pd.api.typing.DataFrameGroupBy = self.full_df.groupby(['neighbourhood', 'room_type'])
         self.selection_df = get_group(group_by=group_by, group_key=(neighbourhood, room_type), df=self.full_df)
         return self.selection_df
 
@@ -48,10 +48,10 @@ class NeighbourhoodSelector:
 
     def get_neighbourhood_groups(self) -> np.ndarray:
         """ Returns a list of all neighbourhood groups in the dataset."""
-        return self.full_df['neighbourhood group'].unique()
+        return self.full_df['neighbourhood_group'].unique()
 
     def get_room_types(self) -> list:
         """ Returns a list of all room types in the dataset."""
-        return self.full_df['room type'].unique().tolist()
+        return self.full_df['room_type'].unique().tolist()
 
 

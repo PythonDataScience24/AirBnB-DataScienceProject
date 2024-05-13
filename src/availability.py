@@ -74,8 +74,6 @@ class AvailabilitySummary:
 
     def room_availability_with_price_between_and_more_than(self, lower_bound: float, upper_bound: float, days: int):
         listings = self.df[["price", "availability 365"]]
-        prices = listings["price"].str.replace(",", "").str[1:].astype(float)
-        listings["price"] = prices
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
         listings_with_availability = listings[listings["availability 365"] >= days]
         quotient = listings.shape[0] / listings_with_availability.shape[0]

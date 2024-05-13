@@ -117,6 +117,9 @@ class NeighbourhoodVisualizer:
         visualizes the mean rating
         of the selected neighbourhood
         """
+        mean = self.rating_summary.get_average_rating_per_nhood()
+        st.subheader("See below the average rating of this neighbourhood")
+        st.write(mean)
         pass
 
     def visualize_median_cost(self):
