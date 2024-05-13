@@ -81,3 +81,23 @@ self.availability_summary = self.get_availability_summary_of_selection()
 ```
 #### fixed issue
 changed name style self.availabilitySummary -> self.availability_summary (snake_case naming style)
+
+# Message 7
+src/neighbourhood_visualizer.py:4:0: C0411: third party import "streamlit" should be placed before first party imports "availability.AvailabilitySummary", "price.PriceSummary"  (wrong-import-order)
+
+#### previous code
+```bash
+import pandas as pd
+from availability import AvailabilitySummary
+from price import PriceSummary
+import streamlit as st
+```
+#### adapted code
+```bash
+import pandas as pd
+import streamlit as st
+from availability import AvailabilitySummary
+from price import PriceSummary
+```
+#### fixed issue
+placed third party import under first party imports

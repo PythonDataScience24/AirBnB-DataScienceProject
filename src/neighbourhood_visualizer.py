@@ -1,7 +1,7 @@
 import pandas as pd
+import streamlit as st
 from availability import AvailabilitySummary
 from price import PriceSummary
-import streamlit as st
 from airbnb_summary import AirBnBSummary
 from rating import RatingSummary
 
@@ -62,9 +62,10 @@ class NeighbourhoodVisualizer:
         result1 = self.availability_summary.room_availability_less_than(90)
         st.write(str(result) + " % of all rooms in this neighbourhood with the "
                                "selected room type still have more than 180 days " +
-                 " availability in future and " + str(result1) + "% of all rooms in this neighbourhood with the "
-                                                                 "selected room type have less than 90 days "
-                                                                 "availability in future")
+                 " availability in future and " + str(result1) +
+                 "% of all rooms in this neighbourhood with the "
+                 "selected room type have less than 90 days "
+                 "availability in future")
 
     def visualize_max_price(self):
         """
