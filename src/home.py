@@ -2,13 +2,18 @@ import pandas as pd
 import streamlit as st
 import neighbourhood_selector
 import neighbourhood_visualizer
+import data_preprocessor
 
 # To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
 # streamlit run src/home.py
 # See also README.md
 
+
 st.title('Home')
+data_preprocessor = data_preprocessor.DataPreprocessor('data/Airbnb_Open_Data.csv')
+data_preprocessor.preprocess()
+data_preprocessor.write_csv()
 selector = neighbourhood_selector.NeighbourhoodSelector(
     'data/Airbnb_Open_Data.csv')
 neighbourhood: str = st.selectbox('Neighbourhood', selector.get_neighbourhoods())
@@ -29,4 +34,3 @@ if selector.selection_df is not None:
     visualizer.visualize_mean_price()
 else:
     st.write("No data available for this selection.")
-

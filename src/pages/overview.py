@@ -5,6 +5,7 @@ import price
 import availability
 import rating
 
+
 # imports need to be this way because of streamlit
 
 # To start the program please make sure you have streamlit installed
@@ -37,7 +38,7 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.write(f"{total_number_of_listings} listings are available in New York City. " 
+    st.write(f"{total_number_of_listings} listings are available in New York City. "
              f" {non_nan_prices} provide pricing information. "
              "In the following pricing summary, only listings with pricing information are considered.")
     st.write("Accommodations are available in the following price range:")
@@ -91,7 +92,7 @@ def display_room_with_max_availability():
     (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
     st.write("Book now a room with type " + str(type) + ", this type still has "
-            + str(max_value) + " days of availability")
+             + str(max_value) + " days of availability")
     return
 
 
@@ -100,7 +101,7 @@ def display_room_with_min_availability():
     (type, min_value) = availability_summary.room_type_with_min_availability()
     st.subheader("Room Type with min availability")
     st.write("Don't miss it and book now a room with type " + str(type) + ", this type only has "
-            + str(min_value) + " days left of availability")
+             + str(min_value) + " days left of availability")
     return
 
 

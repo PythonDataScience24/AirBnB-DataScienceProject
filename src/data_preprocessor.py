@@ -60,7 +60,7 @@ class DataPreprocessor:
 
     def __init__(self, csv_path: str = None):
         # Load CSV file with specified column names and data types
-        self.df = pd.read_csv(csv_path, names=self.column_names, dtype=self.data_types, )
+        self.df = pd.read_csv(csv_path, names=self.column_names, dtype=self.data_types, header=0)
 
     def drop_columns(self):
         """
@@ -75,9 +75,9 @@ class DataPreprocessor:
 
     def standardize_datatypes_columns(self):
         """change string data types to float, int or dates after cleaning the columns"""
+        self.df["price"] = self.df["price"].str.replace(",", "").str[1:].astype(float)
         self.df['price'] = self.df['price'].astype(str).str.replace(r'\$/', '', regex=True).astype(np.float64)
-        self.df['service_fee'] = self.df['service_fee'].astype(str).str.replace(r['$/'], '', regex=True).astype(
-            np.float64)
+        self.df["service_fee"] = self.df["service_fee"].astype(str).str.replace('$', "").astype(np.float64)
         self.df['last_review'] = pd.to_datetime(self.df['last_review'])  # instead of NaN there's NaT value
 
     def clean_invalid_values(self):
@@ -85,10 +85,10 @@ class DataPreprocessor:
         Cleans invalid values from a DataFrame
         """
         # clean invalid data from 'availability' column
-        self.df.loc[self.df["availability 365"] > 365, "availability 365"] = 365
-        self.df.loc[self.df["availability 365"] < 0, "availability 365"] = 0
-        self.df.loc[self.df["neighbourhood group"] == "manhatan", "neighbourhood group"] = "Manhattan"
-        self.df.loc[self.df["neighbourhood group"] == "brookln", "neighbourhood group"] = "Brooklyn"
+        self.df.loc[self.df["availability_365"] > 365, "availability 365"] = 365
+        self.df.loc[self.df["availability_365"] < 0, "availability 365"] = 0
+        self.df.loc[self.df["neighbourhood_group"] == "manhatan", "neighbourhood_group"] = "Manhattan"
+        self.df.loc[self.df["neighbourhood_group"] == "brookln", "neighbourhood_group"] = "Brooklyn"
 
     def clean_missing_values(self):
         """Cleans null values from the data set"""
@@ -98,15 +98,12 @@ class DataPreprocessor:
         # target user group
         self.df.dropna(subset=['name'], inplace=True)
 
+    def preprocess(self):
+        self.standardize_datatypes_columns()
+        self.clean_invalid_values()
+        self.drop_columns()
+        self.clean_missing_values()
 
-# Instantiate DataPreprocessor object with the path to your CSV file
-preprocessor = DataPreprocessor('../data/Airbnb_Open_Data.csv')
+    def write_csv(self):
+        self.df.to_csv("data/Airbnb_Open_processed_Data.csv", index=False)
 
-# Execute preprocessing steps sequentially
-preprocessor.standardize_datatypes_columns()
-preprocessor.clean_invalid_values()
-preprocessor.clean_missing_values()
-preprocessor.drop_columns()
-
-# Save the preprocessed DataFrame to a new CSV file
-preprocessor.df.to_csv('../data/preprocessed_data.csv', index=False)
