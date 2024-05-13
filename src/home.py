@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 import neighbourhood_selector
 import neighbourhood_visualizer
-from airbnb_summary import AirBnBSummary
 
 # To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
@@ -25,6 +24,7 @@ if selector.selection_df is not None:
                  + room_type)
     visualizer.visualize_max_price()
     visualizer.visualize_min_price()
+    visualizer.visualize_median_cost()
     st.subheader("Mean Price of the neighbourhood " + str(neighbourhood) + " and room type " + str(room_type))
     visualizer.visualize_mean_price()
 else:

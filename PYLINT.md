@@ -68,3 +68,16 @@ src/price.py:83:8: W0107: Unnecessary pass statement (unnecessary-pass)
 ```
 #### fixed issue 
 removed unnecessary pass statement
+
+# Message 6
+src/neighbourhood_visualizer.py:1:0: C0103: Module name "src/neighbourhood_visualizer" doesn't conform to snake_case naming style (invalid-name)
+#### previous code
+```bash
+self.availabilitySummary = self.get_availability_summary_of_selection()
+```
+#### adapted code
+```bash
+self.availability_summary = self.get_availability_summary_of_selection()
+```
+#### fixed issue
+changed name style self.availabilitySummary -> self.availability_summary (snake_case naming style)

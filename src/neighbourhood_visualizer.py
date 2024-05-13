@@ -10,10 +10,10 @@ class NeighbourhoodVisualizer:
 
     def __init__(self, df: pd.DataFrame):
         self.df = df
-        self.availabilitySummary = self.get_availability_summary_of_selection()
-        self.priceSummary = self.get_price_summary_of_selection()
-        self.airbnbSummary = self.get_overall_summary_of_selection()
-        self.ratingSummary = self.get_rating_summary_of_selection()
+        self.availability_summary = self.get_availability_summary_of_selection()
+        self.price_summary = self.get_price_summary_of_selection()
+        self.airbnb_summary = self.get_overall_summary_of_selection()
+        self.rating_summary = self.get_rating_summary_of_selection()
 
     def get_availability_summary_of_selection(self) -> AvailabilitySummary:
         """ Returns a AvailabilitySummary of the selected neighbourhood and room type."""
@@ -59,7 +59,7 @@ class NeighbourhoodVisualizer:
         visualizes the max price per
         night for the selected neighbourhood
         """
-        (name, max_price, service_fee) = self.priceSummary.get_max_price_per_night()
+        (name, max_price, service_fee) = self.price_summary.get_max_price_per_night()
         st.subheader("Max Price per Night")
         st.write("The accommodation " + str(name) + " has the max price " + str(max_price) + " dollar per night")
 
@@ -68,16 +68,18 @@ class NeighbourhoodVisualizer:
         visualizes the min price per
         night for the selected neighbourhood
         """
-        (name, min_price, service_fee) = self.priceSummary.get_min_price_per_night()
+        (name, min_price, service_fee) = self.price_summary.get_min_price_per_night()
         st.subheader("Min Price per Night")
-        st.write("The accommodation " + str(name) + " has the min price " + str(min_price) + " dollar per night")
+        st.write("The accommodation " + str(name) + " has the min price " + str(min_price) + "dollar per night and "
+                                                                                             "service fee: " + str(
+            service_fee) + " dollars per")
 
     def visualize_mean_price(self):
         """
         visualizes the mean price
         of the selected neighbourhood
         """
-        mean_price = self.priceSummary.get_mean_price_per_night()
+        mean_price = self.price_summary.get_mean_price_per_night()
         st.write("mean price per night: " + str(round(mean_price)))
 
     def visualize_max_costs(self):
@@ -122,13 +124,12 @@ class NeighbourhoodVisualizer:
         visualizes the median costs (price per night) of all
         rooms in the selected neighbourhood
         """
-        median = self.priceSummary.get_median_price_for_one_night()
+        median = self.price_summary.get_median_price_for_one_night()
         st.write("The median price per night is: " + str(median))
-        pass
 
     def visualize_numbers_of_listings(self):
         """
         visualizes the number many listings in the selected neighbourhood exist
         """
-        total_number_of_listings = self.airbnbSummary.get_total_airbnbs()
+        total_number_of_listings = self.price_summary.get_total_number_of_listings()
         st.write(f"Total number of listings in the selected neighbourhood:", total_number_of_listings)
