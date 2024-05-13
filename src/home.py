@@ -33,5 +33,7 @@ if selector.selection_df is not None:
     visualizer.visualize_median_cost()
     st.subheader("Mean Price of the neighbourhood " + str(neighbourhood) + " and room type " + str(room_type))
     visualizer.visualize_mean_price()
+    visualizer.visualize_neighbourhood_availability()
+
 else:
     st.write("No data available for this selection.")

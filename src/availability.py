@@ -16,23 +16,25 @@ class AvailabilitySummary:
         NaN values in price are dropped, in service fee are assumed to be 0.
         The price and service fee columns are converted from Strings to integers.
         Has to be called before the first method which calculates min or max prices is called."""
-        self.df.dropna(subset=['availability 365'], inplace=True)
-        self.df.loc[self.df["availability 365"] > 365, "availability 365"] = 365
-        self.df.loc[self.df["availability 365"] < 0, "availability 365"] = 0
+        self.df.dropna(subset=['availability_365'], inplace=True)
         return self.df
 
     def room_availability_in_exact_days(self, days: int):
-        listings = self.df[self.df['availability 365'] == days]
+        listings = self.df[self.df['availability_365'] == days]
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
     def room_availability_more_than(self, days: int):
-        listings = self.df[self.df['availability 365'] >= days]
+        listings = self.df[self.df['availability_365'] >= days]
+        if listings.shape[0] == 0:
+            return 0
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
     def room_availability_less_than(self, days: int):
-        listings = self.df[self.df['availability 365'] <= days]
+        listings = self.df[self.df['availability_365'] <= days]
+        if listings.shape[0] == 0:
+            return 0
         quotient = self.df.shape[0] / listings.shape[0]
         return round(100 / quotient)
 
@@ -72,10 +74,11 @@ class AvailabilitySummary:
         mean = self.df.loc[self.df["price"] <= price, "price"].mean()
         return mean
 
-    def room_availability_with_price_between_and_more_than(self, lower_bound: float, upper_bound: float, days: int):
-        listings = self.df[["price", "availability 365"]]
+    def room_availability_when_price_id_between(self, lower_bound: float, upper_bound: float, days: int):
+        listings = self.df[["price", "availability_365"]]
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
-        listings_with_availability = listings[listings["availability 365"] >= days]
+        print(listings.shape, upper_bound, lower_bound)
+        listings_with_availability = listings[listings["availability_365"] >= days]
         quotient = listings.shape[0] / listings_with_availability.shape[0]
         return round(100 / quotient)
 

@@ -5,6 +5,11 @@ import streamlit as st
 from airbnb_summary import AirBnBSummary
 from rating import RatingSummary
 
+"""
+The neighbourhood visualizer visualizes 
+information about selected the neighbourhood and room type
+"""
+
 
 class NeighbourhoodVisualizer:
 
@@ -44,7 +49,7 @@ class NeighbourhoodVisualizer:
         """ Returns a visualization of the filtered dataframe """
         st.dataframe(self.df)
 
-    def visualize_neighbourhood_availability(self, days: int):
+    def visualize_neighbourhood_availability(self):
         """
         visualizes how many percentage of the listings
             in the selected neighbourhood have still
@@ -52,7 +57,14 @@ class NeighbourhoodVisualizer:
         Keyword arguments:
             days -- days of availability
         """
-        pass
+        st.subheader("Availability")
+        result = self.availability_summary.room_availability_more_than(days=180)
+        result1 = self.availability_summary.room_availability_less_than(90)
+        st.write(str(result) + " % of all rooms in this neighbourhood with the "
+                               "selected room type still have more than 180 days " +
+                 " availability in future and " + str(result1) + "% of all rooms in this neighbourhood with the "
+                                                                 "selected room type have less than 90 days "
+                                                                 "availability in future")
 
     def visualize_max_price(self):
         """
@@ -61,7 +73,10 @@ class NeighbourhoodVisualizer:
         """
         (name, max_price, service_fee) = self.price_summary.get_max_price_per_night()
         st.subheader("Max Price per Night")
-        st.write("The accommodation " + str(name) + " has the max price " + str(max_price) + " dollar per night")
+        st.write("The accommodation " + str(name) + " has the max price " + str(max_price) + "dollar per night and a "
+                                                                                             "service fee of " + str(
+            service_fee)
+                 + " dollars")
 
     def visualize_min_price(self):
         """
@@ -82,13 +97,6 @@ class NeighbourhoodVisualizer:
         mean_price = self.price_summary.get_mean_price_per_night()
         st.write("mean price per night: " + str(round(mean_price)))
 
-    def visualize_max_costs(self):
-        """
-        visualizes the max costs, that means
-        the max costs per night plus the service fee
-        """
-        pass
-
     def visualize_availability_when_price_is_between(self, lower_bound: float, upper_bound: float, days):
         """
         visualizes information about how much percentage of listings
@@ -99,7 +107,9 @@ class NeighbourhoodVisualizer:
             upper_bound -- upper bound of the price
             days -- days of availability
         """
-        pass
+        result = self.availability_summary.room_availability_when_price_id_between(lower_bound, upper_bound, days)
+        print(result)
+        st.write(result + "%")
 
     def visualize_mean_availability_when_price_is_between(self, lower_bound: float, upper_bound: float):
         """
@@ -110,6 +120,7 @@ class NeighbourhoodVisualizer:
                    lower_bound -- lower bound of the price
                    upper_bound -- upper bound of the price
                """
+
         pass
 
     def visualize_mean_rating(self):
@@ -120,7 +131,6 @@ class NeighbourhoodVisualizer:
         mean = self.rating_summary.get_average_rating_per_nhood()
         st.subheader("See below the average rating of this neighbourhood")
         st.write(mean)
-        pass
 
     def visualize_median_cost(self):
         """
