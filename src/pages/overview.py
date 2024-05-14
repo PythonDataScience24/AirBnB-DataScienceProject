@@ -69,7 +69,7 @@ def display_room_availabilities_with_more_than(values):
 def display_room_with_one_year_availabilities():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.room_availability_in_exact_days(365)
-    st.text(str(data) + "% of all listings still have 365 days availability")
+    st.write(str(data.shape[0]) + " rooms can still be rented for one year")
 
 
 def display_room_availability_with_less_than(days):
@@ -136,11 +136,11 @@ def display_rating_summary():
 def display_room_availability_with_price_between_and_more_than():
     st.subheader('Check prices and availability in one shot')
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
-    data = availability_summary.room_availability_with_price_between_and_more_than(50, 100, 180)
+    data = availability_summary.room_availability_when_price_is_between(60, 200, 180)
     if data < 50:
         st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
                                                                               "availability "
-                                                                              "which cost between 50 and 100 "
+                                                                              "which cost between 60 and 200 "
                                                                               "Dollar")
     else:
         st.write(str(data) + "%" + "of all rooms which cost between 50 Dollar and 100 Dollar still have more than 180 "

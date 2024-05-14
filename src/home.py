@@ -33,8 +33,7 @@ if selector.selection_df is not None:
     st.subheader("See below multiple information about the neighbourhood " + neighbourhood + " and room type "
                  + room_type)
     visualizer.visualize_mean_rating()
-    visualizer.visualize_max_price()
-    visualizer.visualize_min_price()
+    visualizer.visualize_min_max_price_summary()
     visualizer.visualize_median_cost()
     st.subheader("Mean Price of the neighbourhood " + str(neighbourhood)
                  + " and room type " + str(room_type))

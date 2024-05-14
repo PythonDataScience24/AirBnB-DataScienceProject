@@ -47,6 +47,14 @@ class NeighbourhoodVisualizer:
         """ Returns a visualization of the filtered dataframe """
         st.dataframe(self.df)
 
+    def visualize_min_max_price_summary(self):
+        (name_max, max_price, service_fee) = self.price_summary.get_max_price_per_night()
+        (name_min, min_price, service_fee) = self.price_summary.get_min_price_per_night()
+        st.subheader("Min and Max Price per Night")
+        df = pd.DataFrame({'Price': [max_price, min_price], 'Accommodation': [name_max, name_min]},
+                          index=["Max Price", "Min Price"])
+        st.table(df)
+
     def visualize_neighbourhood_availability(self):
         """
         visualizes how many percentage of the listings
@@ -73,31 +81,11 @@ class NeighbourhoodVisualizer:
         st.table(df)
 
     def visualize_mean_availability(self):
+        """
+        visualizes mean availability in days
+        """
         mean_availability = self.availability_summary.mean_availability_per_room_type()
         st.write("Average availability in days: " + str(round(mean_availability)))
-
-    def visualize_max_price(self):
-        """
-        visualizes the max price per
-        night for the selected neighbourhood
-        """
-        (name, max_price, service_fee) = self.price_summary.get_max_price_per_night()
-        st.subheader("Max Price per Night")
-        st.write("The accommodation " + str(name) + " has the max price " + str(max_price) + "dollar per night and a "
-                                                                                             "service fee of " + str(
-            service_fee)
-                 + " dollars")
-
-    def visualize_min_price(self):
-        """
-        visualizes the min price per
-        night for the selected neighbourhood
-        """
-        (name, min_price, service_fee) = self.price_summary.get_min_price_per_night()
-        st.subheader("Min Price per Night")
-        st.write("The accommodation " + str(name) + " has the min price " + str(min_price) + "dollar per night and "
-                                                                                             "service fee: " + str(
-            service_fee) + " dollars per")
 
     def visualize_mean_price(self):
         """

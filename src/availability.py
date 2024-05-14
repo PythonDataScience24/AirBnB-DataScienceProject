@@ -22,7 +22,7 @@ class AvailabilitySummary:
         Keyword arguments:
             days -- number of days of availability
         """
-        listings = self.df[self.df['availability_365'] == days]
+        listings = self.df.loc[self.df['availability_365'] == days, "name"]
         return listings
 
     def room_availability_more_than(self, days: int):
@@ -56,7 +56,7 @@ class AvailabilitySummary:
         finally returns the room type with the
         maximum amount of days in availability
         """
-        listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
+        listings_grouped_by_type = self.df.groupby("room_type")["availability_365"].sum()
         idx = listings_grouped_by_type.idxmax()
         return idx, int(listings_grouped_by_type[idx])
 
@@ -67,19 +67,26 @@ class AvailabilitySummary:
             finally returns the room type with the
             minimum amount of days in availability
         """
-        listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
+        listings_grouped_by_type = self.df.groupby("room_type")["availability_365"].sum()
         idx = listings_grouped_by_type.idxmin()
         return idx, int(listings_grouped_by_type[idx])
+
+    def mean_availability(self):
+        """
+        calculates the mean availability
+        """
+        listings = self.df["availability_365"].mean()
+        return listings
 
     def mean_availability_per_room_type(self):
         """
         calculates the mean availability per room type
         """
-        listings = self.df["availability 365"].mean()
+        listings = self.df.groupby("room_type")["availability_365"].mean()
         return listings
 
     def percentage_no_availability_per_type(self):
-        listings = self.df[self.df["availability 365"] == 0]
+        listings = self.df[self.df["availability_365"] == 0]
         listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
         total_count = self.df.groupby("room_type")["availability_365"].count()
         quotients = total_count / listings_grouped_by_type
@@ -90,7 +97,7 @@ class AvailabilitySummary:
 
     def percentage_availability_per_type(self, days: int):
         listings = self.df[self.df["availability_365"] >= days]
-        listings_grouped_by_type = listings.groupby("room type")["availability_365"].count()
+        listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
         total_count = self.df.groupby("room_type")["availability_365"].count()
         quotient = total_count / listings_grouped_by_type
         result = 100 / quotient
@@ -100,7 +107,7 @@ class AvailabilitySummary:
         mean = self.df.loc[self.df["price"] <= price, "price"].mean()
         return mean
 
-    def room_availability_when_price_id_between(self, lower_bound: float, upper_bound: float, days: int):
+    def room_availability_when_price_is_between(self, lower_bound: float, upper_bound: float, days: int):
         listings = self.df[["price", "availability_365"]]
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
         print(listings.shape, upper_bound, lower_bound)
@@ -109,11 +116,11 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def availability_per_neighbour_group_more_than(self, days: int):
-        listings = self.df.groupby("neighbourhood group")["availability_365"].count()
+        listings = self.df.groupby("neighbourhood_group")["availability_365"].count()
         listings_with_availability = self.df[self.df["availability 365"] >= days]
         listings_availability_grouped_by_neighbourhood_group = \
-            listings_with_availability.groupby("neighbourhood group")[
-                "availability 365"].count()
+            listings_with_availability.groupby("neighbourhood_group")[
+                "availability_365"].count()
         quotients = listings / listings_availability_grouped_by_neighbourhood_group
         df = pd.DataFrame(quotients)
         df = df.rename(columns={"availability 365": "Percentage (%)"})
