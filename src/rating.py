@@ -1,7 +1,7 @@
 import pandas as pd
 
 class RatingSummary:
-    
+
     """
         Calculates and summarize rating statistics for Airbnb listings.
 
@@ -58,22 +58,21 @@ class RatingSummary:
         """
         under_average = self.df[self.df['review rate number'] < self.average_rating()].shape[0]
         return self.calculate_percentage(under_average)
-        
+   
     def min_rating(self):
         """ 
         Returns:
             int: min rating of all AirBnBs
         """
         return self.df['review rate number'].min()
-        
-        
+   
     def max_rating(self):
         """ 
         Returns:
             int: max rating of all AirBnBs
         """
         return self.df['review rate number'].max()
-        
+
     def percentage_under_min_rating(self):
         """ 
         Returns:
@@ -81,7 +80,7 @@ class RatingSummary:
         """
         under_min = self.df[self.df['review rate number'] < self.min_rating()].shape[0]
         return self.calculate_percentage(under_min)
-    
+
     def percentage_over_min_rating(self):
         """ 
         Returns:
@@ -97,7 +96,7 @@ class RatingSummary:
         """
         under_max = self.df[self.df['review rate number'] < self.max_rating()].shape[0]
         return self.calculate_percentage(under_max)
-    
+
     def percentage_over_max_rating(self): 
         """ 
         Returns:
