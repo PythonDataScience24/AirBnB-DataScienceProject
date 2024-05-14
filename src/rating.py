@@ -58,14 +58,14 @@ class RatingSummary:
         """
         under_average = self.df[self.df['review rate number'] < self.average_rating()].shape[0]
         return self.calculate_percentage(under_average)
-   
+
     def min_rating(self):
         """ 
         Returns:
             int: min rating of all AirBnBs
         """
         return self.df['review rate number'].min()
-   
+
     def max_rating(self):
         """ 
         Returns:
@@ -97,7 +97,7 @@ class RatingSummary:
         under_max = self.df[self.df['review rate number'] < self.max_rating()].shape[0]
         return self.calculate_percentage(under_max)
 
-    def percentage_over_max_rating(self): 
+    def percentage_over_max_rating(self):
         """ 
         Returns:
             float: percentage of AirBnB with higher rating then max rating
@@ -115,5 +115,4 @@ class RatingSummary:
             rounded to three decimal places.
         """
         total = self.df.shape[0]
-        return round(100 * value/total, 3) 
- 
+        return round(100 * value/total, 3)
