@@ -1,3 +1,6 @@
+"""
+visualizes information about the selected neighbourhood
+"""
 import pandas as pd
 import streamlit as st
 from availability import AvailabilitySummary
@@ -68,6 +71,11 @@ class NeighbourhoodVisualizer:
             return
         st.subheader("The following rooms can still be rented for one year")
         st.table(df)
+
+    def visualize_mean_availability(self):
+        mean_availability = self.availability_summary.mean_availability_per_room_type()
+        st.write("Average availability in days: " + str(round(mean_availability)))
+
     def visualize_max_price(self):
         """
         visualizes the max price per
@@ -99,26 +107,12 @@ class NeighbourhoodVisualizer:
         mean_price = self.price_summary.get_mean_price_per_night()
         st.write("mean price per night: " + str(round(mean_price)))
 
-    def visualize_availability_when_price_is_between(self, lower_bound: float, upper_bound: float, days):
-        """
-        visualizes information about how much percentage of listings
-        in the selected neighbourhood with price (per night) between
-        lower and upper bound still have days of availability in future
-        Keyword arguments:
-            lower_bound -- lower bound of the price
-            upper_bound -- upper bound of the price
-            days -- days of availability
-        """
-        result = self.availability_summary.room_availability_when_price_id_between(lower_bound, upper_bound, days)
-        print(result)
-        st.write(result + "%")
-
     def visualize_mean_rating(self):
         """
-        visualizes the mean rating
+        visualizes the  rating
         of the selected neighbourhood
         """
-        mean = self.rating_summary.get_average_rating_per_nhood()
+        mean = self.rating_summary.average_rating()
         st.subheader("See below the average rating of this neighbourhood")
         st.write(mean)
 

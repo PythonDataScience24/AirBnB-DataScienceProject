@@ -40,6 +40,7 @@ if selector.selection_df is not None:
                  + " and room type " + str(room_type))
     visualizer.visualize_mean_price()
     visualizer.visualize_neighbourhood_availability()
+    visualizer.visualize_mean_availability()
     visualizer.visualize_rooms_with_one_year_availability()
 
 else:

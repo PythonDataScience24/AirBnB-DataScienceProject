@@ -1,15 +1,15 @@
+"""
+      Calculates and summarize rating statistics for Airbnb listings.
+
+      This class provides methods to calculate the average rating, minimum and maximum ratings,
+      percentages of listings that are above or below the average, minimum, and maximum ratings.
+      It allows initialization with a CSV file from which data is loaded and cleaned,
+      or directly with given pandas DataFrame.
+  """
 import pandas as pd
 
+
 class RatingSummary:
-
-    """
-        Calculates and summarize rating statistics for Airbnb listings.
-
-        This class provides methods to calculate the average rating, minimum and maximum ratings, 
-        percentages of listings that are above or below the average, minimum, and maximum ratings.
-        It allows initialization with a CSV file from which data is loaded and cleaned,
-        or directly with given pandas DataFrame.
-    """
 
     def __init__(self, csv_path: str = None, df: pd.DataFrame = None):
         """ Initializes the class with data from a CSV file or an existing DataFrame 
@@ -33,7 +33,7 @@ class RatingSummary:
         Returns:
             pd.DataFrame: cleaned dataframe
         """
-        self.df.dropna(subset=['review rate number'], inplace=True)
+        self.df.dropna(subset=['review_rate_number'], inplace=True)
         return self.df
 
     def average_rating(self):
@@ -41,14 +41,14 @@ class RatingSummary:
         Returns:
             float: average rating
         """
-        return round(self.df['review rate number'].mean(),3)
+        return round(self.df['review_rate_number'].mean(), 3)
 
     def percentage_rating_over_average(self):
         """ 
         Returns:
             float: percentage of AirBnB with better rating then average
         """
-        over_average = self.df[self.df['review rate number'] > self.average_rating()].shape[0]
+        over_average = self.df[self.df['review_rate_number'] > self.average_rating()].shape[0]
         return self.calculate_percentage(over_average)
 
     def percentage_rating_under_average(self):
@@ -56,7 +56,7 @@ class RatingSummary:
         Returns:
             float: percentage of AirBnB with worse rating then average
         """
-        under_average = self.df[self.df['review rate number'] < self.average_rating()].shape[0]
+        under_average = self.df[self.df['review_rate_number'] < self.average_rating()].shape[0]
         return self.calculate_percentage(under_average)
 
     def min_rating(self):
@@ -64,21 +64,21 @@ class RatingSummary:
         Returns:
             int: min rating of all AirBnBs
         """
-        return self.df['review rate number'].min()
+        return self.df['review_rate_number'].min()
 
     def max_rating(self):
         """ 
         Returns:
             int: max rating of all AirBnBs
         """
-        return self.df['review rate number'].max()
+        return self.df['review_rate_number'].max()
 
     def percentage_over_min_rating(self):
         """ 
         Returns:
             float: percentage of AirBnB with higher rating then min rating
         """
-        over_min = self.df[self.df['review rate number'] > self.min_rating()].shape[0]
+        over_min = self.df[self.df['review_rate_number'] > self.min_rating()].shape[0]
         return self.calculate_percentage(over_min)
 
     def percentage_under_max_rating(self):
@@ -86,10 +86,10 @@ class RatingSummary:
         Returns:
             float: percentage of AirBnB with worse rating then max rating
         """
-        under_max = self.df[self.df['review rate number'] < self.max_rating()].shape[0]
+        under_max = self.df[self.df['review_rate_number'] < self.max_rating()].shape[0]
         return self.calculate_percentage(under_max)
 
-    def calculate_percentage(self,value):
+    def calculate_percentage(self, value):
         """ Calculate the percentage of a specific subset of Airbnb listings
         relative to the total number of listings.
         Args:
@@ -99,4 +99,4 @@ class RatingSummary:
             rounded to three decimal places.
         """
         total = self.df.shape[0]
-        return round(100 * value/total, 3)
+        return round(100 * value / total, 3)

@@ -14,13 +14,11 @@ class AirBnBSummary:
     def clean_data(self) -> pd.DataFrame:
         self.df.drop_duplicates(subset=['id'], inplace=True)
         self.df.dropna(subset=['id'], inplace=True)
-        self.df.loc[self.df["neighbourhood_group"] == "manhatan", "neighbourhood group"] = "Manhattan"
-        self.df.loc[self.df["neighbourhood_group"] == "brookln", "neighbourhood group"] = "Brooklyn"
         return self.df
 
     def get_total_airbnbs(self) -> int:
         return self.df.shape[0]
 
     def get_airbnbs_per_nhood(self) -> pd.DataFrame:
-        airbnbs_per_group = self.df.groupby('neighbourhood_group').size()
+        airbnbs_per_group = self.df.groupby('neighbourhood group').size()
         return airbnbs_per_group

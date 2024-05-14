@@ -12,20 +12,25 @@ class AvailabilitySummary:
             self.clean_data()
 
     def clean_data(self) -> pd.DataFrame:
-        """Cleans the price and service fees columns.
-        NaN values in price are dropped, in service fee are assumed to be 0.
-        The price and service fee columns are converted from Strings to integers.
-        Has to be called before the first method which calculates min or max prices is called."""
+        """removes the rows where column availability is null"""
         self.df.dropna(subset=['availability_365'], inplace=True)
         return self.df
 
     def room_availability_in_exact_days(self, days: int):
+        """returns the rooms which still have exact days
+        of availability in future
+        Keyword arguments:
+            days -- number of days of availability
+        """
         listings = self.df[self.df['availability_365'] == days]
         return listings
 
-
-
     def room_availability_more_than(self, days: int):
+        """returns the rooms which still have more or equals
+            days of availability in future
+            Keyword arguments:
+            days -- number of days of availability
+        """
         listings = self.df[self.df['availability_365'] >= days]
         if listings.shape[0] == 0:
             return 0
@@ -33,6 +38,11 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def room_availability_less_than(self, days: int):
+        """filters the rooms which have less or equals
+                    days of availability in future
+                    Keyword arguments:
+                    days -- number of days of availability
+        """
         listings = self.df[self.df['availability_365'] <= days]
         if listings.shape[0] == 0:
             return 0
@@ -40,33 +50,48 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def room_type_with_max_availability(self):
+        """
+        groups the dataframe by room types
+        and sums the days of availability,
+        finally returns the room type with the
+        maximum amount of days in availability
+        """
         listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
         idx = listings_grouped_by_type.idxmax()
         return idx, int(listings_grouped_by_type[idx])
 
     def room_type_with_min_availability(self):
+        """
+            groups the dataframe by room types
+            and sums the days of availability,
+            finally returns the room type with the
+            minimum amount of days in availability
+        """
         listings_grouped_by_type = self.df.groupby("room type")["availability 365"].sum()
         idx = listings_grouped_by_type.idxmin()
         return idx, int(listings_grouped_by_type[idx])
 
     def mean_availability_per_room_type(self):
-        listings = self.df.groupby("room type")["availability 365"].mean()
+        """
+        calculates the mean availability per room type
+        """
+        listings = self.df["availability 365"].mean()
         return listings
 
     def percentage_no_availability_per_type(self):
         listings = self.df[self.df["availability 365"] == 0]
-        listings_grouped_by_type = listings.groupby("room type")["availability 365"].count()
-        total_count = self.df.groupby("room type")["availability 365"].count()
+        listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
+        total_count = self.df.groupby("room_type")["availability_365"].count()
         quotients = total_count / listings_grouped_by_type
         df = pd.DataFrame(quotients)
-        df = df.rename(columns={"availability 365": "Percentage (%)"})
+        df = df.rename(columns={"availability_365": "Percentage (%)"})
         result = 100 / df
         return result
 
     def percentage_availability_per_type(self, days: int):
-        listings = self.df[self.df["availability 365"] >= days]
-        listings_grouped_by_type = listings.groupby("room type")["availability 365"].count()
-        total_count = self.df.groupby("room type")["availability 365"].count()
+        listings = self.df[self.df["availability_365"] >= days]
+        listings_grouped_by_type = listings.groupby("room type")["availability_365"].count()
+        total_count = self.df.groupby("room_type")["availability_365"].count()
         quotient = total_count / listings_grouped_by_type
         result = 100 / quotient
         return result
@@ -84,9 +109,7 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def availability_per_neighbour_group_more_than(self, days: int):
-        self.df.loc[self.df["neighbourhood group"] == "manhatan", "neighbourhood group"] = "Manhattan"
-        self.df.loc[self.df["neighbourhood group"] == "brookln", "neighbourhood group"] = "Brooklyn"
-        listings = self.df.groupby("neighbourhood group")["availability 365"].count()
+        listings = self.df.groupby("neighbourhood group")["availability_365"].count()
         listings_with_availability = self.df[self.df["availability 365"] >= days]
         listings_availability_grouped_by_neighbourhood_group = \
             listings_with_availability.groupby("neighbourhood group")[
