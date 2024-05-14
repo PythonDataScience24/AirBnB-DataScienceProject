@@ -101,3 +101,17 @@ from price import PriceSummary
 ```
 #### fixed issue
 placed third party import under first party imports
+
+# Message 8
+src/home.py:30:0: C0301: Line too long (119/100) (line-too-long)
+### previous code
+```bash
+    st.subheader("Mean Price of the neighbourhood " + str(neighbourhood) + " and room type " + str(room_type))
+```
+### adapted code
+```bash
+ st.subheader("Mean Price of the neighbourhood " + str(neighbourhood)
+                 + " and room type " + str(room_type))
+```
+### fixed issue
+shortened code line

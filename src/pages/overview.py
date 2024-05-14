@@ -70,7 +70,8 @@ def display_room_availabilities_with_more_than(values):
 def display_room_with_one_year_availabilities():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
     data = availability_summary.room_availability_in_exact_days(365)
-    st.text(str(data) + "% of all listings still have 365 days availability")
+    result = 100 / (availability_summary.get_df().shape[0] / data.shape[0])
+    st.text(str(result) + "% of all listings still have 365 days availability")
 
 
 def display_room_availability_with_less_than(days):

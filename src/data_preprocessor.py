@@ -74,7 +74,6 @@ class DataPreprocessor:
     def standardize_datatypes_columns(self):
         """Change string data types to float, int or to_datetime"""
         self.df["price"] = self.df["price"].str.replace(",", "").str[1:].astype(float)
-        self.df['price'] = self.df['price'].astype(str).str.replace(r'\$/', '', regex=True).astype(np.float64)
         self.df["service_fee"] = self.df["service_fee"].astype(str).str.replace('$', "").astype(np.float64)
         self.df['service_fee'] = self.df['service_fee'].fillna(0.0)
         self.df['last_review'] = pd.to_datetime(self.df['last_review'])  # instead of NaN there's NaT value

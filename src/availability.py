@@ -21,8 +21,9 @@ class AvailabilitySummary:
 
     def room_availability_in_exact_days(self, days: int):
         listings = self.df[self.df['availability_365'] == days]
-        quotient = self.df.shape[0] / listings.shape[0]
-        return round(100 / quotient)
+        return listings
+
+
 
     def room_availability_more_than(self, days: int):
         listings = self.df[self.df['availability_365'] >= days]
@@ -94,3 +95,9 @@ class AvailabilitySummary:
         df = pd.DataFrame(quotients)
         df = df.rename(columns={"availability 365": "Percentage (%)"})
         return round(100 / df)
+
+    def get_df(self):
+        """
+        returns the whole dataframe
+        """
+        return self.df

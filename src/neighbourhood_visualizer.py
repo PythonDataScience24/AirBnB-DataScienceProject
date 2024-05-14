@@ -5,11 +5,6 @@ from price import PriceSummary
 from airbnb_summary import AirBnBSummary
 from rating import RatingSummary
 
-"""
-The neighbourhood visualizer visualizes 
-information about selected the neighbourhood and room type
-"""
-
 
 class NeighbourhoodVisualizer:
 
@@ -67,6 +62,12 @@ class NeighbourhoodVisualizer:
                  "selected room type have less than 90 days "
                  "availability in future")
 
+    def visualize_rooms_with_one_year_availability(self):
+        df = self.availability_summary.room_availability_in_exact_days(365)
+        if df.shape[0] == 0:
+            return
+        st.subheader("The following rooms can still be rented for one year")
+        st.table(df)
     def visualize_max_price(self):
         """
         visualizes the max price per
@@ -111,18 +112,6 @@ class NeighbourhoodVisualizer:
         result = self.availability_summary.room_availability_when_price_id_between(lower_bound, upper_bound, days)
         print(result)
         st.write(result + "%")
-
-    def visualize_mean_availability_when_price_is_between(self, lower_bound: float, upper_bound: float):
-        """
-               visualizes mean availability of all listings
-               in the selected neighbourhood with price (per night) between
-               lower and upper bound
-               Keyword arguments:
-                   lower_bound -- lower bound of the price
-                   upper_bound -- upper bound of the price
-               """
-
-        pass
 
     def visualize_mean_rating(self):
         """

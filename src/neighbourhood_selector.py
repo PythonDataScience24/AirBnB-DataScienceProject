@@ -50,7 +50,7 @@ class NeighbourhoodSelector:
             self.full_df: pd.DataFrame = pd.read_csv(csv_path)
         self.selection_df: pd.DataFrame | None = None
 
-    def set_selection(self, neighbourhood: str, room_type: str) -> pd.DataFrame | None:
+    def set_selection(self, neighbourhood: str, room_type: str, price: float) -> pd.DataFrame | None:
         """
         Set the selection_df to the selection of the neighbourhood and room type, if it exists,
         else None.
@@ -65,6 +65,8 @@ class NeighbourhoodSelector:
             ['neighbourhood', 'room_type'])
         self.selection_df = get_group(group_by=group_by, group_key=(neighbourhood, room_type),
                                       df=self.full_df)
+        if price is not None:
+            self.selection_df = self.selection_df[self.selection_df['price'] <= price]
         return self.selection_df
 
     def get_neighbourhoods(self) -> np.ndarray:
