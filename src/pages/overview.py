@@ -105,31 +105,32 @@ def display_room_with_min_availability():
 
 
 def display_rating_summary():
-    st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_processed_Data.csv')
     rating_summary.clean_data()
-    st.text("The average Rating for all AirBnbs")
+    st.subheader("The Average Rating for all AirBnbs")
     avr = rating_summary.average_rating()
     higher = rating_summary.percentage_rating_over_average()
     lower = rating_summary.percentage_rating_under_average()
-    average_table = [
-        ["Average Rating", str(avr)],
-        ["Percentage of Higher Ratings [%]", str(higher)],
-        ["Percentage of Lower Rating [%]", str(lower)]
+    values = [str(avr),str(higher)+" %",str(lower)+" %"]
+    index = ['Average Rating', 'Percentage of Higher Ratings',
+             'Percentage of Lower Rating'
     ]
-    st.table(average_table)
-    st.text("General Information about Minimal and Maximal Rating")
+    average = pd.DataFrame({'Values':values}, index = index)
+    st.table(average)
+    st.subheader("General Information about Minimal and Maximal Rating")
     min_rating = rating_summary.min_rating()
     over_min = rating_summary.percentage_over_min_rating()
     max_rating = rating_summary.max_rating()
     under_max = rating_summary.percentage_under_max_rating()
-    rating_table = [
-        ["Lowest Rating", str(min_rating)],
-        ["Percentage over Lowest Rating [%]", str(over_min)],
-        ["Highest Rating", str(max_rating)],
-        ["Percentage under Highest Rating [%]", str(under_max)]
+    values = [str(min_rating),str(over_min)+" %",str(max_rating),str(under_max)+" %"]
+    index= ['Lowest Rating', 'Percentage of Higher Rating',
+           'Highest Rating', 'Percentage of Lower Rating'
     ]
-    st.table(rating_table)
+    rating_df = pd.DataFrame({
+        'Values': values},
+        index = index)
+    
+    st.table(rating_df)
 
 
 def display_room_availability_with_price_between_and_more_than():
