@@ -5,7 +5,6 @@ import price
 import availability
 import rating
 
-
 # imports need to be this way because of streamlit
 
 # To start the program please make sure you have streamlit installed
@@ -23,7 +22,7 @@ def display_map():
 
 def display_airbnb_summary():
     st.subheader('Available AirBnBs in NYC')
-    airbnb_summ = airbnb_summary.AirBnBSummary('data/Airbnb_Open_Data.csv')
+    airbnb_summ = airbnb_summary.AirBnBSummary('data/Airbnb_Open_processed_Data.csv')
     number = airbnb_summ.get_total_airbnbs()
     st.text(f"In NYC you can choose between {number} different AirBnbs")
     st.text("The following table shows you the number of available AirBnbs per neighbourhood")
@@ -33,12 +32,12 @@ def display_airbnb_summary():
 
 def display_price_summary():
     st.subheader('Prices')
-    price_summary = price.PriceSummary('data/Airbnb_Open_Data.csv')
+    price_summary = price.PriceSummary('data/Airbnb_Open_processed_Data.csv')
     number_of_nan_prices = price_summary.get_number_of_nan_prices()
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.write(f"{total_number_of_listings} listings are available in New York City. "
+    st.write(f"{total_number_of_listings} listings are available in New York City. " 
              f" {non_nan_prices} provide pricing information. "
              "In the following pricing summary, only listings with pricing information are considered.")
     st.write("Accommodations are available in the following price range:")
@@ -46,14 +45,14 @@ def display_price_summary():
 
 
 def display_availability_percentage_per_neighbour_group():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     st.subheader("Percentage of Listings with Availability more than 180 days in future per neighbour group")
     data = availability_summary.availability_per_neighbour_group_more_than(180)
     st.table(data=data)
 
 
 def display_mean_availability_per_room_type():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     st.subheader("Mean availability per room type")
     data = availability_summary.mean_availability_per_room_type()
     st.table(data=data)
@@ -61,27 +60,26 @@ def display_mean_availability_per_room_type():
 
 
 def display_room_availabilities_with_more_than(values):
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     for value in values:
         data = availability_summary.room_availability_more_than(value)
         st.text(str(data) + "% of all listings still have " + str(value) + " or more days availability in future")
 
 
 def display_room_with_one_year_availabilities():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.room_availability_in_exact_days(365)
-    result = 100 / (availability_summary.get_df().shape[0] / data.shape[0])
-    st.text(str(result) + "% of all listings still have 365 days availability")
+    st.text(str(data) + "% of all listings still have 365 days availability")
 
 
 def display_room_availability_with_less_than(days):
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.room_availability_less_than(days)
     st.text(str(data) + "% of all listings  have less than " + str(days) + " days availability in future")
 
 
 def display_room_types_with_zero_availability():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.percentage_no_availability_per_type()
     st.subheader("Percentage of Listings with no availability per room type")
     st.table(data=data)
@@ -89,26 +87,26 @@ def display_room_types_with_zero_availability():
 
 
 def display_room_with_max_availability():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
     st.write("Book now a room with type " + str(type) + ", this type still has "
-             + str(max_value) + " days of availability")
+            + str(max_value) + " days of availability")
     return
 
 
 def display_room_with_min_availability():
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     (type, min_value) = availability_summary.room_type_with_min_availability()
     st.subheader("Room Type with min availability")
     st.write("Don't miss it and book now a room with type " + str(type) + ", this type only has "
-             + str(min_value) + " days left of availability")
+            + str(min_value) + " days left of availability")
     return
 
 
 def display_rating_summary():
     st.subheader('Rating Summary')
-    rating_summary = rating.RatingSummary('data/Airbnb_Open_Data.csv')
+    rating_summary = rating.RatingSummary('data/Airbnb_Open_processed_Data.csv')
     
     st.text("The average Rating for all AirBnbs")
     avr = rating_summary.average_rating()
@@ -137,7 +135,7 @@ def display_rating_summary():
 
 def display_room_availability_with_price_between_and_more_than():
     st.subheader('Check prices and availability in one shot')
-    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_Data.csv')
+    availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.room_availability_with_price_between_and_more_than(50, 100, 180)
     if data < 50:
         st.write("Don't loose more time there are only " + str(data) + "% " + "rooms left with more than 180 days "
