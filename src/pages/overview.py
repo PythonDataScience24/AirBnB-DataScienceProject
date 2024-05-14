@@ -5,7 +5,6 @@ import price
 import availability
 import rating
 
-
 # imports need to be this way because of streamlit
 
 # To start the program please make sure you have streamlit installed
@@ -38,7 +37,7 @@ def display_price_summary():
     total_number_of_listings = price_summary.get_total_number_of_listings()
     non_nan_prices = total_number_of_listings - number_of_nan_prices
     price_summary.clean_data()
-    st.write(f"{total_number_of_listings} listings are available in New York City. "
+    st.write(f"{total_number_of_listings} listings are available in New York City. " 
              f" {non_nan_prices} provide pricing information. "
              "In the following pricing summary, only listings with pricing information are considered.")
     st.write("Accommodations are available in the following price range:")
@@ -70,8 +69,7 @@ def display_room_availabilities_with_more_than(values):
 def display_room_with_one_year_availabilities():
     availability_summary = availability.AvailabilitySummary('data/Airbnb_Open_processed_Data.csv')
     data = availability_summary.room_availability_in_exact_days(365)
-    result = 100 / (availability_summary.get_df().shape[0] / data.shape[0])
-    st.text(str(result) + "% of all listings still have 365 days availability")
+    st.text(str(data) + "% of all listings still have 365 days availability")
 
 
 def display_room_availability_with_less_than(days):
@@ -93,7 +91,7 @@ def display_room_with_max_availability():
     (type, max_value) = availability_summary.room_type_with_max_availability()
     st.subheader("Room Type with max availability")
     st.write("Book now a room with type " + str(type) + ", this type still has "
-             + str(max_value) + " days of availability")
+            + str(max_value) + " days of availability")
     return
 
 
@@ -102,22 +100,37 @@ def display_room_with_min_availability():
     (type, min_value) = availability_summary.room_type_with_min_availability()
     st.subheader("Room Type with min availability")
     st.write("Don't miss it and book now a room with type " + str(type) + ", this type only has "
-             + str(min_value) + " days left of availability")
+            + str(min_value) + " days left of availability")
     return
 
 
 def display_rating_summary():
     st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_processed_Data.csv')
-    st.text("Average Rating per neighbourhood")
-    data = rating_summary.get_average_rating_per_nhood()
-    st.table(data=data)
-    st.text("Best rating per neighbourhood")
-    data = rating_summary.get_max_rating_per_nhood()
-    st.table(data=data)
-    st.text("Worst rating per neighbourhood")
-    data = rating_summary.get_min_rating_per_nhood()
-    st.table(data=data)
+
+    st.text("The average Rating for all AirBnbs")
+    avr = rating_summary.average_rating()
+    higher = rating_summary.percentage_rating_over_average()
+    lower = rating_summary.percentage_rating_under_average()
+    average_table = [
+        ["Average Rating", str(avr)],
+        ["Percentage of Higher Ratings [%]", str(higher)],
+        ["Percentage of Lower Rating [%]", str(lower)]
+    ]
+    st.table(average_table)
+    
+    st.text("General Information about Minimal and Maximal Rating")
+    min_rating = rating_summary.min_rating()
+    over_min = rating_summary.percentage_over_min_rating()
+    max_rating = rating_summary.max_rating()
+    under_max = rating_summary.percentage_under_max_rating()
+    rating_table = [
+        ["Lowest Rating", str(min_rating)],
+        ["Percentage over Lowest Rating [%]", str(over_min)],
+        ["Highest Rating", str(max_rating)],
+        ["Percentage under Highest Rating [%]", str(under_max)]
+    ]
+    st.table(rating_table)
 
 
 def display_room_availability_with_price_between_and_more_than():
