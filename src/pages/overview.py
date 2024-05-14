@@ -107,7 +107,7 @@ def display_room_with_min_availability():
 def display_rating_summary():
     st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_processed_Data.csv')
-
+    rating_summary.clean_data()
     st.text("The average Rating for all AirBnbs")
     avr = rating_summary.average_rating()
     higher = rating_summary.percentage_rating_over_average()
@@ -118,7 +118,6 @@ def display_rating_summary():
         ["Percentage of Lower Rating [%]", str(lower)]
     ]
     st.table(average_table)
-    
     st.text("General Information about Minimal and Maximal Rating")
     min_rating = rating_summary.min_rating()
     over_min = rating_summary.percentage_over_min_rating()

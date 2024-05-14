@@ -20,5 +20,5 @@ class AirBnBSummary:
         return self.df.shape[0]
 
     def get_airbnbs_per_nhood(self) -> pd.DataFrame:
-        airbnbs_per_group = self.df.groupby('neighbourhood group').size()
+        airbnbs_per_group = self.df.groupby('neighbourhood_group').size()
         return airbnbs_per_group
