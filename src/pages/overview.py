@@ -109,15 +109,30 @@ def display_room_with_min_availability():
 def display_rating_summary():
     st.subheader('Rating Summary')
     rating_summary = rating.RatingSummary('data/Airbnb_Open_Data.csv')
-    st.text("Average Rating per neighbourhood")
-    data = rating_summary.get_average_rating_per_nhood()
-    st.table(data=data)
-    st.text("Best rating per neighbourhood")
-    data = rating_summary.get_max_rating_per_nhood()
-    st.table(data=data)
-    st.text("Worst rating per neighbourhood")
-    data = rating_summary.get_min_rating_per_nhood()
-    st.table(data=data)
+    
+    st.text("The average Rating for all AirBnbs")
+    avr = rating_summary.average_rating()
+    higher = rating_summary.percentage_rating_over_average()
+    lower = rating_summary.percentage_rating_under_average()
+    average_table = [
+        ["Average Rating", str(avr)],
+        ["Percentage of Higher Ratings [%]", str(higher)],
+        ["Percentage of Lower Rating [%]", str(lower)]
+    ]
+    st.table(average_table)
+    
+    st.text("General Information about Minimal and Maximal Rating")
+    min_rating = rating_summary.min_rating()
+    over_min = rating_summary.percentage_over_min_rating()
+    max_rating = rating_summary.max_rating()
+    under_max = rating_summary.percentage_under_max_rating()
+    rating_table = [
+        ["Lowest Rating", str(min_rating)],
+        ["Percentage over Lowest Rating [%]", str(over_min)],
+        ["Highest Rating", str(max_rating)],
+        ["Percentage under Highest Rating [%]", str(under_max)]
+    ]
+    st.table(rating_table)
 
 
 def display_room_availability_with_price_between_and_more_than():
