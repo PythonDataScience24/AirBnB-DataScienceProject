@@ -73,14 +73,6 @@ class RatingSummary:
         """
         return self.df['review rate number'].max()
 
-    def percentage_under_min_rating(self):
-        """ 
-        Returns:
-            float: percentage of AirBnB with worse rating then min rating
-        """
-        under_min = self.df[self.df['review rate number'] < self.min_rating()].shape[0]
-        return self.calculate_percentage(under_min)
-
     def percentage_over_min_rating(self):
         """ 
         Returns:
@@ -96,14 +88,6 @@ class RatingSummary:
         """
         under_max = self.df[self.df['review rate number'] < self.max_rating()].shape[0]
         return self.calculate_percentage(under_max)
-
-    def percentage_over_max_rating(self):
-        """ 
-        Returns:
-            float: percentage of AirBnB with higher rating then max rating
-        """
-        over_max = self.df[self.df['review rate number'] > self.max_rating()].shape[0]
-        return self.calculate_percentage(over_max)
 
     def calculate_percentage(self,value):
         """ Calculate the percentage of a specific subset of Airbnb listings
