@@ -35,7 +35,8 @@ class NeighbourhoodSelector:
     Provides the ability to select a neighbourhood and room type from a dataset and get the rows of
     the dataframe fitting to the selection.
     """
-    def __init__(self, csv_path: str = None, df: pd.DataFrame = None):
+
+    def __init__(self, csv_path: str | None = None, df: pd.DataFrame = None):
         """
         :keyword csv_path: Path to the CSV file containing the data
         :type csv_path: str | None
@@ -54,6 +55,8 @@ class NeighbourhoodSelector:
         """
         Set the selection_df to the selection of the neighbourhood and room type, if it exists,
         else None.
+        :param price: The maximum price to select
+        :type price: float
         :param neighbourhood: The neighbourhood to select
         :type neighbourhood: str
         :param room_type: The room type to select
@@ -63,9 +66,9 @@ class NeighbourhoodSelector:
         """
         group_by: pd.api.typing.DataFrameGroupBy = self.full_df.groupby(
             ['neighbourhood', 'room_type'])
-        self.selection_df = get_group(group_by=group_by, group_key=(neighbourhood, room_type),
-                                      df=self.full_df)
-        if price is not None:
+        self.selection_df: pd.DataFrame | None = get_group(group_by=group_by, group_key=(neighbourhood, room_type),
+                                                           df=self.full_df)
+        if price is not None and self.selection_df is not None:
             self.selection_df = self.selection_df[self.selection_df['price'] <= price]
         return self.selection_df
 
