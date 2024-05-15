@@ -1,6 +1,6 @@
 # Structure and Code Improvements
 ## Abstraction
-### Example Create a data_preprocessor class
+### Example 1 Create a data_preprocessor class
 
 The class abstracts away the details of data preprocessing by providing methods like 
 - 'drop_columns'
@@ -44,7 +44,7 @@ data_preprocessor.py <br>
 These methods hide the complexities of data cleaning and transformation behind a simple interface, allowing users to preprocess data without worrying about the implementation details.
 ## Decomposition
 
-### Example Create a neighbourhood_selector
+### Example 1 Create a neighbourhood_selector
 The class decomposes the preprocessing task into smaller, manageable parts represented by individual methods. Each method is responsible for performing a specific preprocessing step, such as dropping columns, cleaning invalid values etc. This decomposition enhances code readability, modularity and maintainability by breaking down a complex task into smaller, more understandable components. 
 
 #### Example rating.py Class 
@@ -69,6 +69,14 @@ rating.py
         return round(self.df['review_rate_number'].mean(), 3)
 ```
 
+### Example 2 neighbourhood visualizer
+The neighbourhood visualizer capsules the responsibility of visualizing
+information about the selected neighbourhood. 
+The neighbourhood visualizer has only knowledge about 
+the data which he has to visualize. Also does the neighbourhood visualizer not modify any data, he only visualizes the data.
+The visualizer decomposes the visualizing part into smaller manageable parts represented by individual methods. 
+With the Neighbourhood visualizer we achieve as well a clear separation of processing visualizations, which do not
+contain complex logic parts and complex data calculations which need a lot of logical computations.
 
 ## Project Structure
 
@@ -108,4 +116,6 @@ Refactored Project Structure:
     ├── price.py
     └── rating.py
 ```
+
+
 

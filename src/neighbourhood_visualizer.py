@@ -53,10 +53,11 @@ class NeighbourhoodVisualizer:
         Creates a table which visualizes the
         accommodations with the max and min price
         """
-        (name_max, max_price, service_fee) = self.price_summary.get_max_price_per_night()
-        (name_min, min_price, service_fee) = self.price_summary.get_min_price_per_night()
+        (name_max, max_price, service_fee_max) = self.price_summary.get_max_price_per_night()
+        (name_min, min_price, service_fee_min) = self.price_summary.get_min_price_per_night()
         st.subheader("Min and Max Price per Night")
-        df = pd.DataFrame({'Price': [max_price, min_price], 'Accommodation': [name_max, name_min]},
+        df = pd.DataFrame({'Price': [max_price, min_price], 'service_fee': [service_fee_max, service_fee_min],
+                           'Accommodation': [name_max, name_min]},
                           index=["Max Price", "Min Price"])
         st.table(df)
 
@@ -128,4 +129,4 @@ class NeighbourhoodVisualizer:
         visualizes the number many listings in the selected neighbourhood exist
         """
         total_number_of_listings = self.price_summary.get_total_number_of_listings()
-        st.write(f"Total number of listings in the selected neighbourhood:", total_number_of_listings)
+        st.write("Total number of listings in the selected neighbourhood: " + str(total_number_of_listings))
