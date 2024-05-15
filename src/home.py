@@ -4,9 +4,8 @@ the home.py file is the entry point of the programm
 """
 import pandas as pd
 import streamlit as st
-import neighbourhood_selector
-import neighbourhood_visualizer
-import data_preprocessor
+from neighbourhood_selector import NeighbourhoodSelector
+from neighbourhood_visualizer import NeighbourhoodVisualizer
 
 # To start the program please make sure you have streamlit installed
 # Then in your command line enter the following command:
@@ -15,10 +14,7 @@ import data_preprocessor
 
 
 st.title('Home')
-data_preprocessor = data_preprocessor.DataPreprocessor('data/Airbnb_Open_Data.csv')
-data_preprocessor.preprocess()
-data_preprocessor.write_csv()
-selector = neighbourhood_selector.NeighbourhoodSelector(
+selector = NeighbourhoodSelector(
     'data/Airbnb_Open_processed_Data.csv')
 st.subheader('Please select a neighbourhood and a room type to display room information')
 neighbourhood: str = st.selectbox('Neighbourhood*', selector.get_neighbourhoods(), index=None)
@@ -31,11 +27,11 @@ selector.set_selection(neighbourhood, room_type, price)
 
 if selector.selection_df is not None:
     df: pd.DataFrame = selector.selection_df
-    visualizer: neighbourhood_visualizer.NeighbourhoodVisualizer = neighbourhood_visualizer.NeighbourhoodVisualizer(df)
+    visualizer: NeighbourhoodVisualizer = NeighbourhoodVisualizer(df)
     visualizer.visualize_numbers_of_listings()
     visualizer.visualize_filtered_dataframe()
-    st.subheader("See below multiple information about the neighbourhood " + neighbourhood + " and room type "
-                 + room_type)
+    st.subheader("See below multiple information about the neighbourhood " + neighbourhood +
+                 " and room type " + room_type)
     visualizer.visualize_mean_rating()
     visualizer.visualize_percentage_rating_over_average()
     visualizer.visualize_percentage_rating_under_average()
