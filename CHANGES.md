@@ -88,9 +88,9 @@ Changes: <b>
 
  - Addition of pages: Users should have the ability to make desired selections for the view in home.py. <br> The Overview page displays general information about all AirBnBs.
  - New Classes:
-        - data_preprocessor: Outsourcing the task of performing general data cleaning on the DataFrame.
-        - neighbourhood_selector: Outsourcing the task of selecting a specific neighborhood.
-        - neighbourhood_vizualizor: Outsourcing the task of visualizing information based on the selection of a neighborhood, room type in home.py.
+        - data_preprocessor: Outsourcing the task of performing general data cleaning on the DataFrame. <br>
+        - neighbourhood_selector: Outsourcing the task of selecting a specific neighborhood. <br>
+        - neighbourhood_vizualizor: Outsourcing the task of visualizing information based on the selection of a neighborhood, room type in home.py. <br>
         
 Refactored Project Structure:
 ```bash
