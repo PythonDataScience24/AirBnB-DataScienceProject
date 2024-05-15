@@ -1,3 +1,0 @@
-# How to get involved
-
-Coming soon...
