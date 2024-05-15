@@ -10,7 +10,7 @@ The class abstracts away the details of data preprocessing by providing methods 
 - 'preprocess'
 
 #### Example rating.py Class 
-The task of cleaning the DataFrame has been moved to the process_dataframe.py class. Consequently, data cleaning is performed at the same abstraction level as the class. The data cleaning in the rating.py class is now limited to class-specific cleanings.<br>
+The task of cleaning the DataFrame has been moved to the data_preprocessor.py class. Consequently, data cleaning is performed at the same abstraction level as the class. The data cleaning in the rating.py class is now limited to class-specific cleanings.<br>
 Before Abstraction:<br>
 rating.py
 ```python
@@ -70,4 +70,33 @@ rating.py
 ```
 
 
+## Project Structure
+
+
+Before: 
+```bash
+.
+└── src
+    ├── airbnb_summary.py
+    ├── availability.py
+    ├── main.py
+    ├── price.py
+    └── rating.py
+```
+After:
+```bash
+.
+└── src
+    .
+    └── pages
+        └── overview.py  
+    ├── airbnb_summary.py
+    ├── availability.py
+    ├── data_preprocessor.py
+    ├── home.py
+    ├── neighbourhood_selector.py
+    ├── neighbourhood_vizualizer.py
+    ├── price.py
+    └── rating.py
+```
 
