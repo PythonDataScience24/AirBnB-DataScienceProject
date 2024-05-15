@@ -8,6 +8,7 @@
 """
 import pandas as pd
 
+
 class RatingSummary:
 
     def __init__(self, csv_path: str = None, df: pd.DataFrame = None):
