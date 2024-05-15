@@ -1,6 +1,6 @@
 # Structure and Code Improvements
 ## Abstraction
-### 1. Create a data_preprocessor class
+### Example Create a data_preprocessor class
 
 The class abstracts away the details of data preprocessing by providing methods like 
 - 'drop_columns'
@@ -10,8 +10,8 @@ The class abstracts away the details of data preprocessing by providing methods 
 - 'preprocess'
 
 #### Example rating.py Class 
-The task of cleaning the DataFrame has been moved to the process_dataframe.py class. Consequently, data cleaning is performed at the same abstraction level as the class. The data cleaning in the rating.py class is now limited to class-specific cleanings.
-Before Abstraction:
+The task of cleaning the DataFrame has been moved to the data_preprocessor.py class. Consequently, data cleaning is performed at the same abstraction level as the class. The data cleaning in the rating.py class is now limited to class-specific cleanings.<br>
+Before Abstraction:<br>
 rating.py
 ```python
   def clean_data(self) -> pd.DataFrame:
@@ -44,11 +44,11 @@ data_preprocessor.py <br>
 These methods hide the complexities of data cleaning and transformation behind a simple interface, allowing users to preprocess data without worrying about the implementation details.
 ## Decomposition
 
-### 2. Use the neighbourhood_visualizer
+### Example Create a neighbourhood_selector
 The class decomposes the preprocessing task into smaller, manageable parts represented by individual methods. Each method is responsible for performing a specific preprocessing step, such as dropping columns, cleaning invalid values etc. This decomposition enhances code readability, modularity and maintainability by breaking down a complex task into smaller, more understandable components. 
 
 #### Example rating.py Class 
-The task of selecting the group has been delegated to the neighbourhood_selector.py class. This achieves a clear division of tasks: rating.py is responsible solely for evaluating the DataFrame's ratings, while neighbourhood_selector.py is tasked with filtering the DataFrame according to the selected group and then passing it to the evaluation classes.
+The task of selecting the group has been delegated to the neighbourhood_selector.py class. This achieves a clear division of tasks: rating.py is responsible solely for evaluating the DataFrame's ratings, while neighbourhood_selector.py is tasked with filtering the DataFrame according to the selected group and then passing it to the evaluation classes. <br>
 
 Before Decomposition: <br>
 rating.py 
@@ -70,4 +70,42 @@ rating.py
 ```
 
 
+## Project Structure
+
+The project was initially divided into various classes responsible for analyzing costs, availability, and ratings. The main class started Streamlit and displayed the UI. <br>
+
+Old Project Structure: 
+```bash
+.
+└── src
+    ├── airbnb_summary.py
+    ├── availability.py
+    ├── main.py
+    ├── price.py
+    └── rating.py
+```
+Changes: <b>
+
+ - Addition of pages: <br>
+   Users should have the ability to make desired selections for the view in home.py. <br> The Overview page displays general information about all AirBnBs.
+ - New Classes: <br>
+        - data_preprocessor: Outsourcing the task of performing general data cleaning on the DataFrame. <br>
+        - neighbourhood_selector: Outsourcing the task of selecting a specific neighborhood. <br>
+        - neighbourhood_vizualizor: Outsourcing the task of visualizing information based on the selection of a neighborhood,               room type in home.py. <br>
+        
+Refactored Project Structure:
+```bash
+.
+└── src
+    └── pages
+        └── overview.py  
+    ├── airbnb_summary.py
+    ├── availability.py
+    ├── data_preprocessor.py
+    ├── home.py
+    ├── neighbourhood_selector.py
+    ├── neighbourhood_vizualizer.py
+    ├── price.py
+    └── rating.py
+```
 
