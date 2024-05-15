@@ -87,7 +87,6 @@ After:
 ```bash
 .
 └── src
-    .
     └── pages
         └── overview.py  
     ├── airbnb_summary.py
