@@ -31,19 +31,18 @@ To get started, clone the repository and run
 
 Python version 3.9 or higher is required.
 
-Before running the dashboard, run the following command to preprocess the data the data:
+Before running the dashboard the first time, run the following command to preprocess the data:
 ```python src/run_data_preprocessor.py```
-This has to be repeated every time the data in data/Airbnb_Open_Data.csv is updated.
+Only if the data/Airbnb_Open_Data.csv is updated, run this again.
 
 To start the dashboard run
 ```streamlit run src/home.py```
 
-As we will start soon with the development of our project, all information you need to get startet will follow. If you need to know something immediately, see below under **Contact us**
-
 # How can you get involved
-If you are interested in working on the project and would like to contribute improvements or further ideas, please checkout our 
-CONTRIBUTING.md file. 
-Notice: Our CONTRIBUTING.md will be uploaded soon.
+If you are interested in working on the project and would like to contribute improvements or further ideas, please check out our 
+ROADMAP.md file.
+To participate in the project, please get in touch with Romano Brentani: romano.brentani@students.unibe.ch
+
 
 # Source of Data
 - [The dataset for this service is provided by Kaggel.](https://www.kaggle.com/datasets/arianazmoudeh/airbnbopendata?resource=download)
@@ -55,7 +54,7 @@ If you want to contact us regarding a project-related problem or an enhancement,
 # Thank you
 Thank you for your interest, for visiting this page, or for collaborating with us. 
 
-# Licences
-Our project is open source. For further information and details consider the  LICENSE.md file, which will be uploaded soon.
+# Licenses
+Our project is open source under the GNU General Public License v3.0. For further information and details consider the [LICENSE.md](LICENSE.md) file.
 
 
