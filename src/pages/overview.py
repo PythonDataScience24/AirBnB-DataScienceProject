@@ -1,3 +1,6 @@
+""" Displays all general information about all AirBnBs such as 
+    existing AirBnBs, price, availability and rating
+"""
 import pandas as pd
 import streamlit as st
 import airbnb_summary
