@@ -157,7 +157,7 @@ src/neighbourhood_visualizer.py:131:17: W1309: Using an f-string that does not h
 ### fixed issue
 removed f-string which had no interpolated variable
 
-# Message
+# Message 11
 src/neighbourhood_visualizer.py:56:30: W0612: Unused variable 'service_fee' (unused-variable)
 ### previous code
 ```bash
@@ -187,3 +187,5 @@ src/neighbourhood_visualizer.py:56:30: W0612: Unused variable 'service_fee' (unu
                           index=["Max Price", "Min Price"])
         st.table(df)
 ```
+### fixed issue
+displayed the variable service_fee in the dataframe

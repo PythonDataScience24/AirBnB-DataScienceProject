@@ -1,5 +1,6 @@
 """
-visualizes information about the selected neighbourhood
+    This clas has the following functions and responsibility:
+    visualizes information about the selected neighbourhood
 """
 import pandas as pd
 import streamlit as st
@@ -56,7 +57,7 @@ class NeighbourhoodVisualizer:
         (name_max, max_price, service_fee_max) = self.price_summary.get_max_price_per_night()
         (name_min, min_price, service_fee_min) = self.price_summary.get_min_price_per_night()
         st.subheader("Min and Max Price per Night")
-        df = pd.DataFrame({'Price': [max_price, min_price], 'service_fee': [service_fee_max, service_fee_min],
+        df = pd.DataFrame({'Price iin $': [max_price, min_price], 'service_fee': [service_fee_max, service_fee_min],
                            'Accommodation': [name_max, name_min]},
                           index=["Max Price", "Min Price"])
         st.table(df)
@@ -72,12 +73,14 @@ class NeighbourhoodVisualizer:
         st.subheader("Availability")
         result = self.availability_summary.room_availability_more_than(days=180)
         result1 = self.availability_summary.room_availability_less_than(90)
+        result2 = self.availability_summary.room_availability_less_than(0)
         st.write(str(result) + " % of all rooms in this neighbourhood with the "
                                "selected room type still have more than 180 days " +
                  " availability in future and " + str(result1) +
                  "% of all rooms in this neighbourhood with the "
                  "selected room type have less than 90 days "
                  "availability in future")
+        st.write(str(result2) + " % of all rooms have no availability anymore")
 
     def visualize_rooms_with_one_year_availability(self):
         """visualizes a dataframe with rooms which still have 365 days of availability"""
@@ -87,6 +90,14 @@ class NeighbourhoodVisualizer:
         st.subheader("The following rooms can still be rented for one year")
         st.table(df)
 
+    def visualize_mean_median_price_summary(self):
+        """visualizes a table with median price per night and average price per night"""
+        avg_price = self.price_summary.get_mean_price_per_night()
+        median = self.price_summary.get_median_price_for_one_night()
+        df = pd.DataFrame({'price in $': [avg_price, median]}, index=["average price", "median Price"])
+        st.subheader("Median and average price per night")
+        st.table(df)
+
     def visualize_mean_availability(self):
         """
         visualizes mean availability in days
@@ -94,39 +105,34 @@ class NeighbourhoodVisualizer:
         mean_availability = self.availability_summary.mean_availability()
         st.write("Average availability in days: " + str(round(mean_availability)))
 
-    def visualize_mean_price(self):
-        """
-        visualizes the mean price
-        of the selected neighbourhood
-        """
-        mean_price = self.price_summary.get_mean_price_per_night()
-        st.write("mean price per night: " + str(round(mean_price)))
-
     def visualize_mean_rating(self):
         """
         visualizes the  rating
         of the selected neighbourhood
         """
         mean = self.rating_summary.average_rating()
-        st.subheader("See below the average rating of this neighbourhood")
+        st.subheader("Mean rating")
         st.write(mean)
 
     def visualize_percentage_rating_over_average(self):
+        """
+            visualizes hom many percentage of rooms have a rating over the average
+        """
         percentage = self.rating_summary.percentage_rating_over_average()
         st.write(str(percentage) + " % of the accommodations have a better rating than the average rating")
 
-    def visualize_median_cost(self):
+    def visualize_percentage_rating_under_average(self):
         """
-        visualizes the median costs (price per night) of all
-        rooms in the selected neighbourhood
+            visualizes hom many percentage of rooms have a rating over the average
         """
-        st.subheader("Median price per night")
-        median = self.price_summary.get_median_price_for_one_night()
-        st.write("The median price per night is: " + str(median))
+        percentage = self.rating_summary.percentage_rating_under_average()
+        st.write(str(percentage) + " % of the accommodations have a "
+                                   "worse rating than the average rating")
 
     def visualize_numbers_of_listings(self):
         """
         visualizes the number many listings in the selected neighbourhood exist
         """
         total_number_of_listings = self.price_summary.get_total_number_of_listings()
-        st.write("Total number of listings in the selected neighbourhood: " + str(total_number_of_listings))
+        st.write("Total number of listings in the selected neighbourhood: ")
+        st.write(total_number_of_listings)

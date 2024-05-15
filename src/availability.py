@@ -1,3 +1,8 @@
+"""
+    The class AvailabilitySummary has the task to calculate every kind of information
+    about the availability of the Airbnb Accommodations
+"""
+
 import pandas as pd
 
 
@@ -17,7 +22,8 @@ class AvailabilitySummary:
         return self.df
 
     def room_availability_in_exact_days(self, days: int):
-        """returns the rooms which still have exact days
+        """
+        returns the rooms which still have exact days
         of availability in future
         Keyword arguments:
             days -- number of days of availability
@@ -26,7 +32,8 @@ class AvailabilitySummary:
         return listings
 
     def room_availability_more_than(self, days: int):
-        """returns the rooms which still have more or equals
+        """
+        returns the rooms which still have more or equals
             days of availability in future
             Keyword arguments:
             days -- number of days of availability
@@ -38,10 +45,11 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def room_availability_less_than(self, days: int):
-        """filters the rooms which have less or equals
-                    days of availability in future
-                    Keyword arguments:
-                    days -- number of days of availability
+        """
+        filters the rooms which have less or equals
+        days of availability in future
+        Keyword arguments:
+        days -- number of days of availability
         """
         listings = self.df[self.df['availability_365'] <= days]
         if listings.shape[0] == 0:
@@ -73,14 +81,15 @@ class AvailabilitySummary:
 
     def mean_availability(self):
         """
-        calculates the mean availability
+            float: calculates the mean availability
         """
         listings = self.df["availability_365"].mean()
         return listings
 
     def mean_availability_per_room_type(self):
         """
-        calculates the mean availability per room type
+        Returns:
+            float: calculates the mean availability per room type
         """
         listings = self.df.groupby("room_type")["availability_365"].mean()
         return listings
@@ -102,11 +111,11 @@ class AvailabilitySummary:
     def percentage_availability_per_type(self, days: int):
         """
             Returns:
-                float: calculates for every room type
-                the percentage of AirBnB's which have more than
-                availability than the specified days
-        Keyword arguments:
-            days -- the number of days of availability
+                    float: calculates for every room type
+                    the percentage of AirBnB's which have more than
+                    availability than the specified days
+            Keyword arguments:
+                    days -- the number of days of availability
         """
         listings = self.df[self.df["availability_365"] >= days]
         listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
@@ -118,14 +127,23 @@ class AvailabilitySummary:
     def mean_room_availability_with_price_less_than(self, price: float):
         """
             Returns:
-                       float: mean price for all accommodations with a smaller price than a certain price
+                    float: mean price for all accommodations with a smaller price than a certain price
             Keyword arguments:
-                   price -- the upper bound of the price
-               """
+                    price -- the upper bound of the price
+        """
         mean = self.df.loc[self.df["price"] <= price, "price"].mean()
         return mean
 
     def room_availability_when_price_is_between(self, lower_bound: float, upper_bound: float, days: int):
+        """
+        Returns:
+                float: percentage of rooms which have prices between lower_bound and upper_bound and more
+                or equals days of availability in future
+        Keyword arguments:
+                price -- the upper bound of the price
+                lower_bound -- the lower bound of the price
+                upper_bound -- the upper bound of the price
+        """
         listings = self.df[["price", "availability_365"]]
         listings = listings[(listings["price"] <= upper_bound) & (listings["price"] >= lower_bound)]
         print(listings.shape, upper_bound, lower_bound)
@@ -134,6 +152,13 @@ class AvailabilitySummary:
         return round(100 / quotient)
 
     def availability_per_neighbour_group_more_than(self, days: int):
+        """
+            Returns:
+                    float: percentage of rooms which have prices between lower_bound and upper_bound and more
+                    or equals days of availability in future for every room type
+            Keyword arguments:
+                    days -- the number of days of availability
+        """
         listings = self.df.groupby("neighbourhood_group")["availability_365"].count()
         listings_with_availability = self.df[self.df["availability 365"] >= days]
         listings_availability_grouped_by_neighbourhood_group = \

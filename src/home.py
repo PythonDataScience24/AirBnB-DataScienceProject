@@ -1,4 +1,5 @@
-"""home page of the application
+"""
+home page of the application
 the home.py file is the entry point of the programm
 """
 import pandas as pd
@@ -33,14 +34,11 @@ if selector.selection_df is not None:
                  " and room type " + room_type)
     visualizer.visualize_mean_rating()
     visualizer.visualize_percentage_rating_over_average()
+    visualizer.visualize_percentage_rating_under_average()
     visualizer.visualize_min_max_price_summary()
-    visualizer.visualize_median_cost()
-    st.subheader("Mean Price of the neighbourhood " + str(neighbourhood)
-                 + " and room type " + str(room_type))
-    visualizer.visualize_mean_price()
+    visualizer.visualize_mean_median_price_summary()
     visualizer.visualize_neighbourhood_availability()
     visualizer.visualize_mean_availability()
     visualizer.visualize_rooms_with_one_year_availability()
-
 else:
     st.write("No data available for this selection.")
