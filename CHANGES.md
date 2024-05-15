@@ -19,7 +19,7 @@ rating.py
       self.df.dropna(subset=['review_rate_number'], inplace=True)
       return self.df
 ```
-After Abstraction: 
+After Abstraction: <br>
 rating.py 
 ```python
   def clean_data(self) -> pd.DataFrame:
@@ -30,7 +30,7 @@ rating.py
       self.df.dropna(subset=['review_rate_number'], inplace=True)
       return self.df
 ```
-data_preprocessor.py
+data_preprocessor.py <br>
 ```python
   def clean_invalid_values(self):
       """Clean invalid values from a DataFrame"""
@@ -47,7 +47,7 @@ The class decomposes the preprocessing task into smaller, manageable parts repre
 #### Example rating.py Class 
 The task of selecting the group has been delegated to the neighbourhood_selector.py class. This achieves a clear division of tasks: rating.py is responsible solely for evaluating the DataFrame's ratings, while neighbourhood_selector.py is tasked with filtering the DataFrame according to the selected group and then passing it to the evaluation classes.
 
-Before Decomposition: 
+Before Decomposition: <br>
 rating.py 
 ```python
     def get_average_rating_per_nhood(self) -> pd.DataFrame:
@@ -55,7 +55,7 @@ rating.py
         average_ratings = grouped['review_rate_number'].mean()
         return average_ratings
 ```
-After Decomposition: 
+After Decomposition: <br>
 rating.py
 ```python
     def average_rating(self):
