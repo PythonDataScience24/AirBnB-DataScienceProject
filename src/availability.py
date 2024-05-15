@@ -86,6 +86,10 @@ class AvailabilitySummary:
         return listings
 
     def percentage_no_availability_per_type(self):
+        """
+            Returns:
+                float: percentage of AirBnB's per room type with no availability anymore
+        """
         listings = self.df[self.df["availability_365"] == 0]
         listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
         total_count = self.df.groupby("room_type")["availability_365"].count()
@@ -96,6 +100,14 @@ class AvailabilitySummary:
         return result
 
     def percentage_availability_per_type(self, days: int):
+        """
+            Returns:
+                float: calculates for every room type
+                the percentage of AirBnB's which have more than
+                availability than the specified days
+        Keyword arguments:
+            days -- the number of days of availability
+        """
         listings = self.df[self.df["availability_365"] >= days]
         listings_grouped_by_type = listings.groupby("room_type")["availability_365"].count()
         total_count = self.df.groupby("room_type")["availability_365"].count()
@@ -104,6 +116,12 @@ class AvailabilitySummary:
         return result
 
     def mean_room_availability_with_price_less_than(self, price: float):
+        """
+            Returns:
+                       float: mean price for all accommodations with a smaller price than a certain price
+            Keyword arguments:
+                   price -- the upper bound of the price
+               """
         mean = self.df.loc[self.df["price"] <= price, "price"].mean()
         return mean
 

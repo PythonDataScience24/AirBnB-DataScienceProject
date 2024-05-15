@@ -115,3 +115,20 @@ src/home.py:30:0: C0301: Line too long (119/100) (line-too-long)
 ```
 ### fixed issue
 shortened code line
+
+
+#### Message 9
+src/home.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+### prevoious code
+```bash
+import pandas as pd
+```
+### adapted code
+```bash
+"""
+home page of the application
+the home.py file is the entry point of the programm
+"""
+import pandas as pd
+```
+### fixed issue added module doc string

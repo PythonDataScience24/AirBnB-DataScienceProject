@@ -44,10 +44,15 @@ class NeighbourhoodVisualizer:
         return rating_summary
 
     def visualize_filtered_dataframe(self):
-        """ Returns a visualization of the filtered dataframe """
+        """ Returns a visualization of the dataframe filtered
+        by the neighbourhood and room type"""
         st.dataframe(self.df)
 
     def visualize_min_max_price_summary(self):
+        """
+        Creates a table which visualizes the
+        accommodations with the max and min price
+        """
         (name_max, max_price, service_fee) = self.price_summary.get_max_price_per_night()
         (name_min, min_price, service_fee) = self.price_summary.get_min_price_per_night()
         st.subheader("Min and Max Price per Night")
@@ -74,6 +79,7 @@ class NeighbourhoodVisualizer:
                  "availability in future")
 
     def visualize_rooms_with_one_year_availability(self):
+        """visualizes a dataframe with rooms which still have 365 days of availability"""
         df = self.availability_summary.room_availability_in_exact_days(365)
         if df.shape[0] == 0:
             return
@@ -84,7 +90,7 @@ class NeighbourhoodVisualizer:
         """
         visualizes mean availability in days
         """
-        mean_availability = self.availability_summary.mean_availability_per_room_type()
+        mean_availability = self.availability_summary.mean_availability()
         st.write("Average availability in days: " + str(round(mean_availability)))
 
     def visualize_mean_price(self):
@@ -103,6 +109,10 @@ class NeighbourhoodVisualizer:
         mean = self.rating_summary.average_rating()
         st.subheader("See below the average rating of this neighbourhood")
         st.write(mean)
+
+    def visualize_percentage_rating_over_average(self):
+        percentage = self.rating_summary.percentage_rating_over_average()
+        st.write(str(percentage) + " % of the accommodations have a better rating than the average rating")
 
     def visualize_median_cost(self):
         """
