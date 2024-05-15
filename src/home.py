@@ -14,9 +14,6 @@ import data_preprocessor
 
 
 st.title('Home')
-data_preprocessor = data_preprocessor.DataPreprocessor('data/Airbnb_Open_Data.csv')
-data_preprocessor.preprocess()
-data_preprocessor.write_csv()
 selector = neighbourhood_selector.NeighbourhoodSelector(
     'data/Airbnb_Open_processed_Data.csv')
 st.subheader('Please select a neighbourhood and a room type to display room information')

@@ -101,7 +101,8 @@ class DataPreprocessor:
         self.drop_columns()
         self.clean_missing_values()
 
-    def write_csv(self):
-        """Write out the data set as a CSV file"""
-        self.df.to_csv("data/Airbnb_Open_processed_Data.csv", index=False)
+    def write_csv(self, path: str):
+        """Write out the data set as a CSV file
+        :param path: path to the output file"""
+        self.df.to_csv(path, index=False)
 
