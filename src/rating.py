@@ -1,13 +1,12 @@
 """
-      Calculates and summarize rating statistics for Airbnb listings.
+    Calculates and summarize rating statistics for Airbnb listings.
 
-      This class provides methods to calculate the average rating, minimum and maximum ratings,
-      percentages of listings that are above or below the average, minimum, and maximum ratings.
-      It allows initialization with a CSV file from which data is loaded and cleaned,
-      or directly with given pandas DataFrame.
-  """
+    This class provides methods to calculate the average rating, minimum and maximum ratings,
+    percentages of listings that are above or below the average, minimum, and maximum ratings.
+    It allows initialization with a CSV file from which data is loaded and cleaned,
+    or directly with given pandas DataFrame.
+"""
 import pandas as pd
-
 
 class RatingSummary:
 
