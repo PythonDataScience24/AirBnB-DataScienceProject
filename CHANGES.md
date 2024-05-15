@@ -1,6 +1,6 @@
 # Structure and Code Improvements
 ## Abstraction
-### Create a data_preprocessor class
+### Example Create a data_preprocessor class
 
 The class abstracts away the details of data preprocessing by providing methods like 
 - 'drop_columns'
@@ -44,7 +44,7 @@ data_preprocessor.py <br>
 These methods hide the complexities of data cleaning and transformation behind a simple interface, allowing users to preprocess data without worrying about the implementation details.
 ## Decomposition
 
-### Create a neighbourhood_selector
+### Example Create a neighbourhood_selector
 The class decomposes the preprocessing task into smaller, manageable parts represented by individual methods. Each method is responsible for performing a specific preprocessing step, such as dropping columns, cleaning invalid values etc. This decomposition enhances code readability, modularity and maintainability by breaking down a complex task into smaller, more understandable components. 
 
 #### Example rating.py Class 
