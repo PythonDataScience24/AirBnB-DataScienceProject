@@ -43,6 +43,8 @@ data_preprocessor.py <br>
 
 These methods hide the complexities of data cleaning and transformation behind a simple interface, allowing users to preprocess data without worrying about the implementation details.
 ## Decomposition
+
+### 2. Use the neighbourhood_visualizer
 The class decomposes the preprocessing task into smaller, manageable parts represented by individual methods. Each method is responsible for performing a specific preprocessing step, such as dropping columns, cleaning invalid values etc. This decomposition enhances code readability, modularity and maintainability by breaking down a complex task into smaller, more understandable components. 
 
 #### Example rating.py Class 
@@ -68,5 +70,4 @@ rating.py
 ```
 
 
-## 2. (?e.g.?) Use the neighbourhood_visualizer
 
