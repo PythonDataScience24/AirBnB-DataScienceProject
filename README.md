@@ -54,7 +54,7 @@ If you want to contact us regarding a project-related problem or an enhancement,
 # Thank you
 Thank you for your interest, for visiting this page, or for collaborating with us. 
 
-# Licences
-Our project is open source. For further information and details consider the  LICENSE.md file, which will be uploaded soon.
+# Licenses
+Our project is open source under the GNU General Public License v3.0. For further information and details consider the [LICENSE.md](LICENSE.md) file.
 
 
