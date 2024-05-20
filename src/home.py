@@ -19,6 +19,7 @@ selector = NeighbourhoodSelector(
 st.subheader('Please select a neighbourhood and a room type to display room information')
 neighbourhood: str = st.selectbox('Neighbourhood*', selector.get_neighbourhoods(), index=None)
 room_type: str = st.selectbox('Room Type*', selector.get_room_types(), index=None)
+
 prices = [60, 100, 200, 300, 500, 750, 1000, 1500, 2000]
 price: float = st.selectbox('Price', prices,
                             placeholder="Only rooms which have a price equals or less than "
