@@ -126,7 +126,7 @@ class PriceSummary:
         max_costs_index = self.df['costs'].idxmax()
         return self._get_name_price_and_service_fees_of_row(max_costs_index)
 
-    def get_median_price_for_one_night(self) -> int:
+    def get_median_price_for_one_night(self) -> float:
         """
         :return: Median price for one night
         :rtype: int
