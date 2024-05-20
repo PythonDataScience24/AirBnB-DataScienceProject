@@ -7,29 +7,6 @@ import numpy as np
 import pandas as pd
 
 
-def get_group(group_by: pd.api.typing.DataFrameGroupBy, group_key, df: pd.DataFrame) \
-        -> pd.DataFrame | None:
-    """
-    Returns the group from a DataFrameGroupBy object, if the group exists, else None.
-
-    Helper function to get the group from a GroupBy object, since DataFrameGroupBy.get_group() is
-    deprecated and cannot handle if the group does not exist.
-
-    :param group_by: The DataFrameGroupBy object
-    :type group_by: pd.api.typing.DataFrameGroupBy
-    :param group_key: The key of the group to get
-    :param df: The original DataFrame on which the group_by object was created
-    :type df: pd.DataFrame
-    :return: The group, if it exists, else None
-    :rtype: pd.DataFrame | None
-    """
-    indexes = group_by.indices.get(group_key)
-    group_df: pd.DataFrame | None = None
-    if indexes is not None:
-        group_df = df.iloc[indexes]
-    return group_df
-
-
 class NeighbourhoodSelector:
     """
     Provides the ability to select a neighbourhood and room type from a dataset and get the rows of
@@ -51,25 +28,36 @@ class NeighbourhoodSelector:
             self.full_df: pd.DataFrame = pd.read_csv(csv_path)
         self.selection_df: pd.DataFrame | None = None
 
-    def set_selection(self, neighbourhood: str, room_type: str, price: float) -> pd.DataFrame | None:
+    def set_selection(self, neighbourhood_group: str | None = None,
+                      neighbourhood: str | None = None, room_type: str | None = None,
+                      price: float | None = None) -> pd.DataFrame | None:
         """
-        Set the selection_df to the selection of the neighbourhood and room type, if it exists,
-        else None.
-        :param price: The maximum price to select
-        :type price: float
+        Set the selection_df to the selection of the neighbourhood_group, neighbourhood
+        and room type, and upper bound on price.
+        If the selection does not match any rows, selection_df is set to None.
+        :param neighbourhood_group: The neighbourhood group to select
         :param neighbourhood: The neighbourhood to select
-        :type neighbourhood: str
         :param room_type: The room type to select
-        :type room_type: str
-        :return: The selection, if it exists, else None
+        :param price: The maximum price to select
+        :return: selection_df, the DataFrame containing the selected rows,
+        or None if no rows match the selection
         :rtype: pd.DataFrame | None
         """
-        group_by: pd.api.typing.DataFrameGroupBy = self.full_df.groupby(
-            ['neighbourhood', 'room_type'])
-        self.selection_df: pd.DataFrame | None = get_group(group_by=group_by, group_key=(neighbourhood, room_type),
-                                                           df=self.full_df)
-        if price is not None and self.selection_df is not None:
-            self.selection_df = self.selection_df[self.selection_df['price'] <= price]
+        selection_df: pd.DataFrame = self.full_df
+        if neighbourhood_group is not None:
+            neighbourhood_group_mask = selection_df['neighbourhood_group'] == neighbourhood_group
+            selection_df = selection_df[neighbourhood_group_mask]
+        if neighbourhood is not None:
+            neighbourhood_mask = selection_df['neighbourhood'] == neighbourhood
+            selection_df = selection_df[neighbourhood_mask]
+        if room_type is not None:
+            room_type_mask = selection_df['room_type'] == room_type
+            selection_df = selection_df[room_type_mask]
+        if price is not None:
+            selection_df = selection_df[selection_df['price'] <= price]
+        if selection_df.empty:
+            selection_df = None
+        self.selection_df = selection_df
         return self.selection_df
 
     def get_neighbourhoods(self) -> np.ndarray:
