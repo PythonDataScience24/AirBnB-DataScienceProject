@@ -60,19 +60,30 @@ class NeighbourhoodSelector:
         self.selection_df = selection_df
         return self.selection_df
 
-    def get_neighbourhoods(self) -> np.ndarray:
+    def get_neighbourhoods(self, neighbourhood_group: str | None = None) -> list[str]:
         """
-        :return: List of all neighbourhood names in the dataset.
-        :rtype: np.ndarray
+        :param neighbourhood_group: The neighbourhood group to get the neighbourhoods from.
+        If None, all neighbourhoods are returned
+        :return: List of neighbourhood names.
+        :rtype: list[str]
         """
-        return self.full_df['neighbourhood'].unique()
+        if neighbourhood_group is None:
+            neighbourhoods = self.full_df['neighbourhood']
+        else:
+            mask = self.full_df['neighbourhood_group'] == neighbourhood_group
+            neighbourhoods = self.full_df[mask]['neighbourhood']
+        neighbourhoods = neighbourhoods.dropna().unique().tolist()
+        return neighbourhoods
 
-    def get_neighbourhood_groups(self) -> np.ndarray:
+    def get_neighbourhood_groups(self) -> list[str]:
         """
         :return: List of all neighbourhood group names in the dataset.
-        :rtype: np.ndarray
+        :rtype: list[str]
         """
-        return self.full_df['neighbourhood_group'].unique()
+        groups: list[str] = self.full_df['neighbourhood_group'].dropna().unique().tolist()
+        if 'nan' in groups:
+            groups.remove('nan')
+        return groups
 
     def get_room_types(self) -> np.ndarray:
         """
