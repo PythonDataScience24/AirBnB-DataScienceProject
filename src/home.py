@@ -34,7 +34,7 @@ class Home:
         """Shows the homepage of the application."""
         st.title('Home')
 
-        df_path: str = 'data/Airbnb_Open_processeed_Data.csv'
+        df_path: str = 'data/Airbnb_Open_processed_Data.csv'
         selector: NeighbourhoodSelector | None = self.try_init_neighbourhood_selector(df_path)
         if selector is None:
             return
