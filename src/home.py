@@ -8,6 +8,7 @@ import streamlit as st
 
 from neighbourhood_selector import NeighbourhoodSelector
 from neighbourhood_visualizer import NeighbourhoodVisualizer
+from price_plotter import PricePlotter
 
 
 # To start the program please make sure you have streamlit installed
@@ -52,6 +53,7 @@ class Home:
                 visualizer.visualize_mean_rating()
                 visualizer.visualize_percentage_rating_over_average()
                 visualizer.visualize_percentage_rating_under_average()
+                PricePlotter(visualizer.price_summary).plot_price_and_service_fee()
                 visualizer.visualize_min_max_price_summary()
                 visualizer.visualize_mean_median_price_summary()
                 visualizer.visualize_neighbourhood_availability()
