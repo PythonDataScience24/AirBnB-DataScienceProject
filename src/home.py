@@ -84,7 +84,8 @@ class Home:
                                   index=None)
         selector.set_selection(neighbourhood_group=self.neighbourhood_group,
                                neighbourhood=self.neighbourhood,
-                               room_type=self.room_type, price=self.price)
+                               room_type=self.room_type,
+                               price=self.price)
 
     def build_subheader(self) -> str:
         """

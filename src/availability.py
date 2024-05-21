@@ -86,7 +86,7 @@ class AvailabilitySummary:
         listings = self.df["availability_365"].mean()
         return listings
 
-    def mean_availability_per_room_type(self):
+    def mean_availability_per_room_type(self)-> pd.DataFrame:
         """
         Returns:
             float: calculates the mean availability per room type
@@ -124,14 +124,14 @@ class AvailabilitySummary:
         result = 100 / quotient
         return result
 
-    def mean_room_availability_with_price_less_than(self, price: float):
+    def mean_room_availability_with_price_equals_than(self, price: float):
         """
             Returns:
                     float: mean price for all accommodations with a smaller price than a certain price
             Keyword arguments:
                     price -- the upper bound of the price
         """
-        mean = self.df.loc[self.df["price"] <= price, "price"].mean()
+        mean = self.df.loc[self.df["price"] == price, "price"].mean()
         return mean
 
     def room_availability_when_price_is_between(self, lower_bound: float, upper_bound: float, days: int):
