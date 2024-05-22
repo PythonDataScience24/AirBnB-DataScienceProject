@@ -130,7 +130,7 @@ class AvailabilityPlotter:
         data.append(percentage_under_mean)
         data.append(percentage_over_mean)
         x_labels = ["under average", "over average"]
-        ax.legend(x_labels, loc="center left", title="Availabilit under and over mean availability")
+        ax.legend(x_labels, loc="center left", title="Availability under and over mean availability")
         return fig
 
     def pie_chart_room_availability_covered_by_room_type(self):
@@ -159,7 +159,7 @@ class AvailabilityPlotter:
         between price and room availability
         """
         ax.set_title("Price vs Room Availability")
-        ax.set(xlabel='price in $', ylabel='availability in days')
+        ax.set(xlabel='price in $', ylabel='availability \n in days')
         ax.scatter(self.availability_summary.df['price'], self.availability_summary.df['availability_365'])
         pass
 
@@ -167,7 +167,7 @@ class AvailabilityPlotter:
         """creates a plot visualizing the distribution of
         the room availability"""
         ax.set(ylabel='number of accommodations', xlabel='availabilits in days', title='Room Availability distribution')
-        ax.hist(self.availability_summary.df["availability_365"], bins=50)
+        ax.hist(self.availability_summary.df["availability_365"])
 
     def scatter_rating_and_room_availability(self, ax: plt.Axes):
         """
@@ -176,6 +176,6 @@ class AvailabilityPlotter:
                 availability
         """
         ax.set_title("Room Availability vs rating")
-        ax.set(xlabel='rating', ylabel='availability in days')
+        ax.set(xlabel='rating', ylabel='availability \n in days')
         ax.scatter(self.availability_summary.df['review_rate_number'], self.availability_summary.df['availability_365'])
         pass
