@@ -3,7 +3,7 @@
 ### Why the neighbourhood selection module might produce an unexpected error
 The provided NeighbourhoodSelectorTest class is a valuable component of the testing suite for the NeighbourhoodSelector module. This feature is at the centre stage of our Airbnb dashboard.
 
-![neighbourhood-selector.PNG](imgs%2Fneighbourhood-selector.PNG)
+<img src="imgs/neighbourhood-selector.PNG" alt="Neighbourhood Selector" width="50%">
 
 - The test_set_selection_neighbourhood method tests the **set_selection method** of NeighbourhoodSelector. It checks if selecting the neighbourhood 'Williamsburg' correctly filters the DataFrame to include only the relevant entries. The assertEqual statement compares the output to the expected list of names, and if they don't match, it raises an error with the provided message.
 
