@@ -1,3 +1,7 @@
+"""
+The Availability plotter is responsible for plotting
+information about the room availability
+"""
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
@@ -25,6 +29,7 @@ class AvailabilityPlotter:
     def plot_scatter_and_hist(self):
         """
         plots the scatter and histograms
+        in the home page
         """
         fig = plt.figure()
         gs = fig.add_gridspec(3, 1)
@@ -65,7 +70,7 @@ class AvailabilityPlotter:
         plt.title("Mean Availability by room type")
         room_types = df.index.values
         means = df.values
-        rects = ax.bar(room_types, means)
+        rects = ax.bar(room_types, means, width=0.5, align='center')
         ax.bar_label(container=rects, padding=3)
         st.pyplot(fig)
 
@@ -121,32 +126,14 @@ class AvailabilityPlotter:
         ax.pie(data, labels=labels, autopct='%1.1f%%')
         ax.legend(labels, loc="upper right", bbox_to_anchor=(1, 0, 0.5, 1))
 
-    def pie_chart_room_availability_under_and_over_average(self):
-        """
-        creates a pie chart visualizing the percentages of Airbnb's
-        with availability less than the average availability value
-        and more than the average availability value
-        """
-        fig, ax = plt.subplots(figsize=(7, 10))
-        data = []
-        mean = self.availability_summary.mean_availability()
-        mean = int(round(mean))
-        percentage_under_mean = self.availability_summary.room_availability_less_than(mean)
-        percentage_over_mean = self.availability_summary.room_availability_more_than(mean)
-        data.append(percentage_under_mean)
-        data.append(percentage_over_mean)
-        x_labels = ["under average", "over average"]
-        ax.legend(x_labels, loc="center left", title="Availability under and over mean availability")
-        return fig
-
     def pie_chart_room_availability_covered_by_room_type(self):
         """
         creates a pie chart visualizing
-        the percentage of availability covered
+        the percentage of total availability covered
         by each room type
-        Example 100% availability is 1000 days, then room
-        type Home/Apartment covers for example 35% of total availability
-        will be rendered only if room type is not selected
+        I.e. 100% availability is 1000 days, then room
+        type Home/Apartment covers for example 35% of the total availability.
+        Notice: This plot will be rendered only if room type is not selected
         """
         fig = plt.figure()
         total_availability = self.availability_summary.total_room_availability()
