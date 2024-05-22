@@ -9,6 +9,7 @@ import streamlit as st
 from neighbourhood_selector import NeighbourhoodSelector
 from neighbourhood_visualizer import NeighbourhoodVisualizer
 from price_plotter import PricePlotter
+from availability_plotter import AvailabilityPlotter
 
 
 # To start the program please make sure you have streamlit installed
@@ -59,6 +60,8 @@ class Home:
                 visualizer.visualize_neighbourhood_availability()
                 visualizer.visualize_mean_availability()
                 visualizer.visualize_rooms_with_one_year_availability()
+                AvailabilityPlotter(visualizer.availability_summary).plot_room_availability(
+                    room_type_selected=self.room_type is not None)
         else:
             st.write("No data available for this selection.")
 

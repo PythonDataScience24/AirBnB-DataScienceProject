@@ -86,7 +86,7 @@ class NeighbourhoodVisualizer:
 
     def visualize_rooms_with_one_year_availability(self):
         """visualizes a dataframe with rooms which still have 365 days of availability"""
-        df = self.availability_summary.room_availability_in_exact_days(365)
+        df = self.availability_summary.room_availability_in_exact_days(365).reset_index()
         if df.shape[0] == 0:
             return
         st.subheader("The following rooms can still be rented for one year")

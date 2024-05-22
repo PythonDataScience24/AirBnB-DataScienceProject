@@ -83,8 +83,8 @@ class AvailabilitySummary:
         """
             float: calculates the mean availability
         """
-        listings = self.df["availability_365"].mean()
-        return listings
+        mean = self.df["availability_365"].mean()
+        return mean
 
     def mean_availability_per_room_type(self)-> pd.DataFrame:
         """
@@ -168,6 +168,9 @@ class AvailabilitySummary:
         df = pd.DataFrame(quotients)
         df = df.rename(columns={"availability 365": "Percentage (%)"})
         return round(100 / df)
+
+    def total_room_availability(self):
+        return self.df["availability_365"].sum()
 
     def get_df(self):
         """
