@@ -3,6 +3,7 @@ home page of the application
 the home.py file is the entry point of the programm
 """
 import traceback
+
 import pandas as pd
 import streamlit as st
 
@@ -60,7 +61,9 @@ class Home:
                 visualizer.visualize_mean_availability()
                 visualizer.visualize_rooms_with_one_year_availability()
         else:
-            st.write("No data available for this selection.")
+            st.write("")
+            st.write("There are currently no listings available for your selection. Please adjust "
+                     "your selection.")
 
     def show_select_boxes(self, selector: NeighbourhoodSelector):
         """
@@ -81,8 +84,8 @@ class Home:
         self.room_type = st.selectbox('Room Type', selector.get_room_types(), index=None)
         prices = [60, 100, 200, 300, 500, 750, 1000, 1500, 2000]
         self.price = st.selectbox('Price', prices,
-                                  placeholder="Only rooms which have a price equals or less "
-                                              "than the selected price will be displayed",
+                                  placeholder="Only rooms priced at or below the selected amount "
+                                              "will be shown.",
                                   index=None)
         selector.set_selection(neighbourhood_group=self.neighbourhood_group,
                                neighbourhood=self.neighbourhood,
@@ -121,71 +124,57 @@ class Home:
             selector = NeighbourhoodSelector(csv_path=df_path)
         except FileNotFoundError:
             st.error(f"""
-            Error: Table with the AirBnB data could not be found.
+            Error: Airbnb data table not found.
 
-            File ```{df_path}``` containing the AirBnB data not found.
+            File `{df_path}` missing.
             
-            Next Steps:
-            Make sure ```data_preprocessor.py``` has been executed before running this script and
-            the resulting file ```{df_path}``` has not been moved or deleted.
+            Steps to resolve:
+            1. Run ```python src/data_preprocessor.py```
+            2. Verify `{df_path}` exists and is not moved or deleted.
             
-            To run ```data_preprocessor.py```, execute the following command in the command line:
-
-            ```python src/data_preprocessor.py```
-
-            For more information see README.md -> 'How to get started'
-
-            If this does not solve the problem, please contact the developers
-            or create an issue in the GitHub repository of this project.
-            More information can be found in the README.md file.
+            See
+            [README.md](https://github.com/PythonDataScience24/AirBnB-DataScienceProject/blob/main/README.md#how-can-you-get-involved) 
+            for more details.
+            
+            If the issue persists, contact the developers or report on GitHub.
             """)
             return None
         except ValueError:
             st.error(f"""
-            Error: Table with the AirBnB data could not be read correctly.
+            Error: Unable to read the Airbnb data table.
 
-            Unable to read file ```{df_path}``` containing the AirBnB.
+            File `{df_path}` could not be read.
             
-            Next Steps:
-            Execute ```data_preprocessor.py``` again and make sure the file ```{df_path}```
-            is not corrupted or manually altered. If you wish to edit the data,
-            do so in the original file ```data/Airbnb_Open_Data.csv``` and
-            then run ```data_preprocessor.py``` again.
+            Steps to resolve:
+            1. Run ```python src/data_preprocessor.py```
+            2. Verify `{df_path}` exists and is not moved or deleted.
             
-            To run ```data_preprocessor.py```, execute the following command in the command line:
-
-            ```python src/data_preprocessor.py```
-
-            For more information see README.md -> 'How to get started'
-
-            If this does not solve the problem, please contact the developers
-            or create an issue in the GitHub repository of this project.
-            More information can be found in the README.md file.
+            See
+            [README.md](https://github.com/PythonDataScience24/AirBnB-DataScienceProject/blob/main/README.md#how-can-you-get-involved) 
+            for more details.
+            
+            If the issue persists, contact the developers or report on GitHub.
             """)
             return None
         except MemoryError:
             st.error(f"""
-            Error: Table with the AirBnB data can not be loaded because of memory issues.
+            Error: Unable to load AirBnB data due to memory issues.
 
-            Not enough free memory on the device to load the file ```{df_path}``` containing
-            the AirBnB data.
+            Not enough free memory to load "{df_path}".
             
-            Next Steps:
-            Try to free up memory on the device by closing other applications or processes.
-            If this doesn't solve the problem, try to run the application on a device with
-            more memory or try use a smaller dataset by editing the file 
-            ```data/Airbnb_Open_Data.csv```.
-            Make sure to  save a copy of the original file before editing it.
+            Steps to resolve:
+            1. Free up memory by closing other applications.
+            2. Use a device with more memory.
+            3. Try a smaller dataset by editing "data/Airbnb_Open_Data.csv" (save a copy first).
             
-            To run ```data_preprocessor.py```, execute the following command in the command line:
-
-            ```python src/data_preprocessor.py```
-
-            For more information see README.md -> 'How to get started'
-
-            If this does not solve the problem, please contact the developers
-            or create an issue in the GitHub repository of this project.
-            More information can be found in the README.md file.
+            To run "data_preprocessor.py", use:
+            python src/data_preprocessor.py
+            
+            See
+            [README.md](https://github.com/PythonDataScience24/AirBnB-DataScienceProject/blob/main/README.md#how-can-you-get-involved) 
+            for more details.
+            
+            If the issue persists, contact the developers or report on GitHub.
             """)
             return None
         except Exception:  # pylint: disable=broad-except
