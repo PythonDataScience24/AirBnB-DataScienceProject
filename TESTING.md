@@ -15,7 +15,7 @@ he provided NeighbourhoodSelectorTest class is a valuable component of the testi
 3. The test_get_neighbourhoods method calls **get_neighbourhoods** and checks if it returns the correct list of unique neighborhoods. The assertEqual statement compares the method’s output to the expected list of neighborhood names. If they don't match, it raises an error with the specified message.
 
 
--4. The test test_set_selection_impossible method tests the behavior of the **set_selection method**. It can handle cases where the specified filters (neighbourhood, room type, and price) do not match any entries in the dataset. It is important to verify that the method can handle such scenarios well without errors and return the expected result.
+4. The test test_set_selection_impossible method tests the behavior of the **set_selection method**. It can handle cases where the specified filters (neighbourhood, room type, and price) do not match any entries in the dataset. It is important to verify that the method can handle such scenarios well without errors and return the expected result.
 The test checks if the filter logic correctly identifies that there are no entries matching the given criteria. Specifically, it verifies that filtering for neighbourhood='Williamsburg', room_type='Private room', and price=0 results in an empty selection, as there are no rooms in Williamsburg with a private room priced at 0 in the sample dataset.
 
 ### Why this test class is valuable
