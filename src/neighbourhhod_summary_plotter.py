@@ -1,19 +1,48 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import streamlit as st
 
 
 class NeighbourhoodSummaryPlotter:
     def __init__(self, df: pd.DataFrame):
         self.df = df
 
-    def bar_diagram_room_type_distribution(self):
-        fig, ax = plt.subplots(figsize=(7, 10))
-        plt.ylim(top=5500, bottom=0)
-        plt.title("Room type distribution for the selected neighbourhood")
-        plt.yticks(np.arange(0, 30000, 1500))
-        room_typed_accumulated = self.df.groupby("room type")["room type"].count()
-        room_types = room_typed_accumulated.index.values
-        counts = room_typed_accumulated.values
+    def plot_neighbourhood_room_type_summary(self, room_type_selected: bool):
+        if not room_type_selected:
+            fig1 = self.bar_chart_room_type_()
+            fig2 = self.pie_chart_room_type()
+            st.pyplot(fig1)
+            st.pyplot(fig2)
+
+    def bar_chart_room_type_(self):
+        """
+        creates a plt visualizing
+        the total numbers of accommodations
+        by each room type
+        will only be rendered if room type is not selected
+        """
+        fig, ax = plt.subplots(figsize=(5, 5))
+        plt.title("Total numbers of accommodations by each room type")
+        room_typed_count = self.df.groupby("room_type")["room_type"].count()
+        room_types = room_typed_count.index.values
+        counts = room_typed_count.values
         rects = ax.bar(room_types, counts)
         ax.bar_label(container=rects, padding=3)
+        return fig
+
+    def pie_chart_room_type(self):
+        """
+        creates a plot visualizing the percentage
+        of each room type occurring in selected the neighbourhood
+        will only be rendered if room type is not selected
+
+        """
+        fig, ax = plt.subplots(figsize=(5,5))
+        room_types_count = self.df.groupby("room_type")["room_type"].count()
+        data = room_types_count * 100 / self.df.shape[0]
+        labels = room_types_count.index.values
+        ax.set_title("Occurrence percentage of each room type")
+        ax.pie(data, autopct='%1.1f%%')
+        ax.legend(labels, loc='lower left', bbox_to_anchor=(1, 0, 0.5, 1))
+        return fig

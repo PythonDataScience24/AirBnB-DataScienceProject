@@ -11,6 +11,7 @@ from neighbourhood_selector import NeighbourhoodSelector
 from neighbourhood_visualizer import NeighbourhoodVisualizer
 from price_plotter import PricePlotter
 from availability_plotter import AvailabilityPlotter
+from neighbourhhod_summary_plotter import NeighbourhoodSummaryPlotter
 
 
 # To start the program please make sure you have streamlit installed
@@ -52,6 +53,8 @@ class Home:
             visualizer.visualize_filtered_dataframe()
             if df.size != selector.full_df.size:
                 st.subheader(self.build_subheader())
+                NeighbourhoodSummaryPlotter(visualizer.df).plot_neighbourhood_room_type_summary(
+                    room_type_selected=self.room_type is not None)
                 visualizer.visualize_mean_rating()
                 visualizer.visualize_percentage_rating_over_average()
                 visualizer.visualize_percentage_rating_under_average()
