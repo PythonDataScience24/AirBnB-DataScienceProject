@@ -23,6 +23,9 @@ class AvailabilityPlotter:
             st.pyplot(special_chart)
 
     def plot_scatter_and_hist(self):
+        """
+        plots the scatter and histograms
+        """
         fig = plt.figure()
         gs = fig.add_gridspec(3, 1)
         ax1 = fig.add_subplot(gs[0, :])
@@ -35,6 +38,9 @@ class AvailabilityPlotter:
         st.pyplot(fig)
 
     def plot_pie_charts(self):
+        """
+        plots the piecharts
+        """
         fig = plt.figure(figsize=(10, 6))
         gs = gridspec.GridSpec(2, 2, figure=fig, wspace=0.5, hspace=0.5)
         ax1 = fig.add_subplot(gs[0, 0])
