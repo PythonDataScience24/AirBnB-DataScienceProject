@@ -160,7 +160,7 @@ class AvailabilitySummary:
                     days -- the number of days of availability
         """
         listings = self.df.groupby("neighbourhood_group")["availability_365"].count()
-        listings_with_availability = self.df[self.df["availability 365"] >= days]
+        listings_with_availability = self.df[self.df["availability_365"] >= days]
         listings_availability_grouped_by_neighbourhood_group = \
             listings_with_availability.groupby("neighbourhood_group")[
                 "availability_365"].count()
