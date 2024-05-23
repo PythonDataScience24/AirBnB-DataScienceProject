@@ -130,7 +130,7 @@ class NeighbourhoodVisualizer:
         of the selected neighbourhood
         """
         mean = self.rating_summary.average_rating()
-        st.subheader("Mean rating")
+        st.markdown('#### Average rating')
         st.write("The average rating is: ", mean)
         st.write("See how guests rated accomodations " + 
                  "compared to the average rating.")
