@@ -116,35 +116,24 @@ class NeighbourhoodVisualizer:
         visualizes the rating
         of the selected neighbourhood 
         """
-        st.subheader("Guest Ratings of Listings")
+        st.subheader("Guest Ratings for AirBnB Accomodations")
+        st.write("Important to note: Our rating data does not consider " + 
+                 "things like how recent a review is and if the reviewer bought the review." +
+                 "It also does not analyse reviews to verify trustworthiness.")
         st.write("Guests gave accommodations a rating of 1 (worst rating) " + 
                  "to 5 (best rating). In this plot you can see how many accommodations " +
                  "got ratings 1, 2, 3, 4, 5.")       
 
     def visualize_mean_rating(self):
         """
-        visualizes the  rating
+        visualizes the average rating
         of the selected neighbourhood
         """
         mean = self.rating_summary.average_rating()
         st.subheader("Mean rating")
         st.write("The average rating is: ", mean)
-
-    def visualize_percentage_rating_over_average(self):
-        """
-            visualizes hom many percentage of rooms have a rating over the average
-        """
-        percentage = self.rating_summary.percentage_rating_over_average()
-        st.write(
-            str(percentage) + " % of the accommodations have a better rating than the average rating")
-
-    def visualize_percentage_rating_under_average(self):
-        """
-            visualizes hom many percentage of rooms have a rating over the average
-        """
-        percentage = self.rating_summary.percentage_rating_under_average()
-        st.write(str(percentage) + " % of the accommodations have a "
-                                   "worse rating than the average rating")
+        st.write("See how guests rated accomodations " + 
+                 "compared to the average rating.")
 
     def visualize_numbers_of_listings(self):
         """

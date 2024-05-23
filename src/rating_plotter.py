@@ -29,6 +29,7 @@ class RatingPlotter:
         data.append(over_avrg)
         data.append(under_avrg)
         labels = ["Rating over Average", 'Rating under Average']
-        ax.set_title("Rating")
+        ax.set_title("Accomodations Rated Below or Above Average")
         ax.pie(data, labels= labels, autopct = '%1.1f%%')
+        ax.legend(labels, loc="best", bbox_to_anchor=(1, 0, 0.5, 1))
         st.pyplot(fig)
