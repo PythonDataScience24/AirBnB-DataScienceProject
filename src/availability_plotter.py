@@ -172,3 +172,5 @@ class AvailabilityPlotter:
         ax.set(xlabel='rating', ylabel='availability \n in days')
         ax.scatter(self.availability_summary.df['review_rate_number'], self.availability_summary.df['availability_365'])
         pass
+
+

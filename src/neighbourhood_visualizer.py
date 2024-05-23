@@ -85,12 +85,15 @@ class NeighbourhoodVisualizer:
         st.write(str(result2) + " % of all rooms have no availability anymore")
 
     def visualize_rooms_with_one_year_availability(self):
-        """visualizes a dataframe with rooms which still have 365 days of availability"""
+        """
+            visualizes a dataframe with rooms which still have 365 days of availability
+            in future
+        """
         df = self.availability_summary.room_availability_in_exact_days(365).reset_index()
         if df.shape[0] == 0:
             return
         st.subheader("The following rooms can still be rented for one year")
-        st.table(df)
+        st.dataframe(df)
 
     def visualize_mean_median_price_summary(self):
         """visualizes a table with median price per night and average price per night"""
