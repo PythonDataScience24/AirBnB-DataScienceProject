@@ -12,6 +12,7 @@ from neighbourhood_visualizer import NeighbourhoodVisualizer
 from price_plotter import PricePlotter
 from availability_plotter import AvailabilityPlotter
 from neighbourhhod_summary_plotter import NeighbourhoodSummaryPlotter
+from rating_plotter import RatingPlotter
 
 
 # To start the program please make sure you have streamlit installed
@@ -55,7 +56,9 @@ class Home:
                 st.subheader(self.build_subheader())
                 NeighbourhoodSummaryPlotter(visualizer.df).plot_neighbourhood_room_type_summary(
                     room_type_selected=self.room_type is not None)
+                RatingPlotter(visualizer.rating_summary).plot_hist_rating()
                 visualizer.visualize_mean_rating()
+                RatingPlotter(visualizer.rating_summary).plot_pie_average()
                 visualizer.visualize_percentage_rating_over_average()
                 visualizer.visualize_percentage_rating_under_average()
                 PricePlotter(visualizer.price_summary).plot_price_and_service_fee()
