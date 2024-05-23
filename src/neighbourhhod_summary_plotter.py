@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 import streamlit as st
 
 
@@ -35,7 +34,7 @@ class NeighbourhoodSummaryPlotter:
         """
         creates a plot visualizing the percentage
         of each room type occurring in selected the neighbourhood
-        will only be rendered if room type is not selected
+        Notice: This plot will only be rendered if the room type is not selected
         """
         fig, ax = plt.subplots(figsize=(5,5))
         room_types_count = self.df.groupby("room_type")["room_type"].count()

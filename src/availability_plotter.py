@@ -15,7 +15,7 @@ class AvailabilityPlotter:
     def __init__(self, availability_summary: AvailabilitySummary):
         self.availability_summary = availability_summary
 
-    def plot_room_availability(self, room_type_selected=False):
+    def plot_room_availability(self, room_type_selected):
         st.subheader("Availability")
         pie = self.plot_pie_charts()
         pie.tight_layout()

@@ -81,8 +81,8 @@ class DataPreprocessor:
     def clean_invalid_values(self):
         """Clean invalid values from a DataFrame"""
         # clean invalid data from 'availability' column
-        self.df.loc[self.df["availability_365"] > 365, "availability 365"] = 365
-        self.df.loc[self.df["availability_365"] < 0, "availability 365"] = 0
+        self.df.loc[self.df["availability_365"] > 365, "availability_365"] = 365
+        self.df.loc[self.df["availability_365"] < 0, "availability_365"] = 0
         self.df.loc[self.df["neighbourhood_group"] == "manhatan", "neighbourhood_group"] = "Manhattan"
         self.df.loc[self.df["neighbourhood_group"] == "brookln", "neighbourhood_group"] = "Brooklyn"
 
