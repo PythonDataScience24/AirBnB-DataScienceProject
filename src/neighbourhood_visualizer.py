@@ -103,13 +103,23 @@ class NeighbourhoodVisualizer:
                           index=["average price", "median Price"])
         st.subheader("Median and average price per night")
         st.table(df)
-
+    
     def visualize_mean_availability(self):
         """
         visualizes mean availability in days
         """
         mean_availability = self.availability_summary.mean_availability()
         st.write("Average availability in days: " + str(round(mean_availability)))
+        
+    def visualize_rating(self):
+        """
+        visualizes the rating
+        of the selected neighbourhood 
+        """
+        st.subheader("Guest Ratings of Listings")
+        st.write("Guests gave accommodations a rating of 1 (worst rating) " + 
+                 "to 5 (best rating). In this plot you can see how many accommodations " +
+                 "got ratings 1, 2, 3, 4, 5.")       
 
     def visualize_mean_rating(self):
         """
@@ -118,7 +128,7 @@ class NeighbourhoodVisualizer:
         """
         mean = self.rating_summary.average_rating()
         st.subheader("Mean rating")
-        st.write(mean)
+        st.write("The average rating is: ", mean)
 
     def visualize_percentage_rating_over_average(self):
         """

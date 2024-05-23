@@ -56,11 +56,10 @@ class Home:
                 st.subheader(self.build_subheader())
                 NeighbourhoodSummaryPlotter(visualizer.df).plot_neighbourhood_room_type_summary(
                     room_type_selected=self.room_type is not None)
+                visualizer.visualize_rating()
                 RatingPlotter(visualizer.rating_summary).plot_hist_rating()
                 visualizer.visualize_mean_rating()
                 RatingPlotter(visualizer.rating_summary).plot_pie_average()
-                visualizer.visualize_percentage_rating_over_average()
-                visualizer.visualize_percentage_rating_under_average()
                 PricePlotter(visualizer.price_summary).plot_price_and_service_fee()
                 visualizer.visualize_min_max_price_summary()
                 visualizer.visualize_mean_median_price_summary()
