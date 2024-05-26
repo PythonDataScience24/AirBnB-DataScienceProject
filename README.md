@@ -31,6 +31,7 @@ To get started, clone the repository and run
 
 Python version 3.9 or higher is required.
 
+#### Important! 
 Before running the dashboard the first time, run the following command to preprocess the data:
 ```python src/run_data_preprocessor.py```
 Only if the data/Airbnb_Open_Data.csv is updated, run this again.
