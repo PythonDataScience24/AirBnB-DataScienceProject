@@ -29,7 +29,7 @@ An additional advantage of the reporting tool is the clear visualisation of the 
 To get started, clone the repository and run 
 ```pip install -r requirements.txt```
 
-Python version 3.9 or higher is required.
+Python version 3.12 or higher is required.
 
 Before running the dashboard the first time, run the following command to preprocess the data:
 ```python src/run_data_preprocessor.py```
