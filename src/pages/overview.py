@@ -11,7 +11,7 @@ import availability
 import rating
 
 
-# imports need to be this way because of streamlit
+# Note: imports need to be this way because of streamlit
 
 def display_map():
     """ Displays a Map from NYC with all AirBnBs """

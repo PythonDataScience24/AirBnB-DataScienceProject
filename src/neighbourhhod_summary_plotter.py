@@ -40,7 +40,7 @@ class NeighbourhoodSummaryPlotter:
         room_types_count = self.df.groupby("room_type")["room_type"].count()
         data = room_types_count * 100 / self.df.shape[0]
         labels = room_types_count.index.values
-        ax.set_title("Occurrence of each room type")
+        ax.set_title("Percentage of each room type")
         ax.pie(data, autopct='%1.1f%%', labels=labels)
         ax.legend(labels, loc='lower left', bbox_to_anchor=(1, 0, 0.5, 1))
         return fig

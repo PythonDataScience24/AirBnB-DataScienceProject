@@ -142,8 +142,7 @@ class AvailabilityPlotter:
         labels = rooms.index
         plt.title("Coverage of total availability by each room type")
         plt.pie(data.values, labels=labels, autopct='%1.1f%%', )
-        plt.legend(labels, loc="lower left", title="room availability covering percentage by each room type",
-                   bbox_to_anchor=(1, 0, 0.5, 1))
+        plt.legend(labels, loc="lower left", bbox_to_anchor=(1, 0, 0.5, 1))
         return fig
 
     def scatter_chart_price_and_room_availability(self, ax: plt.Axes):
